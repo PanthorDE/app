@@ -93,7 +93,7 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
 
         viewHolder.pbCountPlayers.setProgress((int) progress);
 
-        if (server.Servername.toLowerCase().contains("realliferpg") && !server.Servername.toLowerCase().contains("gungame")) {
+        if (server.Servername.toLowerCase().contains("panthor") && !server.Servername.toLowerCase().contains("gungame")) {
             // Arma 3 Server
             viewHolder.tvPlayersGroupInfo.setText(Html.fromHtml(
                     "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
@@ -105,7 +105,7 @@ public class PlayersListAdapter extends BaseExpandableListAdapter {
         else {
             // anderer Server
             viewHolder.tvPlayersGroupInfo.setText(Html.fromHtml(
-                    "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>Spieler " + server.Playercount));
+                    "<font color='" + convertView.getResources().getColor(R.color.primaryTextColor) + "'>Spieler: " + server.Playercount + "/" + server.Slots) );
         }
 
         convertView.setTag(viewHolder);

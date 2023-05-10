@@ -2,7 +2,7 @@ package de.realliferpg.app;
 
 public class Constants {
 
-    public static final String HOST = "https://api.realliferpg.de/v1/";
+    public static final String HOST = "https://api.panthor.de/v1/";
 
     public static final String URL_CHANGELOG = HOST + "changelog";
     public static final String URL_SERVER =  HOST + "servers";
