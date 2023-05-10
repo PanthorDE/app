@@ -13,7 +13,7 @@ buildscript {
 apply plugin: 'com.android.application'
 
 android {
-    compileSdk 32
+    compileSdk 33
     defaultConfig {
         applicationId "de.realliferpg.app"
         minSdkVersion 14
@@ -34,7 +34,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildToolsVersion '33.0.0-rc4'
+    buildToolsVersion '33.0.2'
 }
 
 dependencies {

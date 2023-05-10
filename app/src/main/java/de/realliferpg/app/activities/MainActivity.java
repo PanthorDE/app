@@ -176,22 +176,22 @@ public class MainActivity extends AppCompatActivity
                 switchFragment(new CompanyShopsFragment());
                 break;
             case R.id.nav_website: {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.realliferpg.de"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.panthor.de"));
                 startActivity(browserIntent);
                 break;
             }
             case R.id.nav_forum: {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forum.realliferpg.de"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://forum.panthor.de"));
                 startActivity(browserIntent);
                 break;
             }
             case R.id.nav_twitter: {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/A3ReallifeRPG"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/PanthorDE"));
                 startActivity(browserIntent);
                 break;
             }
-            case R.id.nav_facebook: {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/RealLifeRPGCommunity/"));
+            case R.id.nav_discord: {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://discord.com/invite/Hf3XeAyn4h"));
                 startActivity(browserIntent);
                 break;
             }

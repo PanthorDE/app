@@ -53,7 +53,7 @@ public class ServerListAdapter extends ArrayAdapter<Server> {
 
         viewHolder.pbPlayers.setProgress((int) progress);
 
-        if (server.Servername.toLowerCase().contains("realliferpg") && !server.Servername.toLowerCase().contains("gungame")) {
+        if (server.Servername.toLowerCase().contains("panthor") && !server.Servername.toLowerCase().contains("gungame")) {
             // Arma 3 Server
             viewHolder.tvPlayerInfo.setText(Html.fromHtml(
                     "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>CIV " + server.Civilians +
@@ -65,7 +65,7 @@ public class ServerListAdapter extends ArrayAdapter<Server> {
         else {
             // anderer Server
             viewHolder.tvPlayerInfo.setText(Html.fromHtml(
-                    "<font color='" + convertView.getResources().getColor(R.color.colorCiv) + "'>Spieler " + server.Playercount));
+                    "<font color='" + convertView.getResources().getColor(R.color.primaryTextColor) + "'>Spieler: " + server.Playercount + "/" + server.Slots));
         }
 
         convertView.setTag(viewHolder);

@@ -1,20 +1,20 @@
 <resources>
-    <string name="app_name">RealLifeRPG App</string>
+    <string name="app_name">Panthor</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="nav_notLoggedIn">Not logged in</string>
-    <string name="nav_loginInfo">Visit info.realliferpg.de</string>
+    <string name="nav_loginInfo">Visit info.panthor.de</string>
 
     <string name="set_playerApiKey">Player API Key</string>
     <string name="str_placeholder">Placeholder</string>
     <string name="str_website">Website</string>
     <string name="str_twitter" translatable="false">Twitter</string>
-    <string name="str_facebook" translatable="false">Facebook</string>
+    <string name="str_discord" translatable="false">Discord</string>
     <string name="str_changelog" translatable="false">Changelog</string>
     <string name="str_imprint">Imprint &amp; Privacy</string>
-    <string name="str_imprint_text">RealLifeRPG is a modded Arma 3 Roleplay server</string>
+    <string name="str_imprint_text">Panthor is a modded Arma 3 Roleplay server</string>
 
     <string name="str_overview">Overview</string>
     <string name="str_Servers">Servers</string>
@@ -62,10 +62,10 @@
     <string name="str_error_occurred">An error occurred</string>
     <string name="str_crashReporting" translatable="false">Crash Reporting</string>
     <string name="str_info_crashReporting">Send Log when app crashes</string>
-    <string name="str_qrScannerInfo">Scan code on info.realliferpg.de       For help check settings</string>
+    <string name="str_qrScannerInfo">Scan code on info.panthor.de       For help check settings</string>
     <string name="str_crashlyticsEnabled">Thank you for sending crash data.</string>
     <string name="str_crashlyticsDisabled">Changes will be active after restart.</string>
-    <string name="str_noApiTokenInfo">You need to scan/copy your API Token from info.realliferpg.de to use most of this app.</string>
+    <string name="str_noApiTokenInfo">You need to scan/copy your API Token from info.panthor.de to use most of this app.</string>
     <string name="str_noApiToken">No API Token</string>
     <string name="str_communicate">Communicate</string>
     <string name="str_license_info">View License Info</string>

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RealLifeRPG App</string>
+    <string name="app_name">Panthor</string>
     <string name="navigation_drawer_open">Navigation öffnen</string>
     <string name="navigation_drawer_close">Navigation schließen</string>
     <string name="nav_header_desc">Navigationskopf</string>
     <string name="action_settings">Einstellungen</string>
     <string name="nav_notLoggedIn">Nicht angemeldet</string>
-    <string name="nav_loginInfo">Besuche info.realliferpg.de</string>
+    <string name="nav_loginInfo">Besuche info.panthor.de</string>
 
     <string name="set_playerApiKey">Spieler-API-Key</string>
     <string name="str_placeholder">Platzhalter</string>
     <string name="str_website">Website</string>
     <string name="str_imprint">Impressum &amp; Datenschutz</string>
-    <string name="str_imprint_text">RealLifeRPG ist ein gemoddeter Arma 3 Roleplay Server</string>
+    <string name="str_imprint_text">Panthor ist ein gemoddeter Arma 3 Roleplay Server</string>
 
     <string name="str_overview">Übersicht</string>
     <string name="str_Servers">Server</string>
@@ -56,10 +56,10 @@
     <string name="str_view">Details</string>
     <string name="str_error_occurred">Ein Fehler ist aufgetreten</string>
     <string name="str_info_crashReporting">Logs senden, wenn App crashed</string>
-    <string name="str_qrScannerInfo">Scanne den Code auf info.realliferpg.de\\n       Hilfe für mehr Infos</string>
+    <string name="str_qrScannerInfo">Scanne den Code auf info.panthor.de\\n       Hilfe für mehr Infos</string>
     <string name="str_crashlyticsEnabled">Danke, dass du uns mit deinen Crash-Daten hilfst.</string>
     <string name="str_crashlyticsDisabled">Änderung nach App-Restart aktiv</string>
-    <string name="str_noApiTokenInfo">Du musst deinen API-Token scannen bzw. von info.realliferpg.de kopieren, um die App zu benutzen.</string>
+    <string name="str_noApiTokenInfo">Du musst deinen API-Token scannen bzw. von info.panthor.de kopieren, um die App zu benutzen.</string>
     <string name="str_noApiToken">Kein API-Token</string>
     <string name="str_communicate">Kommunikation</string>
     <string name="str_license_info">Lizenzinfo ansehen</string>

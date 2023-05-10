@@ -17,7 +17,7 @@ public class ReminderBroadcastReceiver extends BroadcastReceiver {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyMaintenance")
-                .setSmallIcon(R.drawable.realliferpg_logo)
+                .setSmallIcon(R.drawable.panthor_logo)
                 .setContentTitle(context.getResources().getString(R.string.str_notifications_reminder_maintenance_title))
                 .setContentText(context.getResources().getString(R.string.str_notifications_reminder_maintenance_content))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
