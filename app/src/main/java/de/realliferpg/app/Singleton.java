@@ -173,7 +173,9 @@ public class Singleton {
         ArrayList<MarketItem> marketItems = new ArrayList<MarketItem>();
 
         MarketServerObject dataServer1 =  this.marketServerObjects.get(0);
-        MarketServerObject dataServer2 =  this.marketServerObjects.get(1);
+        MarketServerObject dataServer2 = null;
+        if (this.marketServerObjects.size() > 1)
+            dataServer2 =  this.marketServerObjects.get(2);
         MarketServerObject dataServer3 = null;
         if (this.marketServerObjects.size() > 2)
             dataServer3 =  this.marketServerObjects.get(2);
@@ -188,7 +190,7 @@ public class Singleton {
             temp.priceServer1 = item.price;
             // Um nicht zwei foreach-Schleifen zu gehen, wird durch den Counter auf das entsprechende Element aus den Daten von Server 2 & 3 zugegriffen
             // Wenn neue Items hinzugefügt werden, dann kann es sein, dass Server 2 die Änderungen hat, Server 3 aber nicht -> für den dann nicht weiter durch die Liste iterieren
-            if (dataServer2.market.length > counter) {
+            if (dataServer2 != null && dataServer2.market.length > counter) {
                 temp.priceServer2 = dataServer2.market[counter].price;
             }
             if (dataServer3 != null && dataServer3.market.length > counter) {

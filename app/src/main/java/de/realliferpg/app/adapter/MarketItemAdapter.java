@@ -62,6 +62,15 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
         viewHolder.tvMarketItemPrice2.setText(formattedPriceServer2);
         viewHolder.tvMarketItemPrice3.setText(formattedPriceServer3);
 
+        if (serversOnline.length < 2 || serversOnline[1] == 0)
+        {
+            // Server 2 wird nicht angezeigt
+            viewHolder.tvMarketItemTextServer2.setVisibility(View.INVISIBLE);
+            viewHolder.tvMarketItemPrice2.setVisibility(View.INVISIBLE);
+            viewHolder.tvMarketItemTextServer2.setHeight(0);
+            viewHolder.tvMarketItemPrice2.setHeight(0);
+        }
+
         if (serversOnline.length < 3 || serversOnline[2] == 0)
         {
             // Server 3 wird nicht angezeigt
