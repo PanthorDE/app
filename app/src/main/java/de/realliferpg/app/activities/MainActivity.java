@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity
     private void createNotificationChannel(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = "ReminderMaintenance";
-            String description = "Channel for RealLifeRPG Maintenance Reminder";
+            String description = "Channel for Panthor Maintenance Reminder";
             int importance =NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel("notifyMaintenance", name, importance);
             channel.setDescription(description);
