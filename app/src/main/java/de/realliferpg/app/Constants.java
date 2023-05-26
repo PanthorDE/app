@@ -13,8 +13,6 @@ public class Constants {
     public static final String URL_SHOPTYPES_ITEMS =  HOST + "info/items_shoptypes";
     public static final String URL_SHOPTYPES_VEHICLES =  HOST + "info/vehicles_shoptypes";
 
-    public static final String URL_CBS =  HOST + "cbs";
-
     public static final String URL_SHOP_ITEMS =  HOST + "info/items/";
     public static final String URL_SHOP_VEHICLES =  HOST + "info/vehicles/";
 

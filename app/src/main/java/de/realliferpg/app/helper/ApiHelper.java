@@ -12,7 +12,6 @@ import de.realliferpg.app.Singleton;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.interfaces.VehicleEnum;
-import de.realliferpg.app.objects.CBSData;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.MarketServerObject;
@@ -87,11 +86,6 @@ public class ApiHelper {
                 ShopVehicle.Wrapper vehicleWrapper = gson.fromJson(response.toString(), ShopVehicle.Wrapper.class);
                 final ArrayList<ShopVehicle> shopVehicles = new ArrayList<>(Arrays.asList(vehicleWrapper.data));
                 Singleton.getInstance().setShopVehicleList(shopVehicles);
-                return true;
-            case CBS:
-                CBSData.Wrapper cbsWrapper = gson.fromJson(response.toString(), CBSData.Wrapper.class);
-                final ArrayList<CBSData> cbsData = new ArrayList<>(Arrays.asList(cbsWrapper.data));
-                Singleton.getInstance().setCBSData(cbsData);
                 return true;
             case COMPANY_SHOPS:
                 CompanyShops.Wrapper companyShopsWrapper = gson.fromJson(response.toString(), CompanyShops.Wrapper.class);
@@ -213,10 +207,6 @@ public class ApiHelper {
         networkHelper.doJSONRequest(Constants.URL_MARKETPRICES,callbackInterface,RequestTypeEnum.CURRENT_MARKET_PRICES);
     }
 
-    public void getCBSData(){
-        NetworkHelper networkHelper = new NetworkHelper();
-        networkHelper.doJSONRequest(Constants.URL_CBS, callbackInterface, RequestTypeEnum.CBS);
-    }
 
     public void getPlayerVehicles() {
         NetworkHelper networkHelper = new NetworkHelper();
