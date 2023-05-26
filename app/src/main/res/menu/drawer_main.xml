@@ -33,11 +33,6 @@
             ></item>
 
         <item
-            android:id="@+id/nav_cbs"
-            android:icon="@drawable/ic_location_city"
-            android:title="@string/str_cbs" />
-
-        <item
             android:id="@+id/nav_marketprices"
             android:icon="@drawable/ic_chart"
             android:title="@string/str_market" />
