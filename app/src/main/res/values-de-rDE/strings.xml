@@ -321,5 +321,8 @@
     <string name="str_rental_9">Steinmark Appartements Autogarage</string>
     <string name="str_garage_unknown">unbekannt</string>
     <string name="str_garage_selfbuild">selbstgebaute Garage</string>
+    <string name="str_garage_car_race">Rennstrecke Autogarage</string>
+    <string name="str_garage_car_22">Schönwalde Autogarage</string>
+    <string name="str_garage_car_21">Freudenstedt Autogarage</string>
 
 </resources>
