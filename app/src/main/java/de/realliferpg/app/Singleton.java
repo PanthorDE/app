@@ -9,7 +9,6 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
 
-import de.realliferpg.app.objects.CBSData;
 import de.realliferpg.app.objects.Changelog;
 import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.CustomNetworkError;
@@ -43,7 +42,6 @@ public class Singleton {
     private ArrayList<ShopVehicle> shopVehicleList;
     private ArrayList<ShopItem> shopItemList;
     private ArrayList<MarketServerObject> marketServerObjects;
-    private ArrayList<CBSData> cbsData;
     private ArrayList<CompanyShops> companyShops;
 
     private CustomNetworkError networkError;
@@ -151,10 +149,7 @@ public class Singleton {
         this.shopItemList = shopItemList;
     }
 
-    public ArrayList<CBSData> getCBSData(){ return cbsData; }
-    public void setCBSData(ArrayList<CBSData> cbsData) {
-        this.cbsData = cbsData;
-    }
+
 
     public ArrayList<CompanyShops> getCompanyShopsData(){ return companyShops; }
     public void setCompanyShopsData(ArrayList<CompanyShops> companyShops) {

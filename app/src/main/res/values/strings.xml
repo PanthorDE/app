@@ -137,9 +137,6 @@
     <string name="str_rac09">Leiter</string> <!-- R9, adac-level 9 -->
 
 
-    <string name="str_cbs">CBS</string>
-    <string name="str_cbspicture">CBS picture</string>
-    <string name="str_cbs_money_label">Fundings</string>
 
     <!-- Market items -->
     <string name="aluminum_r">aluminum</string>
