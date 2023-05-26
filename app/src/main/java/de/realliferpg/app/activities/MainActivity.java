@@ -36,7 +36,6 @@ import org.json.JSONObject;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
-import de.realliferpg.app.fragments.CBSFragment;
 import de.realliferpg.app.fragments.ChangelogFragment;
 import de.realliferpg.app.fragments.CompanyShopsFragment;
 import de.realliferpg.app.fragments.ErrorFragment;
@@ -162,9 +161,6 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_marketprices:
                 switchFragment(new MarketFragment());
-                break;
-            case R.id.nav_cbs:
-                switchFragment(new CBSFragment());
                 break;
             case R.id.nav_settings:
                 switchFragment(new SettingsFragment());
