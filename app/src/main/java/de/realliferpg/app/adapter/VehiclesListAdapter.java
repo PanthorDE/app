@@ -1,20 +1,14 @@
 package de.realliferpg.app.adapter;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Paint;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.text.Format;
-import java.util.Formatter;
-import java.util.Locale;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FormatHelper;
@@ -180,25 +174,16 @@ public class VehiclesListAdapter extends BaseExpandableListAdapter {
     }
 
     private String getNameGarage(String lastGarage){
-        if (lastGarage.toLowerCase().equals("unknown")){
-            lastGarage = "garage_unknown";
-        }
-
-        if (lastGarage.toLowerCase().startsWith("custom_garage")){
-            lastGarage = "garage_selfbuild";
-        }
+        if (lastGarage.toLowerCase().equals("unknown")) lastGarage = "garage_unknown";
+        if (lastGarage.toLowerCase().startsWith("custom_garage")) lastGarage = "garage_selfbuild";
 
         String strLastGarage = new StringBuilder().append("str_").append(lastGarage).toString();
         Resources resources = context.getResources();
         int resourceId = 0;
-        try {
-            resourceId = resources.getIdentifier(strLastGarage, "string", context.getPackageName());
-        } catch (Exception e) {
-            // Fehlermeldung ist hier nicht sinnig, es wird einfach "Garage: unbekannt" angezeigt
-            resourceId = resources.getIdentifier("str_garage_unknown", "string", context.getPackageName());;
-        }
-
-        return resources.getString(resourceId);
+        resourceId = resources.getIdentifier(strLastGarage, "string", context.getPackageName());
+        // Wenn kein Treffer für den "lastGarage"-String gefunden wurde (resourceId = 0), greifen wir auf unbekannt zurück
+        if (resourceId == 0) resourceId = resources.getIdentifier("str_garage_unknown", "string", context.getPackageName());
+        return resourceId != 0 ?  resources.getString(resourceId) : "unknown";
     }
 
     static class ViewHolder {
