@@ -31,4 +31,9 @@ public class Building implements IBuilding {
     public int getDisabled() {
         return disabled;
     }
+
+    @Override
+    public boolean isDisabled() {
+        return disabled == 1;
+    }
 }

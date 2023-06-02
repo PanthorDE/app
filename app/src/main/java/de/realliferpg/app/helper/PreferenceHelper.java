@@ -25,9 +25,9 @@ public class PreferenceHelper {
     public boolean showImpounded() { return prefs.getBoolean("pref_vehicleList_impounded", false);}
 
     public int getDaysForReminderMaintenance() {
-        String days = prefs.getString("pref_days_maintenance", "14");
+        String days = prefs.getString("pref_days_maintenance", "7");
         if (days == null || days.isEmpty()){
-            days = "14";
+            days = "7";
         }
         return Integer.valueOf(days);
     }
