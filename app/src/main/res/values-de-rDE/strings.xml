@@ -200,15 +200,16 @@
     <string name="str_setReminder">Wartungserinnerung</string>
 
     <!-- Buildings -->
-    <string name="str_house">Haus</string>
-    <string name="str_rental">Appartment</string>
-    <string name="str_building">Gebäude</string>
+    <string name="str_house">Häuser</string>
+    <string name="str_rental">Appartments</string>
+    <string name="str_building">Baustellen</string>
     <string name="str_maintainance_house">{0} mit ID {1} ist für {2} Tage ({3} Stunden) gewartet.</string>
     <string name="str_maintainance_rental">{0} mit ID {1} ist für {2} Tage ({3} Stunden) bezahlt.</string>
     <string name="str_inactive"> - inaktiv</string>
     <string name="str_remind_me">Erinnerung setzen</string>
     <string name="str_alarms_set">Erinnerungen gesetzt</string>
     <string name="str_notifications_reminder_maintenance_title">Erinnerung Wartung</string>
+    <string name="str_notifications_maintenance_title">Hausverfall in {0} Tagen</string>
     <string name="str_no_person_with_key">Niemand hat einen Schlüssel.</string>
     <string name="str_persons_with_key">Hat einen Schlüssel:</string>
 

@@ -28,22 +28,13 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public int getGroupCount() {
-        int length = 0;
-
-        if (this.buildingByType != null)
-            length = this.buildingByType.length;
-
-        return length;
+        return this.buildingByType != null ? this.buildingByType.length : 0;
     }
 
     @Override
     public int getChildrenCount(int groupPosition) {
-        int count = 0;
-
-        if (this.buildingByType != null && this.buildingByType[groupPosition].buildings != null)
-            count = this.buildingByType[groupPosition].buildings.length;
-
-        return count;
+        return this.buildingByType != null && this.buildingByType[groupPosition].buildings != null
+                ? this.buildingByType[groupPosition].buildings.length : 0;
     }
 
     @Override
@@ -148,8 +139,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         IBuilding building = this.buildingByType[groupPosition].buildings[childPosition];
         String buildingName = "ID: " + Integer.toString(building.getId());
 
-        if (building.getDisabled() != 0) // 0 heißt aktiv
-        {
+        if (building.isDisabled()) {
             viewHolderChild.tvBezeichnung.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
             buildingName += " " + context.getResources().getString(R.string.str_inactive);
         }
@@ -162,8 +152,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
             viewHolderChild.tvBezahlteTage.setText(context.getString(R.string.str_buildingsList_buildingPayedFor).replace("{0}", Integer.toString(building.getPayedForDays())));
             viewHolderChild.tvBezahlteTage.setVisibility(View.VISIBLE);
             viewHolderChild.ivListItemWarning.setVisibility(building.getPayedForDays() <= daysMaintenance ? View.VISIBLE : View.INVISIBLE);
-        }
-        else {
+        } else {
             viewHolderChild.ivListItemWarning.setVisibility(View.INVISIBLE);
             Building buildingCast = (Building)building;
             viewHolderChild.tvBezahlteTage.setText("Stage: " + buildingCast.stage);

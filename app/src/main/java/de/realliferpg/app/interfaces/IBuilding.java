@@ -6,4 +6,5 @@ public interface IBuilding {
     int getPayedForHours();
     String[] getPlayers();
     int getDisabled();
+    boolean isDisabled();
 }
