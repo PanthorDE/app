@@ -191,8 +191,13 @@ public class MainActivity extends AppCompatActivity
                 startActivity(browserIntent);
                 break;
             }
-            case R.id.nav_polDashboard:{
+            case R.id.nav_polDashboard: {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.polizei-nordholm.de/"));
+                startActivity(browserIntent);
+                break;
+            }
+            case R.id.nav_racDashboard: {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://rac-panel.de/"));
                 startActivity(browserIntent);
                 break;
             }
@@ -256,8 +261,12 @@ public class MainActivity extends AppCompatActivity
                 tvInfo.setText(playerInfo.name);
 
                 NavigationView navigationView = findViewById(R.id.nav_view);
-                if (playerInfo != null && Integer.parseInt(playerInfo.coplevel) > 1){
-                    navigationView.getMenu().findItem(R.id.nav_polDashboard).setVisible(true);
+                if (playerInfo != null) {
+                    if (Integer.parseInt(playerInfo.coplevel) >= 1) {
+                        navigationView.getMenu().findItem(R.id.nav_polDashboard).setVisible(true);
+                    } else if (Integer.parseInt(playerInfo.adaclevel) >= 1) {
+                        navigationView.getMenu().findItem(R.id.nav_racDashboard).setVisible(true);
+                    }
                 }
                 break;
         }
