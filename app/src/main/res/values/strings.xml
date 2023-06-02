@@ -217,7 +217,8 @@
     <string name="str_remind_me">Set reminder</string>
     <string name="str_alarms_set">Reminders set</string>
     <string name="str_notifications_reminder_maintenance_title">Reminder Maintenance</string>
-    <string name="str_notifications_maintenance_title">House decay in {0} days</string>
+    <string name="str_notifications_maintenance_house_title">House decay in {0} days</string>
+    <string name="str_notifications_maintenance_rental_title">Apartment rent due in {0} days</string>
     <string name="str_no_person_with_key">No one has a key.</string>
     <string name="str_persons_with_key">Has a key:</string>
 

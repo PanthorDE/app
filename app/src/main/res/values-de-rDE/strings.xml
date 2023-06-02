@@ -209,7 +209,8 @@
     <string name="str_remind_me">Erinnerung setzen</string>
     <string name="str_alarms_set">Erinnerungen gesetzt</string>
     <string name="str_notifications_reminder_maintenance_title">Erinnerung Wartung</string>
-    <string name="str_notifications_maintenance_title">Hausverfall in {0} Tagen</string>
+    <string name="str_notifications_maintenance_house_title">Hausverfall in {0} Tagen</string>
+    <string name="str_notifications_maintenance_rental_title">Appartment Mietvertrag verlängern in {0} Tagen</string>
     <string name="str_no_person_with_key">Niemand hat einen Schlüssel.</string>
     <string name="str_persons_with_key">Hat einen Schlüssel:</string>
 

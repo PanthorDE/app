@@ -7,22 +7,18 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.provider.CalendarContract;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.util.ArrayUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Objects;
-import java.util.OptionalInt;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
@@ -30,8 +26,10 @@ import de.realliferpg.app.adapter.BuildingsListAdapter;
 import de.realliferpg.app.helper.PreferenceHelper;
 import de.realliferpg.app.interfaces.BuildingEnum;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
+import de.realliferpg.app.interfaces.IBuilding;
 import de.realliferpg.app.objects.Building;
 import de.realliferpg.app.objects.BuildingGroup;
+import de.realliferpg.app.objects.ChoosenMaintenanceBuilding;
 import de.realliferpg.app.objects.House;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Rental;
@@ -129,28 +127,44 @@ public class PlayerBuildingsFragment extends Fragment {
         }
 
         btnReminder.setOnClickListener(v -> {
+            // Days left till notification should be should (meaning the user will get notified)
             int daysLeft = 100;
+            ChoosenMaintenanceBuilding chosenBuilding = null;
 
-            // Minimum an verbleibenden Tagen finden
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-                daysLeft = Arrays.stream(houses).mapToInt(House::getPayedForDays).min().orElse(daysLeft);
-            } else {
-                for (House house : houses) {
-                    int paidDays = house.getPayedForDays();
-                    if (paidDays < daysLeft) daysLeft = paidDays;
+            for (House house : houses) {
+                if (chosenBuilding == null || house.getPayedForHours() < chosenBuilding.getBuilding().getPayedForHours()) {
+                    chosenBuilding = new ChoosenMaintenanceBuilding(BuildingEnum.HOUSE, house);
                 }
             }
 
-            // Davon prefHelper.getDaysForReminderMaintenance Tage abziehen (wenn nicht schon kleiner gleich 5)
-            int prefDaysForReminder = prefHelper.getDaysForReminderMaintenance();
+            for (Rental rental : rentals) {
+                if (chosenBuilding == null || rental.getPayedForHours() < chosenBuilding.getBuilding().getPayedForHours()) {
+                    chosenBuilding = new ChoosenMaintenanceBuilding(BuildingEnum.RENTAL, rental);
+                }
+            }
 
+            if (chosenBuilding == null) {
+                Snackbar snackbar = Snackbar.make(view.findViewById(R.id.elv_buildings), "Kein passendes Gebäude gefunden", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                Singleton.getInstance().setCurrentSnackbar(snackbar);
+                return;
+            }
+
+            // Minimum an verbleibenden Tagen finden
+            int paidDays = chosenBuilding.getBuilding().getPayedForDays();
+            int prefDaysForReminder = prefHelper.getDaysForReminderMaintenance();
+            if (paidDays < daysLeft) daysLeft = paidDays;
+
+            // Davon prefHelper.getDaysForReminderMaintenance Tage abziehen (wenn nicht schon kleiner gleich 5)
             if (daysLeft >= prefDaysForReminder) {
                 daysLeft = daysLeft - prefDaysForReminder;
             }
 
             // Kalenderevent von heute + daysLeft erzeugen
             String calendarEventTitle = this.requireContext()
-                    .getString(R.string.str_notifications_maintenance_title)
+                    .getString(chosenBuilding.getType() == BuildingEnum.BUILDING
+                            ? R.string.str_notifications_maintenance_house_title
+                            : R.string.str_notifications_maintenance_rental_title)
                     .replace("{0}", String.valueOf(daysLeft));
             Calendar calendarEvent = Calendar.getInstance();
             calendarEvent.add(Calendar.DAY_OF_YEAR, daysLeft);
