@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -33,6 +34,8 @@ import com.google.zxing.integration.android.IntentResult;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
+
+import java.util.Objects;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
@@ -348,5 +351,16 @@ public class MainActivity extends AppCompatActivity
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
         }
+    }
+
+    public void setAppBarTitle(String title) {
+        Objects.requireNonNull(getSupportActionBar())
+                .setTitle(title);
+    }
+
+    public void setAppBarTitle(int resourceId) {
+        Resources res = getResources();
+        String title = res.getString(resourceId);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(title);
     }
 }

@@ -1,9 +1,13 @@
 package de.realliferpg.app.fragments;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -17,9 +21,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
@@ -52,10 +56,14 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
 
         this.view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_overview);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getServers();
@@ -214,6 +222,6 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
             }
         }
 
-        return Integer.toString(nextRestart) + " " + getResources().getString(R.string.o_clock);
+        return nextRestart + " " + getResources().getString(R.string.o_clock);
     }
 }

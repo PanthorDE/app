@@ -12,7 +12,7 @@
     <string name="str_website">Website</string>
     <string name="str_twitter" translatable="false">Twitter</string>
     <string name="str_discord" translatable="false">Discord</string>
-    <string name="str_changelog" translatable="false">Changelog</string>
+    <string name="str_changelog" translatable="false">Changelogs</string>
     <string name="str_imprint">Imprint &amp; Privacy</string>
     <string name="str_imprint_text">Panthor is a modded Arma 3 Roleplay server</string>
 

@@ -8,7 +8,7 @@
     android:background="@color/secondaryColor"
     tools:context=".fragments.MainFragment">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_main_phonebook"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -28,27 +28,15 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="1" />
 
-            <TextView
-                android:id="@+id/tv_phonebook_head"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:text="@string/str_phonebook"
-                android:textColor="@color/primaryTextColor"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/sv_search_phone_by_name"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="4dp"
+                android:iconifiedByDefault="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_phonebook_head"
-                android:iconifiedByDefault="false" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ExpandableListView
                 android:id="@+id/lv_phonebook"

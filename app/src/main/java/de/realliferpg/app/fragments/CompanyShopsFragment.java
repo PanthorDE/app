@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.adapter.CompanyShopsListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
@@ -52,8 +53,11 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_companyshops, container, false);
-        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_company_shops);
 
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_company_shops);
+
+        final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_company_shops);
         final ProgressBar pbLoadCompanyShop = view.findViewById(R.id.pb_company_shops);
         pbLoadCompanyShop.setVisibility(View.VISIBLE);
         final ExpandableListView elv_company_shops = view.findViewById(R.id.lv_company_shops);

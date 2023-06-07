@@ -11,6 +11,7 @@
     <string name="set_playerApiKey">Spieler-API-Key</string>
     <string name="str_placeholder">Platzhalter</string>
     <string name="str_website">Website</string>
+    <string name="str_changelog">Changelogs</string>
     <string name="str_imprint">Impressum &amp; Datenschutz</string>
     <string name="str_imprint_text">Panthor ist ein gemoddeter Arma 3 Roleplay Server</string>
 

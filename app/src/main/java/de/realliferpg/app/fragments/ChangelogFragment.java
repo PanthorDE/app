@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.adapter.ChangelogAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
@@ -50,6 +51,9 @@ public class ChangelogFragment extends Fragment implements CallbackNotifyInterfa
                              Bundle savedInstanceState) {
 
         this.view = inflater.inflate(R.layout.fragment_changelog, container, false);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_changelog);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getChangelog();

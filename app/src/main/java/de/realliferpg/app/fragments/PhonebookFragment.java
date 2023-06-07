@@ -17,9 +17,9 @@ import android.widget.ProgressBar;
 import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
-import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.adapter.PhonebookAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
@@ -27,7 +27,6 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
-import de.realliferpg.app.objects.Phones;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class PhonebookFragment extends Fragment implements CallbackNotifyInterface, SearchView.OnQueryTextListener, SearchView.OnCloseListener {
@@ -54,6 +53,9 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_phonebooks, container, false);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_phonebook);
 
         final ProgressBar pbLoadphonebook = view.findViewById(R.id.pb_phonebook);
         pbLoadphonebook.setVisibility(View.VISIBLE);
