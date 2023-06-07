@@ -144,7 +144,7 @@
     <string name="cocaine_r">Kokain</string>
     <string name="copper_r">Kupfer</string>
     <string name="crab">Krabbe</string>
-    <string name="diamond_r">Diamand</string>
+    <string name="diamond_r">Diamanten</string>
     <string name="fish_r">Fisch</string>
     <string name="heroin_r">Heroin</string>
     <string name="honey_r">Honig</string>
@@ -167,6 +167,21 @@
     <string name="wheat_r">Weizenmehl</string>
     <string name="wheat_u">Weizen</string>
     <string name="wood_r">Holz</string>
+    <string name="charcoal_r">Holzkohle</string>
+    <string name="cotton_r">Baumwolle</string>
+    <string name="crab_rolls">Krabbenrollen</string>
+    <string name="detergent">Waschmittel</string>
+    <string name="furniture_r">Exportmöbel</string>
+    <string name="grape_juice">Traubensaft</string>
+    <string name="white_widow_r">White Widow (Trocken)</string>
+    <string name="white_russian_r">White Russian (Trocken)</string>
+    <string name="purple_haze_r">Purple Haze (Trocken)</string>
+    <string name="met">Met</string>
+    <string name="moonshiner">Moonshine</string>
+    <string name="precious_metal_r">Wertvolles Metall</string>
+    <string name="rubber">Gummi</string>
+    <string name="rye_r">Gerstenmehl</string>
+    <string name="tissue">Gewebe</string>
 
     <string name="str_polDashboard">Dashboard Polizei Nordholm</string>
 
