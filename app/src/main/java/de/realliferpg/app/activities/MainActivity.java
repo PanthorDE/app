@@ -39,27 +39,10 @@ import java.util.Objects;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
-import de.realliferpg.app.fragments.ChangelogFragment;
-import de.realliferpg.app.fragments.CompanyShopsFragment;
-import de.realliferpg.app.fragments.ErrorFragment;
-import de.realliferpg.app.fragments.ImprintFragment;
-import de.realliferpg.app.fragments.InfoFragment;
-import de.realliferpg.app.fragments.MainFragment;
-import de.realliferpg.app.fragments.MarketFragment;
-import de.realliferpg.app.fragments.PhonebookFragment;
-import de.realliferpg.app.fragments.PlayerBuildingsFragment;
-import de.realliferpg.app.fragments.PlayerDonationFragment;
-import de.realliferpg.app.fragments.PlayerFragment;
-import de.realliferpg.app.fragments.PlayerStatsFragment;
-import de.realliferpg.app.fragments.PlayerVehiclesFragment;
-import de.realliferpg.app.fragments.PlayersListFragment;
-import de.realliferpg.app.fragments.SettingsFragment;
+import de.realliferpg.app.fragments.*;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
-import de.realliferpg.app.interfaces.CallbackNotifyInterface;
-import de.realliferpg.app.interfaces.FragmentInteractionInterface;
-import de.realliferpg.app.interfaces.RequestCallbackInterface;
-import de.realliferpg.app.interfaces.RequestTypeEnum;
+import de.realliferpg.app.interfaces.*;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class MainActivity extends AppCompatActivity
@@ -73,8 +56,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Singleton.getInstance().setContext(getApplicationContext());
-        createNotificationChannel();
-
         PreferenceHelper preferenceHelper = new PreferenceHelper();
 
         setContentView(R.layout.activity_main);
@@ -337,19 +318,6 @@ public class MainActivity extends AppCompatActivity
         }catch (Exception e){
             Singleton.getInstance().setErrorMsg(e.getMessage());
             switchFragment(new ErrorFragment());
-        }
-    }
-
-    private void createNotificationChannel(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "ReminderMaintenance";
-            String description = "Channel for Panthor Maintenance Reminder";
-            int importance =NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("notifyMaintenance", name, importance);
-            channel.setDescription(description);
-
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
         }
     }
 
