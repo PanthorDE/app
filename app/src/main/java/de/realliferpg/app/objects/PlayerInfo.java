@@ -55,15 +55,10 @@ public class PlayerInfo {
     public String profileurl;
 
     public Donation[] donations;
-    // Fertige Häuser
-    public House[] houses;
-    // Bauwerke
-    public Building[] buildings;
-    // Appartments
-    public Rental[] rentals;
-    // Fahrzeuge je nach Typ
-    public VehicleGroup[] vehiclesByType;
-    
+    public House[] houses; // Fertige Häuser
+    public Building[] buildings; // Bauwerke
+    public Rental[] rentals; // Appartments
+    public VehicleGroup[] vehiclesByType; // Fahrzeuge je nach Typ
     public Phones[] phones;
     public Phonebooks[] phonebooks;
 

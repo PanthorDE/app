@@ -9,30 +9,32 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Locale;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.helper.FractionMappingHelper;
 import de.realliferpg.app.interfaces.FractionEnum;
-import de.realliferpg.app.objects.Phones;
 import de.realliferpg.app.objects.PhonebookEntry;
 import de.realliferpg.app.objects.Phonebooks;
+import de.realliferpg.app.objects.Phones;
 import de.realliferpg.app.objects.PlayerInfo;
 
-
 public class PhonebookAdapter extends BaseExpandableListAdapter {
-
     private final Context context;
     private final PlayerInfo playerInfo;
-    private ArrayList<Phonebooks> filteredList;
-    private ArrayList<Phonebooks> originalList;
+    private ArrayList<Phonebooks> phonebooks;
+    private ArrayList<Phonebooks> filteredPhonebooks;
 
     public PhonebookAdapter(Context _context, PlayerInfo _playerInfo) {
         this.context = _context;
         this.playerInfo = _playerInfo;
-        this.filteredList = new ArrayList<>();
-        this.originalList = new ArrayList<>();
-        this.originalList.addAll(Arrays.asList(_playerInfo.phonebooks));
+        this.filteredPhonebooks = new ArrayList<>();
+        this.phonebooks = new ArrayList<>();
+        this.phonebooks.addAll(Arrays.asList(_playerInfo.phonebooks));
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
     }
 
     @Override
@@ -41,8 +43,8 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public int getChildrenCount(int i) {
-        return playerInfo.phonebooks[i].phonebook.length;
+    public long getGroupId(int groupPosition) {
+        return groupPosition;
     }
 
     @Override
@@ -51,33 +53,8 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        int idNrPhone = this.playerInfo.phones[groupPosition].idNR;
-        PhonebookEntry[] phoneBook = null;
-
-        for (Phonebooks book : this.playerInfo.phonebooks) {
-            if (book.idNR == idNrPhone)
-            {
-                phoneBook = book.phonebook;
-            }
-        }
-
-        return phoneBook[childPosition];
-    }
-
-    @Override
-    public long getGroupId(int groupPosition) {
-        return groupPosition;
-    }
-
-    @Override
     public long getChildId(int groupPosition, int childPosition) {
         return childPosition;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
     }
 
     @Override
@@ -99,12 +76,14 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
 
         viewHolder.position = groupPosition;
 
-        viewHolder.tvPhonebookToPhonenumber.setText("Telefonbuch zur Nr. " + this.playerInfo.phones[groupPosition].phone);
+        Phonebooks[] playerPhonebooks = playerInfo.phonebooks;
+        Phonebooks phonebook = playerPhonebooks[groupPosition];
+        Phones telPhone = this.getPhoneForPhonebook(phonebook);
 
-        FractionEnum fractionEnum = FractionMappingHelper.getFractionFromSide(this.playerInfo.phones[groupPosition].side, Integer.valueOf(playerInfo.coplevel));
+        viewHolder.tvPhonebookToPhonenumber.setText("Telefonbuch zur Nr. " + telPhone.phone);
+        FractionEnum fractionEnum = FractionMappingHelper.getFractionFromSide(phonebook.side, Integer.parseInt(playerInfo.coplevel));
         String textSidePlusMaybeDefault = FractionMappingHelper.getFractionNameFromEnum(this.context, fractionEnum);
-        if (this.playerInfo.phones[groupPosition].note.toLowerCase().equals("default"))
-        {
+        if (telPhone.note.equalsIgnoreCase("default")) {
             textSidePlusMaybeDefault += " (default)";
         }
 
@@ -116,13 +95,30 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        PhonebookEntry phoneBookEntry = this.playerInfo.phonebooks[groupPosition].phonebook[childPosition];
+    public Object getChild(int groupPosition, int childPosition) {
+        Phones telPhone = this.playerInfo.phones[groupPosition];
+        Phonebooks[] phonebooks = this.playerInfo.phonebooks;
+        int idNrPhone = telPhone.idNR;
+        PhonebookEntry[] phoneBook = null;
 
+        for (Phonebooks book : phonebooks) {
+            if (book.idNR == idNrPhone && book.side.equals(telPhone.side) && !telPhone.isDisabled()) {
+                phoneBook = book.phonebook;
+            }
+        }
+
+        return phoneBook[childPosition];
+    }
+
+    @Override
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.list_item_phonebook, null);
         }
+
+        Phonebooks phonebook = this.playerInfo.phonebooks[groupPosition];
+        PhonebookEntry phoneBookEntry = phonebook.phonebook[childPosition];
 
         TextView tvName = convertView.findViewById(R.id.tv_phonebook_name);
         TextView tvNumber = convertView.findViewById(R.id.tv_phonebook_number);
@@ -136,36 +132,52 @@ public class PhonebookAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
+    public int getChildrenCount(int i) {
+        return playerInfo.phonebooks[i].phonebook.length;
+    }
+
+    @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
 
-    public void filterData(String query){
+    public Phones getPhoneForPhonebook(Phonebooks phonebook) {
+        Phones[] pPhones = playerInfo.phones;
+        Phones matchedPhone = null;
 
+        for (Phones phone : pPhones) {
+            if (phone.idNR == phonebook.idNR && phone.side.equals(phonebook.side)) {
+                matchedPhone = phone;
+                break;
+            }
+        }
+
+        return matchedPhone;
+    }
+
+    public void filterData(String query) {
         query = query.toLowerCase();
-        filteredList.clear();
+        filteredPhonebooks.clear();
 
         if (query.isEmpty()){
-            filteredList.addAll(originalList);
-        }
-        else {
-
-            for (Phonebooks phonebook : originalList){
-                ArrayList<PhonebookEntry> phonebookList = new ArrayList<PhonebookEntry>(Arrays.asList(phonebook.phonebook));
-                ArrayList<PhonebookEntry> newPhonebookList = new ArrayList<PhonebookEntry>();
-                for (PhonebookEntry entry: phonebookList){
-                    if(entry.name.toLowerCase().contains(query)){
+            filteredPhonebooks.addAll(phonebooks);
+        } else {
+            for (Phonebooks phonebook : phonebooks) {
+                ArrayList<PhonebookEntry> phonebookList = new ArrayList<>(Arrays.asList(phonebook.phonebook));
+                ArrayList<PhonebookEntry> newPhonebookList = new ArrayList<>();
+                for (PhonebookEntry entry: phonebookList) {
+                    if(entry.name.toLowerCase().contains(query)) {
                         newPhonebookList.add(entry);
                     }
                 }
-                if (newPhonebookList.size() > 0){
+                if (newPhonebookList.size() > 0) {
                     Phonebooks newEntry = new Phonebooks(phonebook.idNR, newPhonebookList.toArray(new PhonebookEntry[newPhonebookList.size()]));
-                    filteredList.add(newEntry);
+                    filteredPhonebooks.add(newEntry);
                 }
             }
         }
 
-        this.playerInfo.phonebooks = filteredList.toArray(new Phonebooks[filteredList.size()]);
+        this.playerInfo.phonebooks = filteredPhonebooks.toArray(new Phonebooks[filteredPhonebooks.size()]);
         notifyDataSetChanged();
     }
 

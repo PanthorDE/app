@@ -9,4 +9,8 @@ public class Phones {
     public int disabled;
     private String created_at;
     private String updated_at;
+
+    public boolean isDisabled() {
+        return this.disabled == 1;
+    }
 }
