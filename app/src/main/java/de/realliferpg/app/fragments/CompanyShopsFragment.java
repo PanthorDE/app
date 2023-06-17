@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
 import de.realliferpg.app.activities.MainActivity;
@@ -29,7 +28,6 @@ import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.CustomNetworkError;
-import de.realliferpg.app.objects.Phones;
 
 public class CompanyShopsFragment extends Fragment implements CallbackNotifyInterface {
 
@@ -80,29 +78,21 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
 
         elv_company_shops.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
+            public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int topRow = (elv_company_shops == null || elv_company_shops.getChildCount() == 0) ?
-                        0 : elv_company_shops.getChildAt(0).getTop();
+                int topRow = elv_company_shops.getChildCount() == 0
+                        ? 0
+                        : elv_company_shops.getChildAt(0).getTop();
                 sc.setEnabled(firstVisibleItem == 0 && topRow >= 0);
             }
         });
 
-
         ArrayList<CompanyShops> companyShopsData = Singleton.getInstance().getCompanyShopsData();
-
-        if (companyShopsData == null || companyShopsData.size() == 0){
-            tvKeineDaten.setVisibility(View.VISIBLE);
-            elv_company_shops.setVisibility(View.INVISIBLE);
-        } else {
-            tvKeineDaten.setVisibility(View.INVISIBLE);
-            elv_company_shops.setVisibility(View.VISIBLE);
-        }
-
+        boolean noDataProvided = companyShopsData == null || companyShopsData.size() == 0;
+        tvKeineDaten.setVisibility(noDataProvided ? View.VISIBLE : View.INVISIBLE);
+        elv_company_shops.setVisibility(noDataProvided ? View.INVISIBLE : View.VISIBLE);
 
         return view;
     }
@@ -110,11 +100,8 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof FragmentInteractionInterface) {
-            mListener = (FragmentInteractionInterface) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        if (!(context instanceof  FragmentInteractionInterface)) {
+            throw new RuntimeException(context + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -134,11 +121,14 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
 
         switch (type) {
             case COMPANY_SHOPS:
+                ArrayList<CompanyShops> companyShops = Singleton.getInstance().getCompanyShopsData();
+                boolean noDataProvided = companyShops == null || companyShops.size() == 0;
 
-                CompanyShopsListAdapter listAdapter = new CompanyShopsListAdapter(this.getContext(), Singleton.getInstance().getCompanyShopsData());
+                CompanyShopsListAdapter listAdapter = new CompanyShopsListAdapter(this.getContext(), companyShops);
                 tvKeineDaten.setVisibility(View.GONE);
 
                 elv_company_shops.setAdapter(listAdapter);
+                elv_company_shops.setVisibility(noDataProvided ? View.INVISIBLE : View.VISIBLE);
 
                 pb_company_shops.setVisibility(View.GONE);
 
@@ -154,6 +144,7 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
                     }
                 });
                 break;
+
             case NETWORK_ERROR:
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 
@@ -176,14 +167,5 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
                 Singleton.getInstance().setCurrentSnackbar(snackbar);
                 break;
         }
-    }
-
-    private String getDefaultNumber(Phones[] phones) {
-        for (Phones phone : phones) {
-            if (phone.note.matches("default")) {
-                return phone.phone;
-            }
-        }
-        return "0";
     }
 }
