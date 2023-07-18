@@ -2,11 +2,12 @@ package de.realliferpg.app.objects;
 
 import de.realliferpg.app.interfaces.IBuilding;
 
-public class Rental implements IBuilding {
+public class BuildingDTO implements IBuilding {
     public int id;
-    public int payed_for;
+    public String classname;
+    public int stage;
+    public String location;
     public int disabled;
-    public int active;
 
     @Override
     public int getId() {
@@ -14,13 +15,19 @@ public class Rental implements IBuilding {
     }
 
     @Override
-    public int getPayedForDays() { return (int)(payed_for/24); }
+    public int getPayedForDays() {
+        return 0;
+    }
 
     @Override
-    public int getPayedForHours() { return payed_for; }
+    public int getPayedForHours() {
+        return 0;
+    }
 
     @Override
-    public String[] getPlayers() { return null; }
+    public String[] getPlayers() {
+        return new String[0];
+    }
 
     @Override
     public int getDisabled() {
@@ -32,7 +39,12 @@ public class Rental implements IBuilding {
         return disabled == 1;
     }
 
+    @Override
     public boolean isActive() {
         return disabled == 0;
+    }
+
+    public Position getPosition() {
+        return new Position(location);
     }
 }

@@ -7,4 +7,6 @@ public interface IBuilding {
     String[] getPlayers();
     int getDisabled();
     boolean isDisabled();
+    boolean isActive();
+    boolean equals(Object o);
 }
