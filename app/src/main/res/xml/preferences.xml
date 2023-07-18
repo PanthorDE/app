@@ -30,7 +30,8 @@
             android:defaultValue=""
             android:icon="@drawable/ic_location_city"
             android:key="pref_days_maintenance"
-            android:title="@string/str_days_maintenance" />
+            android:title="@string/str_days_maintenance"
+            app:summary="@string/str_days_maintenance_time_unit" />
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/str_vehiclesListSettings"

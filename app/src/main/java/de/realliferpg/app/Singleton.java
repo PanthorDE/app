@@ -32,9 +32,7 @@ public class Singleton {
 
     private RequestQueue volleyQueue;
     private Context context;
-
     private Snackbar currentSnackbar;
-
     private PlayerInfo playerInfo;
     private ArrayList<Server> serverList;
     private ArrayList<Changelog> changelogList;
@@ -43,9 +41,7 @@ public class Singleton {
     private ArrayList<ShopItem> shopItemList;
     private ArrayList<MarketServerObject> marketServerObjects;
     private ArrayList<CompanyShops> companyShops;
-
     private CustomNetworkError networkError;
-
     private String scanResponse;
     private String errorMsg;
 
@@ -149,9 +145,10 @@ public class Singleton {
         this.shopItemList = shopItemList;
     }
 
+    public ArrayList<CompanyShops> getCompanyShopsData() {
+        return companyShops;
+    }
 
-
-    public ArrayList<CompanyShops> getCompanyShopsData(){ return companyShops; }
     public void setCompanyShopsData(ArrayList<CompanyShops> companyShops) {
         this.companyShops = companyShops;
     }

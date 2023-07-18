@@ -29,6 +29,6 @@ public class PreferenceHelper {
         if (days == null || days.isEmpty()){
             days = "7";
         }
-        return Integer.valueOf(days);
+        return Integer.parseInt(days);
     }
 }

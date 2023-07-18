@@ -190,13 +190,15 @@
     <string name="rye_r">Rye flour</string>
     <string name="tissue">Tissues</string>
 
-    <string name="str_polDashboard">Dashboard Police Nordholm</string>
+    <string name="str_polDashboard">Dashboard Police Wiesberg</string>
+    <string name="str_racDashsboard">Dashboard RAC</string>
 
     <string name="str_back_again_to_exit">Press BACK again to exit.</string>
     <string name="str_no_data_change_tab">No data.\n\nIf you expect data, please change the tab and then change back here again.</string>
     <string name="str_no_data">No data.</string>
     <string name="str_no_data_refresh">No data.\n\nIf you expect data, please refresh (swipe down).</string>
-    <string name="str_days_maintenance">Reminder for Maintenance (in days)</string>
+    <string name="str_days_maintenance">Reminder for Maintenance</string>
+    <string name="str_days_maintenance_time_unit">Days</string>
     <string name="str_new_value">New value:</string>
     <string name="str_no_valid_number_days_maintenance">No valid number! Must between 0 and 20!</string>
     <string name="str_plate">Plate:</string>
@@ -213,11 +215,11 @@
     <string name="str_scan">Scan QR Code</string>
     <string name="str_helpScan">Help scanning Code</string>
     <string name="str_vehiclesListSettings">Vehicle List Settings</string>
-    <string name="str_dont_show">do not show</string>
-    <string name="str_show">show</string>
+    <string name="str_dont_show">Do not show</string>
+    <string name="str_show">Show</string>
     <string name="str_vehicleList_sold">sold vehicles</string>
-    <string name="str_vehicleList_destroyed">destroyed vehicles</string>
-    <string name="str_vehicleList_impound">impounded vehicles</string>
+    <string name="str_vehicleList_destroyed">Destroyed vehicles</string>
+    <string name="str_vehicleList_impound">Impounded vehicles</string>
 
     <string name="str_buildingsList_buildingPayedFor">Payed for {0} day(s).</string>
     <string name="str_setReminder">Remind me of maintenance</string>

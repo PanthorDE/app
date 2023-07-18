@@ -183,13 +183,15 @@
     <string name="rye_r">Gerstenmehl</string>
     <string name="tissue">Gewebe</string>
 
-    <string name="str_polDashboard">Dashboard Polizei Nordholm</string>
+    <string name="str_polDashboard">Dashboard Polizei Wiesberg</string>
+    <string name="str_racDashsboard">Dashboard RAC</string>
 
     <string name="str_back_again_to_exit">Drücke die Zurück-Taste erneut, wenn du die App verlassen möchtest.</string>
     <string name="str_no_data_change_tab">Keine Daten vorhanden.\n\nSolltest du hier Daten erwarten, bitte wechsle den Tab und komme dann wieder hierher zurück.</string>
     <string name="str_no_data">Keine Daten vorhanden.</string>
     <string name="str_no_data_refresh">Keine Daten vorhanden.\n\nSolltest du hier Daten erwarten, bitte aktualisiere die Seite (runterziehen).</string>
-    <string name="str_days_maintenance">Erinnerung an Wartung (in Tagen)</string>
+    <string name="str_days_maintenance">Erinnerung an Wartung</string>
+    <string name="str_days_maintenance_time_unit">Tage</string>
     <string name="str_new_value">Neuer Wert:</string>
     <string name="str_no_valid_number_days_maintenance">Keine valide Nummer! Sie muss zwischen 0 and 20 liegen!</string>
     <string name="str_plate">Kennzeichen:</string>
@@ -206,11 +208,11 @@
     <string name="str_scan">QR-Code scannen</string>
     <string name="str_helpScan">API-Token-Hilfe</string>
     <string name="str_vehiclesListSettings">Einstellungen zur Fahrzeugliste</string>
-    <string name="str_dont_show">nicht anzeigen</string>
-    <string name="str_show">anzeigen</string>
+    <string name="str_dont_show">Nicht anzeigen</string>
+    <string name="str_show">Anzeigen</string>
     <string name="str_vehicleList_sold">verkaufte Fahrzeuge</string>
-    <string name="str_vehicleList_destroyed">zerstörte Fahrzeuge</string>
-    <string name="str_vehicleList_impound">beschlagnahmte Fahrzeuge</string>
+    <string name="str_vehicleList_destroyed">Zerstörte Fahrzeuge</string>
+    <string name="str_vehicleList_impound">Beschlagnahmte Fahrzeuge</string>
 
     <string name="str_buildingsList_buildingPayedFor">Bezahlt für {0} Tag(e).</string>
     <string name="str_setReminder">Wartungserinnerung</string>
