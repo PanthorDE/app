@@ -23,6 +23,8 @@
     <string name="str_licenses">Lizenzen</string>
     <string name="str_bank">Bank</string>
     <string name="str_cash">Bargeld</string>
+    <string name="str_main_bank_acc">Hauptkonto</string>
+    <string name="str_other_bank_acc">Andere Konten</string>
     <string name="str_level">Level</string>
     <string name="str_skillpoint">Skillpunkt(e)</string>
     <string name="str_forum">Forum</string>

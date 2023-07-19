@@ -25,6 +25,8 @@
     <string name="str_null" translatable="false">0</string>
     <string name="str_bank">Bank</string>
     <string name="str_cash">Cash</string>
+    <string name="str_main_bank_acc">Main Account</string>
+    <string name="str_other_bank_acc">Other Accounts</string>
     <string name="str_level">Level</string>
     <string name="str_skillpoint">Skillpoint(s)</string>
     <string name="str_forum">Forum</string>

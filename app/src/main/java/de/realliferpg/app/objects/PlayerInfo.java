@@ -66,6 +66,8 @@ public class PlayerInfo {
     public VehicleGroup[] vehiclesByType; // Fahrzeuge je nach Typ
     public Phones[] phones;
     public Phonebooks[] phonebooks;
+    public BankAccount[] bank_main;
+    public BankAccountDTO[] banks;
 
     public long requested_at;
 
