@@ -103,6 +103,8 @@ public class CompanyShopsFragment extends Fragment implements CallbackNotifyInte
         if (!(context instanceof  FragmentInteractionInterface)) {
             throw new RuntimeException(context + " must implement OnFragmentInteractionListener");
         }
+
+        mListener = (FragmentInteractionInterface) context;
     }
 
     @Override
