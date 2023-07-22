@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity
                 break;
             }
             case R.id.nav_polDashboard: {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.polizei-nordholm.de/"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://polizei.panthor.de/"));
                 startActivity(browserIntent);
                 break;
             }
