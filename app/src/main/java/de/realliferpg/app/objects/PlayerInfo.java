@@ -1,5 +1,8 @@
 package de.realliferpg.app.objects;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PlayerInfo {
 
     public class Wrapper{
@@ -55,22 +58,103 @@ public class PlayerInfo {
     public String profileurl;
 
     public Donation[] donations;
-    // Fertige Häuser
-    public House[] houses;
-    // Bauwerke
-    public Building[] buildings;
-    // Appartments
-    public Rental[] rentals;
-    // Fahrzeuge je nach Typ
-    public VehicleGroup[] vehiclesByType;
-    
+    public House[] houses; // Fertige Häuser
+    public HouseDTO[] houses_keyed;
+    public Building[] buildings; // Bauwerke
+    public Building[] buildings_keyed;
+    public Rental[] rentals; // Appartments
+    public VehicleGroup[] vehiclesByType; // Fahrzeuge je nach Typ
     public Phones[] phones;
     public Phonebooks[] phonebooks;
+    public BankAccount[] bank_main;
+    public BankAccountDTO[] banks;
 
     public long requested_at;
 
     @Override
     public String toString() {
         return "ID: " + id + " PID:" + pid + " Name: " + name;
+    }
+
+    public List<HouseDTO> getAllHouses() {
+        List<HouseDTO> houses = new ArrayList<>();
+
+        for (HouseDTO house : this.houses) {
+            boolean found = false;
+            for (HouseDTO h : houses) {
+                if (h.equals(house)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) houses.add(house);
+        }
+
+        for (HouseDTO house : this.houses_keyed) {
+            boolean found = false;
+            for (HouseDTO h : houses) {
+                if (h.equals(house)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) houses.add(house);
+        }
+
+        return houses;
+    }
+
+    public List<HouseDTO> getActiveHouses() {
+        List<HouseDTO> allHouses = this.getAllHouses();
+        List<HouseDTO> activeHouses = new ArrayList<>();
+
+        for (HouseDTO house : allHouses) {
+            if (house.isActive()) activeHouses.add(house);
+        }
+
+        return activeHouses;
+    }
+
+    public List<BuildingDTO> getAllBuildings() {
+        List<BuildingDTO> buildings = new ArrayList<>();
+
+        for (BuildingDTO building : this.buildings) {
+            boolean found = false;
+            for (BuildingDTO b : buildings) {
+                if (b.equals(building)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) buildings.add(building);
+        }
+
+        for (BuildingDTO building : this.buildings_keyed) {
+            boolean found = false;
+            for (BuildingDTO b : buildings) {
+                if (b.equals(building)) {
+                    found = true;
+                    break;
+                }
+            }
+
+            if (!found) buildings.add(building);
+        }
+
+        return buildings;
+    }
+
+    public List<BuildingDTO> getActiveBuildings() {
+        List<BuildingDTO> allBuildings = this.getAllBuildings();
+        List<BuildingDTO> activeBuildings = new ArrayList<>();
+
+        for (BuildingDTO building : allBuildings) {
+            if (building.isActive()) activeBuildings.add(building);
+        }
+
+        return activeBuildings;
     }
 }

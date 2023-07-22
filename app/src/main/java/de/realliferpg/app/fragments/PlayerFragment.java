@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
@@ -56,6 +57,9 @@ public class PlayerFragment extends Fragment implements CallbackNotifyInterface 
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_player, container, false);
         viewPlayerVehicles = inflater.inflate(R.layout.fragment_player_vehicles, container, false);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_player_info);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         if (Singleton.getInstance().getPlayerInfo() == null) {

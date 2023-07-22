@@ -15,7 +15,6 @@ import de.realliferpg.app.R;
 import de.realliferpg.app.objects.CompanyShops;
 import de.realliferpg.app.objects.ShopCompany;
 
-
 public class CompanyShopsListAdapter extends BaseExpandableListAdapter {
 
     private final Context context;

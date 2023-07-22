@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,29 +35,14 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
-import de.realliferpg.app.fragments.ChangelogFragment;
-import de.realliferpg.app.fragments.CompanyShopsFragment;
-import de.realliferpg.app.fragments.ErrorFragment;
-import de.realliferpg.app.fragments.ImprintFragment;
-import de.realliferpg.app.fragments.InfoFragment;
-import de.realliferpg.app.fragments.MainFragment;
-import de.realliferpg.app.fragments.MarketFragment;
-import de.realliferpg.app.fragments.PhonebookFragment;
-import de.realliferpg.app.fragments.PlayerBuildingsFragment;
-import de.realliferpg.app.fragments.PlayerDonationFragment;
-import de.realliferpg.app.fragments.PlayerFragment;
-import de.realliferpg.app.fragments.PlayerStatsFragment;
-import de.realliferpg.app.fragments.PlayerVehiclesFragment;
-import de.realliferpg.app.fragments.PlayersListFragment;
-import de.realliferpg.app.fragments.SettingsFragment;
+import de.realliferpg.app.fragments.*;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.PreferenceHelper;
-import de.realliferpg.app.interfaces.CallbackNotifyInterface;
-import de.realliferpg.app.interfaces.FragmentInteractionInterface;
-import de.realliferpg.app.interfaces.RequestCallbackInterface;
-import de.realliferpg.app.interfaces.RequestTypeEnum;
+import de.realliferpg.app.interfaces.*;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class MainActivity extends AppCompatActivity
@@ -70,8 +56,6 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Singleton.getInstance().setContext(getApplicationContext());
-        createNotificationChannel();
-
         PreferenceHelper preferenceHelper = new PreferenceHelper();
 
         setContentView(R.layout.activity_main);
@@ -191,8 +175,13 @@ public class MainActivity extends AppCompatActivity
                 startActivity(browserIntent);
                 break;
             }
-            case R.id.nav_polDashboard:{
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.polizei-nordholm.de/"));
+            case R.id.nav_polDashboard: {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://polizei.panthor.de/"));
+                startActivity(browserIntent);
+                break;
+            }
+            case R.id.nav_racDashboard: {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://rac-panel.de/"));
                 startActivity(browserIntent);
                 break;
             }
@@ -256,8 +245,12 @@ public class MainActivity extends AppCompatActivity
                 tvInfo.setText(playerInfo.name);
 
                 NavigationView navigationView = findViewById(R.id.nav_view);
-                if (playerInfo != null && Integer.parseInt(playerInfo.coplevel) > 1){
-                    navigationView.getMenu().findItem(R.id.nav_polDashboard).setVisible(true);
+                if (playerInfo != null) {
+                    if (Integer.parseInt(playerInfo.coplevel) >= 1) {
+                        navigationView.getMenu().findItem(R.id.nav_polDashboard).setVisible(true);
+                    } else if (Integer.parseInt(playerInfo.adaclevel) >= 1) {
+                        navigationView.getMenu().findItem(R.id.nav_racDashboard).setVisible(true);
+                    }
                 }
                 break;
         }
@@ -328,16 +321,14 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void createNotificationChannel(){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "ReminderMaintenance";
-            String description = "Channel for Panthor Maintenance Reminder";
-            int importance =NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("notifyMaintenance", name, importance);
-            channel.setDescription(description);
+    public void setAppBarTitle(String title) {
+        Objects.requireNonNull(getSupportActionBar())
+                .setTitle(title);
+    }
 
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
-        }
+    public void setAppBarTitle(int resourceId) {
+        Resources res = getResources();
+        String title = res.getString(resourceId);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(title);
     }
 }

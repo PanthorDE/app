@@ -15,6 +15,7 @@ import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import de.realliferpg.app.BuildConfig;
 import de.realliferpg.app.R;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 
 public class ImprintFragment extends Fragment {
@@ -35,6 +36,9 @@ public class ImprintFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_imprint, container, false);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_imprint);
 
         WebView webView = view.findViewById(R.id.wv_imprint_main);
         webView.loadUrl("file:///android_asset/imprint.html");

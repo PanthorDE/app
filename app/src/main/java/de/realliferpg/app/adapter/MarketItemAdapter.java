@@ -49,9 +49,13 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
+        Resources resources = context.getResources();
         MarketItem marketItem = getItem(position);
-
-        viewHolder.tvMarketItemName.setText(marketItem.name);
+        int stringResourceId = 0;
+        String localizedItemName = marketItem.name;
+        stringResourceId = resources.getIdentifier(marketItem.classname, "string", context.getPackageName());
+        if (stringResourceId != 0) localizedItemName = resources.getString(stringResourceId);
+        viewHolder.tvMarketItemName.setText(localizedItemName);
 
         FormatHelper formatHelper = new FormatHelper();
         String formattedPriceServer1 = formatHelper.formatCurrency(marketItem.priceServer1);
@@ -81,7 +85,6 @@ public class MarketItemAdapter extends ArrayAdapter<MarketItem> {
         }
 
         String icCurrentMarketItem = "market_" + marketItem.classname;
-        Resources resources = context.getResources();
         int resourceId = resources.getIdentifier(icCurrentMarketItem, "drawable", context.getPackageName());
         viewHolder.ivMarketItem.setImageResource(resourceId);
 

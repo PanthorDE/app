@@ -11,6 +11,7 @@
     <string name="set_playerApiKey">Spieler-API-Key</string>
     <string name="str_placeholder">Platzhalter</string>
     <string name="str_website">Website</string>
+    <string name="str_changelog">Changelogs</string>
     <string name="str_imprint">Impressum &amp; Datenschutz</string>
     <string name="str_imprint_text">Panthor ist ein gemoddeter Arma 3 Roleplay Server</string>
 
@@ -22,6 +23,8 @@
     <string name="str_licenses">Lizenzen</string>
     <string name="str_bank">Bank</string>
     <string name="str_cash">Bargeld</string>
+    <string name="str_main_bank_acc">Hauptkonto</string>
+    <string name="str_other_bank_acc">Andere Konten</string>
     <string name="str_level">Level</string>
     <string name="str_skillpoint">Skillpunkt(e)</string>
     <string name="str_forum">Forum</string>
@@ -143,7 +146,7 @@
     <string name="cocaine_r">Kokain</string>
     <string name="copper_r">Kupfer</string>
     <string name="crab">Krabbe</string>
-    <string name="diamond_r">Diamand</string>
+    <string name="diamond_r">Diamanten</string>
     <string name="fish_r">Fisch</string>
     <string name="heroin_r">Heroin</string>
     <string name="honey_r">Honig</string>
@@ -166,14 +169,31 @@
     <string name="wheat_r">Weizenmehl</string>
     <string name="wheat_u">Weizen</string>
     <string name="wood_r">Holz</string>
+    <string name="charcoal_r">Holzkohle</string>
+    <string name="cotton_r">Baumwolle</string>
+    <string name="crab_rolls">Krabbenrollen</string>
+    <string name="detergent">Waschmittel</string>
+    <string name="furniture_r">Exportmöbel</string>
+    <string name="grape_juice">Traubensaft</string>
+    <string name="white_widow_r">White Widow (Trocken)</string>
+    <string name="white_russian_r">White Russian (Trocken)</string>
+    <string name="purple_haze_r">Purple Haze (Trocken)</string>
+    <string name="met">Met</string>
+    <string name="moonshiner">Moonshine</string>
+    <string name="precious_metal_r">Wertvolles Metall</string>
+    <string name="rubber">Gummi</string>
+    <string name="rye_r">Gerstenmehl</string>
+    <string name="tissue">Gewebe</string>
 
-    <string name="str_polDashboard">Dashboard Polizei Nordholm</string>
+    <string name="str_polDashboard">Dashboard Polizei Wiesberg</string>
+    <string name="str_racDashsboard">Dashboard RAC</string>
 
     <string name="str_back_again_to_exit">Drücke die Zurück-Taste erneut, wenn du die App verlassen möchtest.</string>
     <string name="str_no_data_change_tab">Keine Daten vorhanden.\n\nSolltest du hier Daten erwarten, bitte wechsle den Tab und komme dann wieder hierher zurück.</string>
     <string name="str_no_data">Keine Daten vorhanden.</string>
     <string name="str_no_data_refresh">Keine Daten vorhanden.\n\nSolltest du hier Daten erwarten, bitte aktualisiere die Seite (runterziehen).</string>
-    <string name="str_days_maintenance">Erinnerung an Wartung (in Tagen)</string>
+    <string name="str_days_maintenance">Erinnerung an Wartung</string>
+    <string name="str_days_maintenance_time_unit">Tage</string>
     <string name="str_new_value">Neuer Wert:</string>
     <string name="str_no_valid_number_days_maintenance">Keine valide Nummer! Sie muss zwischen 0 and 20 liegen!</string>
     <string name="str_plate">Kennzeichen:</string>
@@ -190,11 +210,11 @@
     <string name="str_scan">QR-Code scannen</string>
     <string name="str_helpScan">API-Token-Hilfe</string>
     <string name="str_vehiclesListSettings">Einstellungen zur Fahrzeugliste</string>
-    <string name="str_dont_show">nicht anzeigen</string>
-    <string name="str_show">anzeigen</string>
+    <string name="str_dont_show">Nicht anzeigen</string>
+    <string name="str_show">Anzeigen</string>
     <string name="str_vehicleList_sold">verkaufte Fahrzeuge</string>
-    <string name="str_vehicleList_destroyed">zerstörte Fahrzeuge</string>
-    <string name="str_vehicleList_impound">beschlagnahmte Fahrzeuge</string>
+    <string name="str_vehicleList_destroyed">Zerstörte Fahrzeuge</string>
+    <string name="str_vehicleList_impound">Beschlagnahmte Fahrzeuge</string>
 
     <string name="str_buildingsList_buildingPayedFor">Bezahlt für {0} Tag(e).</string>
     <string name="str_setReminder">Wartungserinnerung</string>

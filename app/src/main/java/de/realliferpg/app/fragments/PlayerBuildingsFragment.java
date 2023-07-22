@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
@@ -28,9 +29,11 @@ import de.realliferpg.app.interfaces.BuildingEnum;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.IBuilding;
 import de.realliferpg.app.objects.Building;
+import de.realliferpg.app.objects.BuildingDTO;
 import de.realliferpg.app.objects.BuildingGroup;
 import de.realliferpg.app.objects.ChoosenMaintenanceBuilding;
 import de.realliferpg.app.objects.House;
+import de.realliferpg.app.objects.HouseDTO;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Rental;
 
@@ -72,28 +75,24 @@ public class PlayerBuildingsFragment extends Fragment {
         final TextView tvKeineDaten = view.findViewById(R.id.tvKeineDatenBuildings);
 
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
-        House[] houses = playerInfo.houses;
-        Building[] buildings = playerInfo.buildings;
+
+        List<HouseDTO> houseList = playerInfo.getActiveHouses();
+        HouseDTO[] houses = houseList.toArray(houseList.toArray(new HouseDTO[0]));
+        List<BuildingDTO> buildingList = playerInfo.getActiveBuildings();
+        BuildingDTO[] buildings = buildingList.toArray(buildingList.toArray(new BuildingDTO[0]));
         Rental[] rentals = playerInfo.rentals;
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            Building[] buildings1 = Arrays
-                    .stream(buildings)
-                    .filter(building -> building.stage > 0)
-                    .toArray(Building[]::new);
-        } else {
-            Building[] buildingsWithoutStageMinusOne = buildings.clone();
-            int counter = 0;
-            for (Building b : buildings) {
-                if (b.stage < 0){
-                    counter++;
-                    buildingsWithoutStageMinusOne = ArrayUtils.removeAll(buildings, b);
-                }
+        BuildingDTO[] buildingsWithoutStageMinusOne = buildings.clone();
+        int counter = 0;
+        for (BuildingDTO b : buildings) {
+            if (b.stage < 0) {
+                counter++;
+                buildingsWithoutStageMinusOne = ArrayUtils.removeAll(buildings, b);
             }
-            buildings = counter == buildings.length
-                    ? new Building[0]
-                    : buildingsWithoutStageMinusOne.clone();
         }
+        buildings = counter == buildings.length
+                ? new Building[0]
+                : buildingsWithoutStageMinusOne.clone();
 
         buildingByType = new BuildingGroup[3];
 
@@ -114,8 +113,8 @@ public class PlayerBuildingsFragment extends Fragment {
 
         Button btnReminder = view.findViewById(R.id.btn_reminder);
 
-        if ((playerInfo.houses == null || playerInfo.houses.length == 0)
-                && (playerInfo.buildings == null || playerInfo.buildings.length == 0)
+        if (houses.length == 0
+                && buildings.length == 0
                 && (playerInfo.rentals == null || playerInfo.rentals.length == 0)) {
             tvKeineDaten.setVisibility(View.VISIBLE);
             expandableListView.setVisibility(View.INVISIBLE);
@@ -131,7 +130,7 @@ public class PlayerBuildingsFragment extends Fragment {
             int daysLeft = 100;
             ChoosenMaintenanceBuilding chosenBuilding = null;
 
-            for (House house : houses) {
+            for (HouseDTO house : houses) {
                 if (chosenBuilding == null || house.getPayedForHours() < chosenBuilding.getBuilding().getPayedForHours()) {
                     chosenBuilding = new ChoosenMaintenanceBuilding(BuildingEnum.HOUSE, house);
                 }

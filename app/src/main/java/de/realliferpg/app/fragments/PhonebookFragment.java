@@ -17,9 +17,9 @@ import android.widget.ProgressBar;
 import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
-import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.adapter.PhonebookAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
@@ -27,11 +27,9 @@ import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
 import de.realliferpg.app.objects.CustomNetworkError;
-import de.realliferpg.app.objects.Phones;
 import de.realliferpg.app.objects.PlayerInfo;
 
 public class PhonebookFragment extends Fragment implements CallbackNotifyInterface, SearchView.OnQueryTextListener, SearchView.OnCloseListener {
-
     private View view;
     private FragmentInteractionInterface mListener;
     private PhonebookAdapter listAdapter;
@@ -51,9 +49,13 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_phonebooks, container, false);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_phonebook);
 
         final ProgressBar pbLoadphonebook = view.findViewById(R.id.pb_phonebook);
         pbLoadphonebook.setVisibility(View.VISIBLE);
@@ -63,9 +65,7 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
         apiHelper.getPlayerStats();
 
         PlayerInfo playerInfo = Singleton.getInstance().getPlayerInfo();
-
         final TextView tvKeineDaten = view.findViewById(R.id.tv_no_data_phonebooks);
-        final ExpandableListView lvPhonebooks = view.findViewById(R.id.lv_phonebook);
 
         final SwipeRefreshLayout sc = view.findViewById(R.id.srl_main_phonebook);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
@@ -73,23 +73,20 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
             @Override
             public void onRefresh() {
                 apiHelper.getPlayerStats();
-
                 pbLoadphonebook.setVisibility(View.VISIBLE);
-
                 listPhonebooks.setAdapter((BaseExpandableListAdapter) null);
             }
         });
 
         listPhonebooks.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {
-
-            }
+            public void onScrollStateChanged(AbsListView view, int scrollState) {}
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                int topRow = (listPhonebooks == null || listPhonebooks.getChildCount() == 0) ?
-                        0 : listPhonebooks.getChildAt(0).getTop();
+                int topRow = listPhonebooks.getChildCount() == 0
+                        ? 0
+                        : listPhonebooks.getChildAt(0).getTop();
                 sc.setEnabled(firstVisibleItem == 0 && topRow >= 0);
             }
         });
@@ -103,11 +100,11 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
 
         if (playerInfo.phonebooks == null || playerInfo.phonebooks.length == 0){
             tvKeineDaten.setVisibility(View.VISIBLE);
-            lvPhonebooks.setVisibility(View.INVISIBLE);
+            listPhoneBooks.setVisibility(View.INVISIBLE);
             search.setVisibility(View.INVISIBLE);
         } else {
             tvKeineDaten.setVisibility(View.INVISIBLE);
-            lvPhonebooks.setVisibility(View.VISIBLE);
+            listPhonebooks.setVisibility(View.VISIBLE);
             search.setVisibility(View.VISIBLE);
         }
 
@@ -117,12 +114,11 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof FragmentInteractionInterface) {
-            mListener = (FragmentInteractionInterface) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+        if (!(context instanceof FragmentInteractionInterface)) {
+            throw new RuntimeException(context + " must implement OnFragmentInteractionListener");
         }
+
+        mListener = (FragmentInteractionInterface) context;
     }
 
     @Override
@@ -143,8 +139,8 @@ public class PhonebookFragment extends Fragment implements CallbackNotifyInterfa
                 listAdapter = new PhonebookAdapter(this.getContext(), Singleton.getInstance().getPlayerInfo());
                 listPhoneBooks.setAdapter(listAdapter);
                 pblistPhonebooks.setVisibility(View.GONE);
-                expandAll();
                 break;
+
             case NETWORK_ERROR:
                 CustomNetworkError error = Singleton.getInstance().getNetworkError();
 

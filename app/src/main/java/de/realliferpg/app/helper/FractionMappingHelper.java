@@ -35,8 +35,7 @@ public class FractionMappingHelper {
                 break;
         }
 
-        if (tempfractionSymbol == "")
-            return -1;
+        if (tempfractionSymbol.equals("")) return -1;
 
         fraction_symbol = resources.getIdentifier(tempfractionSymbol, "drawable", context.getPackageName());
 
@@ -48,20 +47,16 @@ public class FractionMappingHelper {
             case "GUER": // Medic
                 return MEDIC;
             case "WEST": // Pol & Justiz
-                if (coplevel == 0) // war mal bei Justiz/Pol
-                    return FractionEnum.CIV;
-                if (coplevel == 1)
-                {
-                    return FractionEnum.JUSTIZ;
-                } else {
-                    return FractionEnum.COP;
-                }
+                if (coplevel == 0) return FractionEnum.CIV; // war mal bei Justiz/Pol
+                return coplevel == 1
+                        ? FractionEnum.JUSTIZ
+                        : FractionEnum.COP;
             case "EAST":
                 return FractionEnum.RAC;
             case "CIV":
+            default:
                 return FractionEnum.CIV;
         }
-        return FractionEnum.CIV;
     }
 
     public static String getFractionNameFromEnum(Context context, FractionEnum fractionEnum){
@@ -75,9 +70,9 @@ public class FractionMappingHelper {
             case JUSTIZ:
                 return context.getResources().getString(R.string.str_justiz);
             case CIV:
+            default:
                 return context.getResources().getString(R.string.str_civ);
         }
-        return context.getResources().getString(R.string.str_civ);
     }
 
 

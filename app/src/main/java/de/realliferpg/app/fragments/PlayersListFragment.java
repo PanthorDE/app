@@ -16,9 +16,9 @@ import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 
-import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.adapter.PlayersListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
@@ -50,6 +50,9 @@ public class PlayersListFragment extends Fragment implements CallbackNotifyInter
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_players_list, container, false);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_playerslist);
 
         final ProgressBar pbLoadPlayersList = view.findViewById(R.id.pb_playerslist);
         pbLoadPlayersList.setVisibility(View.VISIBLE);

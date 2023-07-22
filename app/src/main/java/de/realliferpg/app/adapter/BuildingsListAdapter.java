@@ -83,8 +83,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         viewHolder.tvBuildingCategory.setText(this.getTypeOfBuilding(buildingByType[groupPosition].type));
         if (buildingByType[groupPosition].type != BuildingEnum.BUILDING) {
             viewHolder.ivBuildingGroupWarning.setVisibility(getVisibilityForGroupWarning(buildingByType[groupPosition].buildings));
-        }
-        else {
+        } else {
             viewHolder.ivBuildingGroupWarning.setVisibility(View.INVISIBLE);
         }
 
@@ -137,7 +136,7 @@ public class BuildingsListAdapter extends BaseExpandableListAdapter {
         viewHolderChild.position = childPosition;
 
         IBuilding building = this.buildingByType[groupPosition].buildings[childPosition];
-        String buildingName = "ID: " + Integer.toString(building.getId());
+        String buildingName = "ID: " + building.getId();
 
         if (building.isDisabled()) {
             viewHolderChild.tvBezeichnung.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);

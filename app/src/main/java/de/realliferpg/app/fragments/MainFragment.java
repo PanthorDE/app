@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import com.google.android.material.snackbar.Snackbar;
+
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -17,9 +18,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.adapter.ServerListAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.helper.FormatHelper;
@@ -27,15 +28,15 @@ import de.realliferpg.app.interfaces.CallbackNotifyInterface;
 import de.realliferpg.app.interfaces.FragmentInteractionInterface;
 import de.realliferpg.app.interfaces.RequestCallbackInterface;
 import de.realliferpg.app.interfaces.RequestTypeEnum;
+import de.realliferpg.app.objects.BankAccount;
+import de.realliferpg.app.objects.BankAccountDTO;
 import de.realliferpg.app.objects.CustomNetworkError;
 import de.realliferpg.app.objects.PlayerInfo;
 import de.realliferpg.app.objects.Server;
 
 
 public class MainFragment extends Fragment implements CallbackNotifyInterface {
-
     private FragmentInteractionInterface mListener;
-
     private View view;
 
     public MainFragment() {
@@ -52,10 +53,14 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
                              Bundle savedInstanceState) {
 
         this.view = inflater.inflate(R.layout.fragment_main, container, false);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_overview);
 
         final ApiHelper apiHelper = new ApiHelper((RequestCallbackInterface) getActivity());
         apiHelper.getServers();
@@ -79,24 +84,21 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
 
         SwipeRefreshLayout sc = view.findViewById(R.id.srl_main);
         sc.setColorSchemeColors(view.getResources().getColor(R.color.primaryColor));
-        sc.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                apiHelper.getServers();
-                apiHelper.getPlayerStats();
-                apiHelper.getPlayerVehicles();
+        sc.setOnRefreshListener(() -> {
+            apiHelper.getServers();
+            apiHelper.getPlayerStats();
+            apiHelper.getPlayerVehicles();
 
-                pbPlayer.setVisibility(View.VISIBLE);
-                pbServer.setVisibility(View.VISIBLE);
+            pbPlayer.setVisibility(View.VISIBLE);
+            pbServer.setVisibility(View.VISIBLE);
 
-                tvPiName.setText("");
-                tvPiPID.setText("");
-                tvPiGUID.setText("");
-                tvRestart.setText(getResources().getString(R.string.str_next_restart) + " " + getTimeTillRestart());
+            tvPiName.setText("");
+            tvPiPID.setText("");
+            tvPiGUID.setText("");
+            tvRestart.setText(getResources().getString(R.string.str_next_restart) + " " + getTimeTillRestart());
 
-                final ListView listView = view.findViewById(R.id.lv_main_serverList);
-                listView.setAdapter(null);
-            }
+            final ListView listView = view.findViewById(R.id.lv_main_serverList);
+            listView.setAdapter(null);
         });
 
         return view;
@@ -113,10 +115,12 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
         TextView tvPiPID = view.findViewById(R.id.tv_main_playerInfo_pid);
         TextView tvPiGUID = view.findViewById(R.id.tv_main_playerInfo_guid);
 
-        TextView tvPiInfoBank = view.findViewById(R.id.tv_main_playerInfo_bank);
-        TextView tvPiInfoCash = view.findViewById(R.id.tv_main_playerInfo_cash);
         TextView tvPiInfoLevel = view.findViewById(R.id.tv_main_playerInfo_level);
         TextView tvPiInfoSkill = view.findViewById(R.id.tv_main_playerInfo_skill);
+
+        TextView tvPiBankCash = view.findViewById(R.id.tv_main_playerInfo_bank_cash);
+        TextView tvPiBankMain = view.findViewById(R.id.tv_main_playerInfo_bank_main);
+        TextView tvPiBankOther = view.findViewById(R.id.tv_main_playerInfo_bank_other);
 
         switch (type){
             case PLAYER:
@@ -129,8 +133,17 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
                 tvPiPID.setText(playerInfo.pid);
                 tvPiGUID.setText(playerInfo.guid);
 
-                tvPiInfoBank.setText(formatHelper.formatCurrency(playerInfo.bankacc));
-                tvPiInfoCash.setText(formatHelper.formatCurrency(playerInfo.cash));
+                int piOtherBankAccBalance = 0;
+                for (BankAccountDTO account : playerInfo.banks) {
+                    if (!account.isDefaultAccount()) {
+                        piOtherBankAccBalance += account.balance;
+                    }
+                }
+
+                tvPiBankCash.setText(formatHelper.formatCurrency(playerInfo.cash));
+                tvPiBankMain.setText(formatHelper.formatCurrency(playerInfo.bankacc));
+                tvPiBankOther.setText(formatHelper.formatCurrency(piOtherBankAccBalance));
+
                 tvPiInfoLevel.setText(String.valueOf(playerInfo.level));
                 tvPiInfoSkill.setText(String.valueOf(playerInfo.skillpoint));
 
@@ -159,10 +172,11 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
                 if (error.requestType == RequestTypeEnum.PLAYER) {
                     pbPlayer.setVisibility(View.GONE);
 
-                    tvPiInfoBank.setText("?");
-                    tvPiInfoCash.setText("?");
                     tvPiInfoLevel.setText("?");
                     tvPiInfoSkill.setText("?");
+                    tvPiBankCash.setText("?");
+                    tvPiBankMain.setText("?");
+                    tvPiBankOther.setText("?");
 
                 } else if (error.requestType == RequestTypeEnum.SERVER) {
                     pbServer.setVisibility(View.GONE);
@@ -214,6 +228,6 @@ public class MainFragment extends Fragment implements CallbackNotifyInterface {
             }
         }
 
-        return Integer.toString(nextRestart) + " " + getResources().getString(R.string.o_clock);
+        return nextRestart + " " + getResources().getString(R.string.o_clock);
     }
 }

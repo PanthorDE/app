@@ -21,6 +21,7 @@ import java.util.Comparator;
 import de.realliferpg.app.Constants;
 import de.realliferpg.app.R;
 import de.realliferpg.app.Singleton;
+import de.realliferpg.app.activities.MainActivity;
 import de.realliferpg.app.adapter.MarketItemAdapter;
 import de.realliferpg.app.helper.ApiHelper;
 import de.realliferpg.app.interfaces.CallbackNotifyInterface;
@@ -53,6 +54,9 @@ public class MarketFragment extends Fragment implements CallbackNotifyInterface 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_market, container, false);
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        if (mainActivity != null) mainActivity.setAppBarTitle(R.string.str_market);
 
         final ProgressBar pbLoadMarketPrices = view.findViewById(R.id.pb_market);
         pbLoadMarketPrices.setVisibility(View.VISIBLE);

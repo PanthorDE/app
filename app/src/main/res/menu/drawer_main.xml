@@ -52,6 +52,11 @@
             android:icon="@drawable/ic_pol_logo"
             android:title="@string/str_polDashboard"
             android:visible="false" />
+        <item
+            android:id="@+id/nav_racDashboard"
+            android:icon="@drawable/fraction_rac"
+            android:title="@string/str_racDashsboard"
+            android:visible="false" />
 
     </group>
 
