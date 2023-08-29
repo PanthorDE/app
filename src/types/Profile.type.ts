@@ -1,17 +1,17 @@
-import { type TimezoneResponse } from './ApiResponse.type';
-import { type BankAccountResponse } from './BankAccount.type';
-import { type BankAccountDTOResponse } from './BankAccountDTO.type';
-import { type BuildingResponse } from './Building.type';
-import { type BuildingDTOResponse } from './BuildingDTO.type';
-import { type CompanyResponse } from './Company.type';
-import { type DonationResponse } from './Donation.type';
-import { type HouseResponse } from './House.type';
-import { type HouseDTOResponse } from './HouseDTO.type';
-import { type LicenseResponse } from './License.type';
-import { type PhoneResponse } from './Phone.type';
-import { type PhonebookResponse } from './Phonebook.type';
-import { type PositionResponse } from './Position.type';
-import { type RentalResponse } from './Rental.type';
+import {type TimezoneResponse} from './ApiResponse.type';
+import {type BankAccountResponse} from './BankAccount.type';
+import {type BankAccountDTOResponse} from './BankAccountDTO.type';
+import {type BuildingResponse} from './Building.type';
+import {type BuildingDTOResponse} from './BuildingDTO.type';
+import {type CompanyResponse} from './Company.type';
+import {type DonationResponse} from './Donation.type';
+import {type HouseResponse} from './House.type';
+import {type HouseDTOResponse} from './HouseDTO.type';
+import {type LicenseResponse} from './License.type';
+import {type PhoneResponse} from './Phone.type';
+import {type PhonebookResponse} from './Phonebook.type';
+import {type PositionResponse} from './Position.type';
+import {type RentalResponse} from './Rental.type';
 
 export type ProfileResponse = {
   id: number;

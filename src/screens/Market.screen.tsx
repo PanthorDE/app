@@ -1,18 +1,19 @@
-import * as React from 'react';
-import { ActivityIndicator, Card } from 'react-native-paper';
+import React from 'react';
+import {Card} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
-import { ScreenDetails } from '../types/ScreenDetails.type';
-import { StoreContext } from '../context/Store.context';
-import { MarketItem as MarketItemModel, RpgServer } from '../models';
-import { ItemBonus, Market, PriceCalculation, type PriceCalculationProps } from '../components/Market';
-import { View } from 'react-native';
-import { PanthorService } from '../services/Panthor.service';
-import { differenceInSeconds } from 'date-fns';
+import {ScreenDetails} from '../types/ScreenDetails.type';
+import {StoreContext} from '../context/Store.context';
+import {MarketItem as MarketItemModel, RpgServer} from '../models';
+import {ItemBonus, Market, PriceCalculation, type PriceCalculationProps} from '../components/Market';
+import {View} from 'react-native';
+import {PanthorService} from '../services/Panthor.service';
+import {differenceInSeconds} from 'date-fns';
+import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
 
 export type MarketScreenProps = {};
 
 export const MarketScreen: React.FC<MarketScreenProps> = () => {
-  const { loading, setLoading, refreshing, setRefreshing, servers, setServers } = React.useContext(StoreContext);
+  const {loading, setLoading, refreshing, setRefreshing, servers, setServers} = React.useContext(StoreContext);
   const [items, setItems] = React.useState<MarketItemModel[]>([]);
   const [refreshInterval, setRefreshInterval] = React.useState<PriceCalculationProps>({
     date: new Date(),
@@ -59,22 +60,25 @@ export const MarketScreen: React.FC<MarketScreenProps> = () => {
   }, []);
 
   if (loading) {
-    return (
-      <View style={{ padding: 16 }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <ScreenActivityIndicator />;
   }
 
   return (
     <ScreenWrapper
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{padding: 16}}
       refreshControl={{
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
-      }}
-    >
-      <View style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', flex: 1, columnGap: 8, marginBottom: 8 }}>
+      }}>
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          flex: 1,
+          columnGap: 8,
+          marginBottom: 8,
+        }}>
         {!loading && <ItemBonus copAmount={policeOnlineCount} />}
         {!loading && refreshInterval.interval > 0 && <PriceCalculation {...refreshInterval} />}
       </View>

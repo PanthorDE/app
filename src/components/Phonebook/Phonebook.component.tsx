@@ -1,26 +1,32 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Avatar, Chip, Divider, List, Searchbar } from 'react-native-paper';
-import { Phonebook as PhonebookModel, Profile } from '../../types';
-import { Accordion } from '../Accordion';
-import { LabelValue } from '../LabelValue';
-import { NoResults } from '../NoResults';
+import {View} from 'react-native';
+import {Avatar, Chip, Divider, List, Searchbar} from 'react-native-paper';
+import {Phonebook as PhonebookModel, Profile} from '../../types';
+import {Accordion} from '../Accordion';
+import {LabelValue} from '../LabelValue';
+import {NoResults} from '../NoResults';
 
 export interface PhonebookProps {
   phonebook: PhonebookModel;
 }
 
-export const Phonebook: React.FC<PhonebookProps> = ({ phonebook }) => {
+export const Phonebook: React.FC<PhonebookProps> = ({phonebook}) => {
   const [keyword, setKeyword] = React.useState('');
   const shownContacts = React.useMemo(() => {
     if (keyword.length < 1) return phonebook.phonebook;
-    return phonebook.phonebook.filter((pb) => pb.name.toLowerCase().includes(keyword.toLowerCase()));
+    return phonebook.phonebook.filter(pb => pb.name.toLowerCase().includes(keyword.toLowerCase()));
   }, [keyword, phonebook.phonebook]);
 
   return (
     <React.Fragment>
-      <View style={{ marginTop: 16 }}>
-        <View style={{ display: 'flex', flexDirection: 'row', paddingHorizontal: 16, columnGap: 16 }}>
+      <View style={{marginTop: 16}}>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            paddingHorizontal: 16,
+            columnGap: 16,
+          }}>
           <View>
             <Avatar.Text label={phonebook.identity.name.slice(0, 2).toUpperCase()} />
           </View>
@@ -37,25 +43,25 @@ export const Phonebook: React.FC<PhonebookProps> = ({ phonebook }) => {
         </View>
       </View>
 
-      <View style={{ paddingHorizontal: 16, paddingVertical: 8 }}>
+      <View style={{paddingHorizontal: 16, paddingVertical: 8}}>
         <Searchbar mode="bar" placeholder="Suchen" value={keyword} onChangeText={setKeyword} />
       </View>
 
       <List.Section>
-        <List.Subheader>Kontakte</List.Subheader>
+        <List.Subheader>Kontakte ({shownContacts.length})</List.Subheader>
         {shownContacts.length < 1 ? (
           <List.Item
             title="Keine Kontakte"
-            titleStyle={{ textAlign: 'center' }}
+            titleStyle={{textAlign: 'center'}}
             description={keyword.length > 0 ? `Keine Treffer für '${keyword}'!` : undefined}
-            descriptionStyle={{ textAlign: 'center' }}
+            descriptionStyle={{textAlign: 'center'}}
           />
         ) : (
           shownContacts.map((contact, index) => (
             <React.Fragment key={contact.number}>
               {index !== 0 && <Divider />}
               <List.Item
-                left={(props) => <List.Icon icon="account-circle" {...props} />}
+                left={props => <List.Icon icon="account-circle" {...props} />}
                 title={contact.name}
                 description={`${contact.number || 'Keine Nummer'}\n${contact.iban || 'Keine IBAN'}`}
               />
@@ -71,7 +77,7 @@ export interface PhonebookWrapperProps {
   phonebooks: Profile['phonebooks'];
 }
 
-export const PhonebookWrapper: React.FC<PhonebookWrapperProps> = ({ phonebooks }) => {
+export const PhonebookWrapper: React.FC<PhonebookWrapperProps> = ({phonebooks}) => {
   const [currentPhonebook, setCurrentPhonebook] = React.useState<PhonebookModel['idNR'] | null>(null);
 
   return (
@@ -79,10 +85,9 @@ export const PhonebookWrapper: React.FC<PhonebookWrapperProps> = ({ phonebooks }
       {phonebooks.length > 0 ? (
         <List.AccordionGroup
           expandedId={currentPhonebook}
-          onAccordionPress={(expandedId) =>
+          onAccordionPress={expandedId =>
             setCurrentPhonebook(expandedId === currentPhonebook ? null : Number(expandedId))
-          }
-        >
+          }>
           {phonebooks.map((phonebook, index, arr) => (
             <Accordion
               key={phonebook.idNR}
@@ -91,9 +96,8 @@ export const PhonebookWrapper: React.FC<PhonebookWrapperProps> = ({ phonebooks }
               isFirst={index === 0}
               isLast={index === arr.length - 1}
               isExpanded={currentPhonebook === phonebook.idNR}
-              surfaceStyle={{ paddingVertical: 0, paddingHorizontal: 0 }}
-              divider
-            >
+              surfaceStyle={{paddingVertical: 0, paddingHorizontal: 0}}
+              divider>
               <Phonebook phonebook={phonebook} />
             </Accordion>
           ))}

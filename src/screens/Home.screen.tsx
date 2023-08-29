@@ -1,20 +1,19 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { Card, ActivityIndicator } from 'react-native-paper';
+import React from 'react';
+import {Card, ActivityIndicator} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
-import { ScreenDetails } from '../types/ScreenDetails.type';
-import { StoreContext } from '../context/Store.context';
-import { RpgServer, Server } from '../models';
-import { type ServerProps, Server as ServerComponent } from '../components/Server';
-import { PanthorService } from '../services/Panthor.service';
-import { Playerlist } from '../components/Playerlist';
-import { HorizontalCardList } from '../components/Card';
-import { NoResults } from '../components/NoResults';
+import {ScreenDetails} from '../types/ScreenDetails.type';
+import {StoreContext} from '../context/Store.context';
+import {RpgServer, Server} from '../models';
+import {type ServerProps, Server as ServerComponent} from '../components/Server';
+import {PanthorService} from '../services/Panthor.service';
+import {Playerlist} from '../components/Playerlist';
+import {HorizontalCardList} from '../components/Card';
+import {NoResults} from '../components/NoResults';
 
 export type HomeScreenProps = {};
 
 export const HomeScreen: React.FC<HomeScreenProps> = () => {
-  const { loading, setLoading, refreshing, setRefreshing, servers, setServers } = React.useContext(StoreContext);
+  const {loading, setLoading, refreshing, setRefreshing, servers, setServers} = React.useContext(StoreContext);
   const [selectedServer, setSelectedServer] = React.useState<RpgServer | Server | null>(null);
 
   const playerList = React.useMemo(() => {
@@ -32,7 +31,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = () => {
       handler.fetchData().finally(() => setRefreshing(false));
     },
     onServerPress: (server: ServerProps['server']) => {
-      if (server.id === selectedServer.id) return;
+      if (!selectedServer || server.id === selectedServer.id) return;
       setSelectedServer(server);
     },
   };
@@ -43,14 +42,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = () => {
 
   return (
     <ScreenWrapper
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{padding: 16}}
       refreshControl={{
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
-      }}
-    >
+      }}>
       {loading ? (
-        <Card elevation={1} style={{ padding: 16 }}>
+        <Card elevation={1} style={{padding: 16}}>
           <ActivityIndicator />
         </Card>
       ) : servers.length > 0 ? (
@@ -80,17 +78,3 @@ export const HomeScreenDetails: ScreenDetails<HomeScreenProps> = {
   icon: 'home',
   component: HomeScreen,
 };
-
-const styles = StyleSheet.create({
-  surface: {
-    margin: 0,
-    height: 160,
-    width: 300,
-    borderRadius: 16,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  centerText: {
-    textAlign: 'center',
-  },
-});

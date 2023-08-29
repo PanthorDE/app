@@ -1,8 +1,8 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Avatar, Divider, List, Text } from 'react-native-paper';
-import { formatter } from '../../services';
-import { MarketItem as MarketItemModel, CopBonus } from '../../models';
+import {View} from 'react-native';
+import {Avatar, Divider, List, Text} from 'react-native-paper';
+import {formatter} from '../../services';
+import {MarketItem as MarketItemModel, CopBonus} from '../../models';
 
 export type MarketItemProps = {
   item: MarketItemModel;
@@ -10,7 +10,7 @@ export type MarketItemProps = {
   withDivider?: boolean;
 };
 
-export const MarketItem: React.FC<MarketItemProps> = ({ item, priceMultiplicator, withDivider }) => {
+export const MarketItem: React.FC<MarketItemProps> = ({item, priceMultiplicator, withDivider}) => {
   return (
     <React.Fragment>
       {withDivider ? <Divider /> : null}
@@ -19,15 +19,15 @@ export const MarketItem: React.FC<MarketItemProps> = ({ item, priceMultiplicator
         left={() => (
           <Avatar.Image
             size={40}
-            source={{ uri: item.getImageUrl() }}
-            style={{ marginLeft: 16, backgroundColor: 'transparent' }}
+            source={{uri: item.getImageUrl()}}
+            style={{marginLeft: 16, backgroundColor: 'transparent'}}
           />
         )}
         right={() => (
-          <View style={{ display: 'flex', justifyContent: 'center' }}>
+          <View style={{display: 'flex', justifyContent: 'center'}}>
             <Text>{formatter.format(item.price)}</Text>
             {priceMultiplicator && (
-              <Text variant="labelSmall" style={{ textAlign: 'right' }}>
+              <Text variant="labelSmall" style={{textAlign: 'right'}}>
                 {formatter.format(CopBonus.calculatePrice(item.price, priceMultiplicator))}
               </Text>
             )}

@@ -1,15 +1,15 @@
-import * as React from 'react';
-import { ScrollView, type ScrollViewProps, type StyleProp, StyleSheet, View, ViewStyle } from 'react-native';
-import { useTheme } from 'react-native-paper';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { RefreshControl } from './components/RefreshControl';
+import React from 'react';
+import {ScrollView, type ScrollViewProps, type StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import {useTheme} from 'react-native-paper';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {RefreshControl} from './components/RefreshControl';
 
 type Props = Omit<ScrollViewProps, 'refreshControl'> & {
   children: React.ReactNode;
   withScrollView?: boolean;
   style?: StyleProp<ViewStyle>;
   contentContainerStyle?: StyleProp<ViewStyle>;
-  refreshControl?: { refreshing: boolean; onRefresh: () => void };
+  refreshControl?: {refreshing: boolean; onRefresh: () => void};
 };
 
 export default function ScreenWrapper({
@@ -47,8 +47,7 @@ export default function ScreenWrapper({
             refreshControl ? (
               <RefreshControl refreshing={refreshControl.refreshing} onRefresh={refreshControl.onRefresh} />
             ) : undefined
-          }
-        >
+          }>
           {children}
         </ScrollView>
       ) : (

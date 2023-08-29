@@ -1,5 +1,5 @@
-import { VehicleResponse, VehicleType } from '../types';
-import { Side } from './Side.model';
+import {VehicleResponse, VehicleType} from '../types';
+import {Side} from './Side.model';
 
 export class Vehicle {
   id: number;

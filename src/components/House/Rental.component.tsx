@@ -1,15 +1,15 @@
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Chip, Text } from 'react-native-paper';
-import { Accordion, AccordionProps } from '../Accordion/Accordion.component';
-import { Rental as RentalModel } from '../../models';
+import {StyleSheet, View} from 'react-native';
+import {Chip, Text} from 'react-native-paper';
+import {Accordion, AccordionProps} from '../Accordion/Accordion.component';
+import {Rental as RentalModel} from '../../models';
 
 export type RentalProps = {
   rental: RentalModel;
 } & Pick<AccordionProps, 'isFirst' | 'isLast' | 'isExpanded'>;
 
-export const Rental: React.FC<RentalProps> = ({ rental, isFirst, isLast, isExpanded }) => {
+export const Rental: React.FC<RentalProps> = ({rental, isFirst, isLast, isExpanded}) => {
   return (
     <Accordion
       id={rental.id}
@@ -22,8 +22,7 @@ export const Rental: React.FC<RentalProps> = ({ rental, isFirst, isLast, isExpan
       isFirst={isFirst}
       isLast={isLast}
       isExpanded={isExpanded}
-      divider
-    >
+      divider>
       <View style={style.col}>
         <Text variant="labelMedium">Gemietet bis zum</Text>
         <Text>{format(rental.active_until, 'dd.MM.yy, HH:mm')} Uhr</Text>

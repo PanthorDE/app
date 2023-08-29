@@ -1,5 +1,5 @@
-import { type RpgServerResponse } from '../types';
-import { Server } from './Server.model';
+import {type RpgServerResponse} from '../types';
+import {Server} from './Server.model';
 
 export class RpgServer extends Server {
   civilians: number;
@@ -17,8 +17,8 @@ export class RpgServer extends Server {
 
   constructor(data: RpgServerResponse) {
     super(data);
-    const onlineDojPlayers: string[] = data.Side.Cops.filter((player) => player.includes('[Justiz]'));
-    const onlinePolicePlayers: string[] = data.Side.Cops.filter((player) => !player.includes('[Justiz]'));
+    const onlineDojPlayers: string[] = data.Side.Cops.filter(player => player.includes('[Justiz]'));
+    const onlinePolicePlayers: string[] = data.Side.Cops.filter(player => !player.includes('[Justiz]'));
     this.civilians = data.Civilians;
     this.medics = data.Medics;
     this.rac = data.Adac;

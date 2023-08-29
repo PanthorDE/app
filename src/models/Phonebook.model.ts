@@ -1,5 +1,5 @@
-import { Side } from './Side.model';
-import { type PhonebookResponse } from '../types';
+import {Side} from './Side.model';
+import {type PhonebookResponse} from '../types';
 
 export class Phonebook {
   pid: string;
@@ -30,7 +30,7 @@ export class Phonebook {
   constructor(data: PhonebookResponse) {
     this.pid = data.pid;
     this.idNR = data.idNR;
-    this.phonebook = data.phonebook.map((contact) => ({
+    this.phonebook = data.phonebook.map(contact => ({
       ...contact,
       number: contact.number.length > 0 ? contact.number : null,
       iban: contact.iban.length > 0 ? contact.iban : null,

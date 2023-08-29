@@ -1,6 +1,6 @@
-import { addHours } from 'date-fns';
-import { type HouseDTOResponse } from '../types/HouseDTO.type';
-import { Position } from './Position.model';
+import {addHours} from 'date-fns';
+import {type HouseDTOResponse} from '../types/HouseDTO.type';
+import {Position} from './Position.model';
 
 export class HouseDTO {
   id: number;

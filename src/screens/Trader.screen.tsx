@@ -1,34 +1,34 @@
 import React from 'react';
-import { ActivityIndicator, List } from 'react-native-paper';
-import { NoResults } from '../components/NoResults';
-import { TraderOffers } from '../components/TraderOffers';
-import type { ShopCategory } from '../types';
-import { ShopType } from '../models';
-import { PanthorService } from '../services/Panthor.service';
-import { View } from 'react-native';
-import { StoreContext } from '../context/Store.context';
-import { ScreenDetails } from '../types/ScreenDetails.type';
+import {List} from 'react-native-paper';
+import {NoResults} from '../components/NoResults';
+import {TraderOffers} from '../components/TraderOffers';
+import type {ShopCategory} from '../types';
+import {ShopType} from '../models';
+import {PanthorService} from '../services/Panthor.service';
+import {StoreContext} from '../context/Store.context';
+import {ScreenDetails} from '../types/ScreenDetails.type';
 import ScreenWrapper from '../ScreenWrapper';
+import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
 
 export type TraderScreenProps = {
   category: ShopCategory;
 };
 
-const TraderScreen: React.FC<TraderScreenProps> = ({ category }) => {
-  const { loading, setLoading, refreshing, setRefreshing, traders, setTraders } = React.useContext(StoreContext);
-  const [currentTrader, setCurrentTrader] = React.useState<ShopType['type'] | null>(null);
+const TraderScreen: React.FC<TraderScreenProps> = ({category}) => {
+  const {loading, setLoading, refreshing, setRefreshing, traders, setTraders} = React.useContext(StoreContext);
+  const [currentTrader, setCurrentTrader] = React.useState<ShopType['type']>('');
 
   const handler = {
     fetchData: async function () {
       const traderList = await PanthorService.getShopTypes(category);
-      setTraders((prev) => ({ ...prev, [category]: traderList }));
+      setTraders(prev => ({...prev, [category]: traderList}));
     },
     onRefresh: () => {
       setRefreshing(true);
       handler.fetchData().finally(() => setRefreshing(false));
     },
     onAccordionPress: (expandedId: number | string) => {
-      setCurrentTrader(expandedId === currentTrader ? null : String(expandedId));
+      setCurrentTrader(expandedId === currentTrader ? '' : String(expandedId));
     },
   };
 
@@ -38,21 +38,16 @@ const TraderScreen: React.FC<TraderScreenProps> = ({ category }) => {
   }, [category]);
 
   if (loading) {
-    return (
-      <View style={{ padding: 16 }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <ScreenActivityIndicator />;
   }
 
   return (
     <ScreenWrapper
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{padding: 16}}
       refreshControl={{
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
-      }}
-    >
+      }}>
       {traders[category].length > 0 ? (
         <List.AccordionGroup expandedId={currentTrader} onAccordionPress={handler.onAccordionPress}>
           {traders[category].map((shop, index, arr) => (

@@ -1,5 +1,5 @@
-import { type PhoneResponse } from '../types';
-import { Side } from './Side.model';
+import {type PhoneResponse} from '../types';
+import {Side} from './Side.model';
 
 export class Phone {
   pid: string;

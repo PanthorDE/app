@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Card, CardProps, Text } from 'react-native-paper';
-import { RpgServer, Server as ServerModel } from '../../models';
+import {StyleSheet, View} from 'react-native';
+import {Card, CardProps, Text} from 'react-native-paper';
+import {RpgServer, Server as ServerModel} from '../../models';
 
 export type ServerProps = {
   cardStyle?: CardProps['style'];
@@ -9,11 +9,11 @@ export type ServerProps = {
   onPress?: (server: ServerProps['server']) => void;
 };
 
-export const Server: React.FC<ServerProps> = ({ server, onPress, cardStyle }) => {
+export const Server: React.FC<ServerProps> = ({server, onPress, cardStyle}) => {
   return (
     <Card style={cardStyle} onPress={onPress ? () => onPress(server) : undefined}>
       <Card.Title title={server.servername} subtitle={`Online: ${server.players.length}/${server.slots}`} />
-      <Card.Content style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+      <Card.Content style={{flexDirection: 'row', flexWrap: 'wrap'}}>
         {server instanceof RpgServer ? (
           <React.Fragment>
             <View style={styles.column}>

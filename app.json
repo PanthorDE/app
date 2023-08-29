@@ -1,34 +1,5 @@
 {
-  "expo": {
-    "name": "Panthor",
-    "slug": "Panthor",
-    "version": "0.1.0",
-    "orientation": "portrait",
-    "icon": "./assets/panthor-logo.png",
-    "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/panthor-logo.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#1a1b1e"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/panthor-logo.png",
-        "backgroundColor": "#1a1b1e"
-      },
-      "package": "de.realliferpg.app"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "9040f95d-9a2c-44ed-813e-ddacbd04fa83"
-      }
-    }
-  }
+  "name": "Panthor",
+  "displayName": "Panthor",
+  "version": "0.1.0"
 }

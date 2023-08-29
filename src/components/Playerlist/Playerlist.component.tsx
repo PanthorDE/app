@@ -1,17 +1,17 @@
 import React from 'react';
-import { Card, Chip, Text } from 'react-native-paper';
-import { Server } from '../../types';
+import {Card, Chip, Text} from 'react-native-paper';
+import {Server} from '../../types';
 
-export const Playerlist: React.FC<{ players: Server['players'] }> = ({ players }) => {
+export const Playerlist: React.FC<{players: Server['players']}> = ({players}) => {
   const id = React.useId();
 
   return (
     <Card>
       <Card.Title title="Spielerliste" />
-      <Card.Content style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+      <Card.Content style={{flexDirection: 'row', flexWrap: 'wrap'}}>
         {players.length > 0 ? (
           players.map((player, index) => (
-            <Chip key={id + '-player-' + index + '-' + player} style={{ marginRight: 4, marginBottom: 4 }} compact>
+            <Chip key={id + '-player-' + index + '-' + player} style={{marginRight: 4, marginBottom: 4}} compact>
               {player}
             </Chip>
           ))

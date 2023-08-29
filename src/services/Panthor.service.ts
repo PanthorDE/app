@@ -13,8 +13,8 @@ import type {
   ShopCategory,
   ShopTypeResponse,
 } from '../types';
-import { Panthor } from '../constants/panthor.constant';
-import { Changelog, CompanyShop, MarketItem, Profile, RpgServer, Server, ShopType, Vehicle } from '../models';
+import {Panthor} from '../constants/panthor.constant';
+import {Changelog, CompanyShop, MarketItem, Profile, RpgServer, Server, ShopType, Vehicle} from '../models';
 
 export class PanthorService {
   static async validateSecret(apiKey: string): Promise<Boolean> {
@@ -44,7 +44,7 @@ export class PanthorService {
     try {
       const response = await axios.get(Panthor.apiBaseUrl + '/v1/player/' + apiKey + '/vehicles');
       const json: ApiResponse<VehicleResponse> = await response.data;
-      return json.data.map((props) => new Vehicle(props));
+      return json.data.map(props => new Vehicle(props));
     } catch (message) {
       console.error(message);
       return [];
@@ -55,7 +55,7 @@ export class PanthorService {
     try {
       const response = await axios.get(Panthor.apiBaseUrl + '/v1/changelog');
       const json: ApiResponse<ChangelogResponse> = await response.data;
-      return json.data.map((props) => new Changelog(props));
+      return json.data.map(props => new Changelog(props));
     } catch (message) {
       console.error(message);
       return [];
@@ -67,8 +67,8 @@ export class PanthorService {
       const response = await axios.get(Panthor.apiBaseUrl + '/v1/servers');
       const json: ApiResponse<RpgServerResponse | ServerResponse> = await response.data;
       return [
-        ...json.data.map((server) =>
-          server.Id < 16 ? new RpgServer(server as RpgServerResponse) : new Server(server as ServerResponse)
+        ...json.data.map(server =>
+          server.Id < 16 ? new RpgServer(server as RpgServerResponse) : new Server(server as ServerResponse),
         ),
       ];
     } catch (message) {
@@ -81,7 +81,7 @@ export class PanthorService {
     try {
       const response = await axios.get(Panthor.apiBaseUrl + '/v1/market/' + serverId);
       const json: ApiResponse<MarketItemResponse> = await response.data;
-      return json.data.map((item) => new MarketItem(item));
+      return json.data.map(item => new MarketItem(item));
     } catch (message) {
       console.error(message);
       return [];
@@ -92,7 +92,7 @@ export class PanthorService {
     try {
       const response = await axios.get(Panthor.apiBaseUrl + `/v1/info/${category}_shoptypes`);
       const json: ApiResponse<ShopTypeResponse> = await response.data;
-      return json.data.map((shop) => new ShopType(category, shop));
+      return json.data.map(shop => new ShopType(category, shop));
     } catch (message) {
       console.error(message);
       return [];
@@ -103,7 +103,7 @@ export class PanthorService {
     try {
       const response = await axios.get(Panthor.apiBaseUrl + `/v1/company_shops`);
       const json: ApiResponse<CompanyShopResponse> = await response.data;
-      return json.data.map((shop) => new CompanyShop(shop));
+      return json.data.map(shop => new CompanyShop(shop));
     } catch (message) {
       console.error(message);
       return [];

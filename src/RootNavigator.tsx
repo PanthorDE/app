@@ -1,10 +1,10 @@
-import type { DrawerNavigationProp } from '@react-navigation/drawer';
-import { getHeaderTitle } from '@react-navigation/elements';
-import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
-import * as React from 'react';
-import { Platform } from 'react-native';
-import { Appbar } from 'react-native-paper';
-import { Screens } from './screens';
+import type {DrawerNavigationProp} from '@react-navigation/drawer';
+import {getHeaderTitle} from '@react-navigation/elements';
+import {CardStyleInterpolators, createStackNavigator} from '@react-navigation/stack';
+import React from 'react';
+import {Platform} from 'react-native';
+import {Appbar} from 'react-native-paper';
+import {Screens} from './screens';
 
 const Stack = createStackNavigator();
 
@@ -15,11 +15,11 @@ export default function Root() {
       : CardStyleInterpolators.forHorizontalIOS;
   return (
     <Stack.Navigator
-      screenOptions={({ navigation }) => {
+      screenOptions={({navigation}) => {
         return {
           detachPreviousScreen: !navigation.isFocused(),
           cardStyleInterpolator,
-          header: ({ navigation, route, options, back }) => {
+          header: ({navigation, route, options, back}) => {
             const title = getHeaderTitle(options, route.name);
             return (
               <Appbar.Header elevated>
@@ -37,14 +37,13 @@ export default function Root() {
             );
           },
         };
-      }}
-    >
-      {Screens.map((screen) => (
+      }}>
+      {Screens.map(screen => (
         <Stack.Screen
           key={screen.name}
           name={screen.name}
           component={screen.component}
-          options={{ title: screen.label }}
+          options={{title: screen.label}}
         />
       ))}
     </Stack.Navigator>

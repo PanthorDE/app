@@ -1,19 +1,17 @@
-import * as React from 'react';
-import { ActivityIndicator } from 'react-native-paper';
+import React from 'react';
 import ScreenWrapper from '../ScreenWrapper';
-import { ScreenDetails } from '../types/ScreenDetails.type';
+import {ScreenDetails} from '../types/ScreenDetails.type';
 import withApiKey from '../hoc/withApiKey.hoc';
-import { View } from 'react-native';
-import { StoreContext } from '../context/Store.context';
-import { PanthorService } from '../services/Panthor.service';
-import { NoResults } from '../components/NoResults';
-import { PhonebookWrapper } from '../components/Phonebook';
+import {StoreContext} from '../context/Store.context';
+import {PanthorService} from '../services/Panthor.service';
+import {NoResults} from '../components/NoResults';
+import {PhonebookWrapper} from '../components/Phonebook';
+import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
 
 export type PhonebookScreenProps = {};
 
 const PhonebookScreen: React.FC<PhonebookScreenProps> = () => {
-  const { loading, setLoading, refreshing, setRefreshing, profile, setProfile, apiKey } =
-    React.useContext(StoreContext);
+  const {loading, setLoading, refreshing, setRefreshing, profile, setProfile, apiKey} = React.useContext(StoreContext);
 
   const phonebooks = React.useMemo(() => {
     if (!profile) return [];
@@ -43,21 +41,16 @@ const PhonebookScreen: React.FC<PhonebookScreenProps> = () => {
   }, []);
 
   if (loading) {
-    return (
-      <View style={{ padding: 16 }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <ScreenActivityIndicator />;
   }
 
   return (
     <ScreenWrapper
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{padding: 16}}
       refreshControl={{
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
-      }}
-    >
+      }}>
       {phonebooks.length > 0 ? (
         <PhonebookWrapper phonebooks={phonebooks} />
       ) : (

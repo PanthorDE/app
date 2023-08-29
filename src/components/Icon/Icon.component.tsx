@@ -1,8 +1,8 @@
 import React from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
-import { List, useTheme } from 'react-native-paper';
-import { hexToRgba } from '../../theme/hexToRgba';
-import { rgbStringToHex } from '../../theme/rgbToHex';
+import {StyleProp, View, ViewStyle} from 'react-native';
+import {List, useTheme} from 'react-native-paper';
+import {hexToRgba} from '../../theme/hexToRgba';
+import {rgbStringToHex} from '../../theme/rgbToHex';
 
 export type IconProps = {
   icon: string;
@@ -16,7 +16,7 @@ export enum IconSize {
   small = 32,
 }
 
-export const Icon: React.FC<IconProps> = ({ icon, size = IconSize.medium, style }) => {
+export const Icon: React.FC<IconProps> = ({icon, size = IconSize.medium, style}) => {
   const theme = useTheme();
 
   return (
@@ -34,8 +34,7 @@ export const Icon: React.FC<IconProps> = ({ icon, size = IconSize.medium, style 
           borderRadius: theme.roundness,
         },
         style,
-      ]}
-    >
+      ]}>
       <List.Icon icon={icon} color={theme.colors.primary} />
     </View>
   );

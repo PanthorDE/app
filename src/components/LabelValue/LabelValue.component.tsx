@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Divider, Text } from 'react-native-paper';
+import {View} from 'react-native';
+import {Divider, Text} from 'react-native-paper';
 
 export interface LabelValueProps {
   label: string;
@@ -8,11 +8,11 @@ export interface LabelValueProps {
   withDivider?: boolean;
 }
 
-export const LabelValue: React.FC<LabelValueProps> = ({ label, value, withDivider = false }) => {
+export const LabelValue: React.FC<LabelValueProps> = ({label, value, withDivider = false}) => {
   return (
     <React.Fragment>
       {withDivider && <Divider />}
-      <View style={{ marginVertical: 8 }}>
+      <View style={{marginVertical: 8}}>
         <Text variant="labelMedium">{label}</Text>
         <Text>{value}</Text>
       </View>

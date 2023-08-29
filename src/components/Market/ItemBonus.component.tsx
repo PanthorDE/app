@@ -1,8 +1,8 @@
 import React from 'react';
-import { CopBonus } from '../../models';
-import { StatsCard } from '../Card';
+import {CopBonus} from '../../models';
+import {StatsCard} from '../Card';
 
-export const ItemBonus: React.FC<{ copAmount: number }> = ({ copAmount }) => {
+export const ItemBonus: React.FC<{copAmount: number}> = ({copAmount}) => {
   const bonus = React.useMemo(() => {
     return new CopBonus(copAmount).determineMultiplicator();
   }, [copAmount]);

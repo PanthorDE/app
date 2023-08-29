@@ -1,20 +1,19 @@
-import * as React from 'react';
-import { ActivityIndicator, List, Text } from 'react-native-paper';
+import React from 'react';
+import {List} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
-import { ScreenDetails } from '../types/ScreenDetails.type';
-import { StoreContext } from '../context/Store.context';
+import {ScreenDetails} from '../types/ScreenDetails.type';
+import {StoreContext} from '../context/Store.context';
 import withApiKey from '../hoc/withApiKey.hoc';
-import { View } from 'react-native';
-import { NoResults } from '../components/NoResults';
-import { Building, House, Rental } from '../components/House';
-import { Profile } from '../models';
-import { PanthorService } from '../services/Panthor.service';
+import {NoResults} from '../components/NoResults';
+import {Building, House, Rental} from '../components/House';
+import {Profile} from '../models';
+import {PanthorService} from '../services/Panthor.service';
+import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
 
 export type PlayerHousesScreenProps = {};
 
 const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
-  const { apiKey, loading, setLoading, refreshing, setRefreshing, profile, setProfile } =
-    React.useContext(StoreContext);
+  const {apiKey, loading, setLoading, refreshing, setRefreshing, setProfile} = React.useContext(StoreContext);
   const [houses, setHouses] = React.useState<{
     houses: ReturnType<Profile['getHouses']>;
     rentals: Profile['rentals'];
@@ -24,13 +23,14 @@ const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
     rentals: [],
     buildings: [],
   });
-  const [currentHouse, setCurrentHouse] = React.useState<number | string | null>(null);
+  const [currentHouse, setCurrentHouse] = React.useState<number | string>(-1);
 
   const handler = {
     fetchData: async function () {
       try {
         if (!apiKey) return;
         const newProfile = await PanthorService.getProfile(apiKey);
+        if (!newProfile) return;
         setProfile(newProfile);
         setHouses({
           houses: newProfile.getHouses(),
@@ -47,7 +47,7 @@ const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
       handler.fetchData().finally(() => setRefreshing(false));
     },
     onAccordionPress: (expandedId: number | string) => {
-      setCurrentHouse((cur) => (cur == expandedId ? null : Number(expandedId)));
+      setCurrentHouse(cur => (cur === expandedId ? -1 : Number(expandedId)));
     },
   };
 
@@ -57,21 +57,15 @@ const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
   }, [apiKey]);
 
   if (loading) {
-    return (
-      <View style={{ padding: 16 }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <ScreenActivityIndicator />;
   }
-
   return (
     <ScreenWrapper
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{padding: 16}}
       refreshControl={{
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
-      }}
-    >
+      }}>
       <List.AccordionGroup expandedId={currentHouse} onAccordionPress={handler.onAccordionPress}>
         <List.Section>
           {houses.houses.length > 0 ? (

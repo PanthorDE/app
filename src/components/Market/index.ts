@@ -1,5 +1,5 @@
-import { MarketItem } from './MarketItem.component';
-import { MarketWrapper } from './MarketWrapper.component';
+import {MarketItem} from './MarketItem.component';
+import {MarketWrapper} from './MarketWrapper.component';
 
 export const Market = {
   Wrapper: MarketWrapper,

@@ -1,4 +1,4 @@
-import { type ChangelogResponse } from '../types';
+import {type ChangelogResponse} from '../types';
 
 export class Changelog {
   id: number;

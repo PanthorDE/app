@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { Avatar, Button, Card, Text, TextInput, useTheme } from 'react-native-paper';
+import React from 'react';
+import {Button, Card, Text, TextInput, useTheme} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
-import { ScreenDetails } from '../types/ScreenDetails.type';
-import { SnackbarContext } from '../context/Snackbar.context';
-import { StoreContext } from '../context/Store.context';
-import { LabelValue } from '../components/LabelValue';
-import { Panthor } from '../constants/panthor.constant';
-import { expo } from '../../app.json';
-import { ApiKeyService } from '../services/ApiKey.service';
+import {ScreenDetails} from '../types/ScreenDetails.type';
+import {useSnackbarContext} from '../context/Snackbar.context';
+import {useStoreContext} from '../context/Store.context';
+import {LabelValue} from '../components/LabelValue';
+import {Panthor} from '../constants/panthor.constant';
+import {displayName as appDisplayName, version as appVersion} from '../../app.json';
+import {ApiKeyService} from '../services/ApiKey.service';
 
 export type SettingsScreenProps = {};
 
 export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
   const theme = useTheme();
-  const { showSnackbar } = React.useContext(SnackbarContext);
-  const { apiKey, setApiKey } = React.useContext(StoreContext);
+  const {showSnackbar} = useSnackbarContext();
+  const {apiKey, setApiKey} = useStoreContext();
   const [newApiKey, setNewApiKey] = React.useState(apiKey);
 
   const handler = {
@@ -25,34 +25,40 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
       try {
         await ApiKeyService.save(null);
         setApiKey(null);
-        showSnackbar({ message: 'API-Key gelöscht' });
+        setNewApiKey(null);
+        showSnackbar({message: 'API-Key gelöscht'});
       } catch (error) {
         console.error(error);
-        showSnackbar({ message: 'Löschen fehlgeschlagen', action: { label: 'Erneut', onPress: handler.deleteApiKey } });
+        showSnackbar({
+          message: 'Löschen fehlgeschlagen',
+          action: {label: 'Erneut', onPress: handler.deleteApiKey},
+        });
       }
     },
     saveNewApiKey: async function () {
       try {
-        if (newApiKey === apiKey) return;
-        if (newApiKey.length === 0) return showSnackbar({ message: 'Ungülter Wert vorhanden' });
+        if (!newApiKey || newApiKey === apiKey) return;
+        if (newApiKey.length === 0) {
+          return showSnackbar({message: 'Ungülter Wert vorhanden'});
+        }
         const valid = await ApiKeyService.validate(newApiKey);
-        if (!valid) return showSnackbar({ message: 'Ungültiger API-Key' });
+        if (!valid) return showSnackbar({message: 'Ungültiger API-Key'});
         await ApiKeyService.save(newApiKey);
         setApiKey(newApiKey);
-        showSnackbar({ message: 'API-Key gespeichert' });
+        showSnackbar({message: 'API-Key gespeichert'});
       } catch (error) {
         console.error(error);
         showSnackbar({
           message: 'Speichern fehlgeschlagen',
-          action: { label: 'Erneut', onPress: handler.saveNewApiKey },
+          action: {label: 'Erneut', onPress: handler.saveNewApiKey},
         });
       }
     },
   };
 
   return (
-    <ScreenWrapper contentContainerStyle={{ padding: 16 }}>
-      <Card style={{ marginBottom: 16 }}>
+    <ScreenWrapper contentContainerStyle={{padding: 16}}>
+      <Card style={{marginBottom: 16}}>
         <Card.Title title="Einstellungen" />
         <Card.Content>
           <Text variant="bodyMedium">
@@ -62,9 +68,12 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
           <TextInput
             mode="outlined"
             label="API-Key"
-            value={newApiKey}
+            value={newApiKey ?? ''}
             onChangeText={handler.onApiKeyInputChange}
-            style={{ marginTop: 8, backgroundColor: theme.colors.elevation.level1 }}
+            style={{
+              marginTop: 8,
+              backgroundColor: theme.colors.elevation.level1,
+            }}
           />
         </Card.Content>
         <Card.Actions>
@@ -77,22 +86,22 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
         </Card.Actions>
       </Card>
 
-      <Card style={{ marginBottom: 16 }}>
+      <Card style={{marginBottom: 16}}>
         <Card.Cover
           source={{
             uri: 'https://opengraph.githubassets.com/27243bf731ee5a6df2277b9717adfb57fe3e680d279a028ff9e6455f47a8516d/tklein1801/A3PLI',
           }}
         />
         <Card.Content>
-          <LabelValue label="Name" value={expo.name} />
-          <LabelValue label="Version" value={expo.version} />
+          <LabelValue label="Name" value={appDisplayName} />
+          <LabelValue label="Version" value={appVersion} />
         </Card.Content>
       </Card>
 
       <Card>
-        <Card.Cover source={{ uri: Panthor.modPreview }} />
+        <Card.Cover source={{uri: Panthor.modPreview}} />
         <Card.Content>
-          <Text style={{ textAlign: 'center', marginTop: 16 }}>
+          <Text style={{textAlign: 'center', marginTop: 16}}>
             Es handelt sich um keine offizielle App von Panthor.de
           </Text>
         </Card.Content>

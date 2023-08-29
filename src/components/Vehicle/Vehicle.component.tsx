@@ -1,16 +1,16 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Chip, Text } from 'react-native-paper';
-import { Vehicle as CVehicle } from '../../types';
-import { Accordion, AccordionProps } from '../Accordion';
-import { Progress } from '../Progress/Progress.component';
+import {StyleSheet, View} from 'react-native';
+import {Chip, Text} from 'react-native-paper';
+import {Vehicle as CVehicle} from '../../types';
+import {Accordion, AccordionProps} from '../Accordion';
+import {Progress} from '../Progress/Progress.component';
 
 export type VehicleProps = {
   vehicle: CVehicle;
 } & Pick<AccordionProps, 'isFirst' | 'isLast' | 'isExpanded'>;
 
 // FIXME: Update chpis and progress-var
-export const Vehicle: React.FC<VehicleProps> = ({ vehicle, isFirst, isLast, isExpanded }) => {
+export const Vehicle: React.FC<VehicleProps> = ({vehicle, isFirst, isLast, isExpanded}) => {
   return (
     <Accordion
       id={vehicle.id}
@@ -19,8 +19,7 @@ export const Vehicle: React.FC<VehicleProps> = ({ vehicle, isFirst, isLast, isEx
       isFirst={isFirst}
       isLast={isLast}
       isExpanded={isExpanded}
-      divider
-    >
+      divider>
       <View style={style.row}>
         <View style={style.col}>
           <Text variant="labelMedium">Fraktion</Text>
@@ -34,7 +33,7 @@ export const Vehicle: React.FC<VehicleProps> = ({ vehicle, isFirst, isLast, isEx
           <Text variant="labelMedium">Kilometerstand</Text>
           <Chip compact>{vehicle.kilometer_total} Km.</Chip>
         </View>
-        <View style={[style.col, { minWidth: '100%' }]}>
+        <View style={[style.col, {minWidth: '100%'}]}>
           <Text variant="labelMedium">Tank</Text>
           <Progress progress={vehicle.fuel * 100} />
         </View>

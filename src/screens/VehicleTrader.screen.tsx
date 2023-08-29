@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { ScreenDetails } from '../types/ScreenDetails.type';
+import React from 'react';
+import {ScreenDetails} from '../types/ScreenDetails.type';
 import TraderScreen from './Trader.screen';
 
 export type VehicleTraderProps = {};

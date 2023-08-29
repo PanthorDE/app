@@ -1,4 +1,4 @@
-import type { PositionResponse } from './Position.type';
+import type {PositionResponse} from './Position.type';
 
 export type CompanyShopItemResponse = {
   item: string;

@@ -1,5 +1,5 @@
-import { type CompanyResponse } from '../types';
-import { BankAccount } from './BankAccount.model';
+import {type CompanyResponse} from '../types';
+import {BankAccount} from './BankAccount.model';
 
 export class Company {
   id: number;
@@ -52,6 +52,6 @@ export class Company {
 
   getBankAccounts(): BankAccount[] {
     if (!this.bank_details) return [] as BankAccount[];
-    return Object.keys(this.bank_details).map((key) => this.bank_details[key]);
+    return Object.keys(this.bank_details).map(key => this.bank_details[key]);
   }
 }

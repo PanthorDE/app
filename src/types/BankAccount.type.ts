@@ -1,4 +1,4 @@
-import { type BankAccountDTOResponse } from './BankAccountDTO.type';
+import {type BankAccountDTOResponse} from './BankAccountDTO.type';
 
 export type BankAccountResponse = BankAccountDTOResponse & {
   id: number;

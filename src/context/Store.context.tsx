@@ -11,9 +11,9 @@ import {
   ShopType,
   Vehicle,
 } from '../models';
-import type { ShopCategory } from '../types';
-import { PanthorService } from '../services/Panthor.service';
-import { ApiKeyService } from '../services';
+import type {ShopCategory} from '../types';
+import {PanthorService} from '../services/Panthor.service';
+import {ApiKeyService} from '../services';
 
 export interface IStoreContext {
   loading: boolean;
@@ -47,7 +47,15 @@ export interface IStoreContext {
 
 export const StoreContext = React.createContext({} as IStoreContext);
 
-export const StoreProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
+export function useStoreContext() {
+  const ctx = React.useContext(StoreContext);
+  if (!ctx) {
+    throw new Error('useStoreContext must be used inside StoreProvider');
+  }
+  return ctx;
+}
+
+export const StoreProvider: React.FC<React.PropsWithChildren> = ({children}) => {
   const [loading, setLoading] = React.useState<IStoreContext['loading']>(false);
   const [refreshing, setRefreshing] = React.useState<IStoreContext['refreshing']>(false);
   const [checking, setChecking] = React.useState(true);
@@ -86,7 +94,7 @@ export const StoreProvider: React.FC<React.PropsWithChildren> = ({ children }) =
     setLoading(true);
     if (apiKey) {
       PanthorService.getProfile(apiKey)
-        .then((data) => setProfile(data))
+        .then(data => setProfile(data))
         .catch(() => setProfile(null))
         .finally(() => setLoading(false));
     } else {
@@ -142,9 +150,8 @@ export const StoreProvider: React.FC<React.PropsWithChildren> = ({ children }) =
           traders,
           cachedTraderOffers,
           companyShops,
-        ]
-      )}
-    >
+        ],
+      )}>
       {children}
     </StoreContext.Provider>
   );

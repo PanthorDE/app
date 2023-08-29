@@ -1,12 +1,25 @@
-import { type DrawerContentComponentProps, DrawerContentScrollView } from '@react-navigation/drawer';
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
-import { Drawer, Text, useTheme } from 'react-native-paper';
-import { Screens } from './screens';
+import {type DrawerContentComponentProps, DrawerContentScrollView} from '@react-navigation/drawer';
+import React from 'react';
+import {StyleSheet, View, Image} from 'react-native';
+import {Drawer, Text, useTheme} from 'react-native-paper';
+import {Screens} from './screens';
+import {useStoreContext} from './context/Store.context';
 
 export default function DrawerItems(props: DrawerContentComponentProps) {
-  const { colors } = useTheme();
-  const [drawerItemIndex, setDrawerItemIndex] = React.useState<number>(0);
+  const theme = useTheme();
+  const {profile} = useStoreContext();
+
+  const isActive = React.useCallback(
+    (screenName: string) => {
+      try {
+        return props.state.routeNames[props.state.index] === screenName;
+      } catch (error) {
+        console.error(error);
+        return false;
+      }
+    },
+    [props.state],
+  );
 
   return (
     <DrawerContentScrollView
@@ -15,20 +28,46 @@ export default function DrawerItems(props: DrawerContentComponentProps) {
       style={[
         styles.drawerContent,
         {
-          backgroundColor: colors.surface,
+          backgroundColor: theme.colors.surface,
         },
-      ]}
-    >
+      ]}>
+      {profile != null && (
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            margin: 8,
+            marginBottom: 18,
+            paddingVertical: 8 * 2,
+            paddingHorizontal: 16,
+            backgroundColor: theme.colors.surfaceDisabled,
+            borderRadius: theme.roundness * 2,
+          }}>
+          <Image
+            source={{uri: profile.avatar_full}}
+            style={{
+              width: 56,
+              height: 56,
+              marginRight: 8,
+              borderRadius: theme.roundness,
+            }}
+          />
+          <View>
+            <Text>{profile.name}</Text>
+            <Text>{profile.pid}</Text>
+          </View>
+        </View>
+      )}
       <React.Fragment>
         {Screens.map((screen, idx) => (
           <Drawer.Item
             {...screen.drawerItemProps}
             key={screen.name}
-            active={drawerItemIndex === idx}
+            active={isActive(screen.name)}
             label={screen.label}
             icon={screen.icon}
             onPress={() => {
-              setDrawerItemIndex(idx);
               if (props.navigation) props.navigation.navigate(screen.name);
             }}
           />
@@ -41,26 +80,5 @@ export default function DrawerItems(props: DrawerContentComponentProps) {
 const styles = StyleSheet.create({
   drawerContent: {
     flex: 1,
-  },
-  preference: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  v3Preference: {
-    height: 56,
-    paddingHorizontal: 28,
-  },
-  badge: {
-    alignSelf: 'center',
-  },
-  collapsedSection: {
-    marginTop: 16,
-  },
-  annotation: {
-    marginHorizontal: 24,
-    marginVertical: 6,
   },
 });

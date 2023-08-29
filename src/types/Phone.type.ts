@@ -1,4 +1,4 @@
-import { type Sides } from './Side.type';
+import {type Sides} from './Side.type';
 
 export type PhoneResponse = {
   pid: string;

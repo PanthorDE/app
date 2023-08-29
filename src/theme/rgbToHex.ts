@@ -24,7 +24,6 @@ export function rgbStringToHex(rgb: string): string {
     if (rgb.startsWith('#') && rgb.length >= 4) {
       return rgb;
     }
-    console.log(rgb);
     // throw new Error('Ungültiger RGB- oder RGBA-String!');
     return '#ff0000';
   }

@@ -1,5 +1,5 @@
-import { type ServerResponse } from '../types';
-import { Timezone } from './Timezone.model';
+import {type ServerResponse} from '../types';
+import {Timezone} from './Timezone.model';
 
 export class Server {
   id: number;

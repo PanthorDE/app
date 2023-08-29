@@ -1,10 +1,10 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { StoreContext } from '../context/Store.context';
+import {StoreContext} from '../context/Store.context';
+import {NoApiKey} from '../components/Alert/NoApiKey.component';
 
 const withApiKey = <P extends object>(WrappedComponent: React.ComponentType<P>) => {
-  const EnhancedComponent: React.FC<P> = (props) => {
-    const { apiKey } = React.useContext(StoreContext);
+  const EnhancedComponent: React.FC<P> = props => {
+    const {apiKey} = React.useContext(StoreContext);
 
     const isApiKeySet = apiKey != null && apiKey.length > 0;
 
@@ -12,15 +12,10 @@ const withApiKey = <P extends object>(WrappedComponent: React.ComponentType<P>) 
       return <WrappedComponent {...props} />;
     }
 
-    // FIXME: Update style
-    return (
-      <View>
-        <Text>API-Key nicht gesetzt</Text>
-      </View>
-    );
+    return <NoApiKey />;
   };
 
-  // EnhancedComponent.displayName = `withApiKey(${WrappedComponent.displayName || WrappedComponent.name})`;
+  EnhancedComponent.displayName = `withApiKey(${WrappedComponent.displayName || WrappedComponent.name})`;
 
   return EnhancedComponent;
 };

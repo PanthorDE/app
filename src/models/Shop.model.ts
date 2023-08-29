@@ -1,12 +1,12 @@
-import { Panthor } from '../constants/panthor.constant';
-import { type ShopCategory, type ShopTypeResponse, type ShopItemResponse, type ShopCarResponse } from '../types';
+import {Panthor} from '../constants/panthor.constant';
+import {type ShopCategory, type ShopTypeResponse, type ShopItemResponse, type ShopCarResponse} from '../types';
 
 export class ShopType {
   category: ShopCategory;
   type: string;
   name: string;
 
-  constructor(category: ShopCategory, { shoptype, shopname }: ShopTypeResponse) {
+  constructor(category: ShopCategory, {shoptype, shopname}: ShopTypeResponse) {
     this.category = category;
     this.type = shoptype;
     this.name = shopname;
@@ -53,7 +53,7 @@ export class ShopCar extends ShopItem {
   type: string;
 
   constructor(data: ShopCarResponse) {
-    super({ ...data, category: '' }); // FIXME: Find a actual solution for the non-existent `category`-attr on ShopCar
+    super({...data, category: ''}); // FIXME: Find a actual solution for the non-existent `category`-attr on ShopCar
     this.vSpace = data.v_space;
     this.type = data.type;
   }

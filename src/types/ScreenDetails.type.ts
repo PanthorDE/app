@@ -1,4 +1,4 @@
-import { DrawerItemProps } from 'react-native-paper';
+import {DrawerItemProps} from 'react-native-paper';
 
 export type ScreenDetails<T> = {
   name: string;

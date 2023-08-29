@@ -1,21 +1,20 @@
-import * as React from 'react';
-import { ActivityIndicator, List, Text } from 'react-native-paper';
+import React from 'react';
+import {List} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
-import { ScreenDetails } from '../types/ScreenDetails.type';
-import { StoreContext } from '../context/Store.context';
-import { Company as CompanyModel } from '../models';
+import {ScreenDetails} from '../types/ScreenDetails.type';
+import {StoreContext} from '../context/Store.context';
+import {Company as CompanyModel} from '../models';
 import withApiKey from '../hoc/withApiKey.hoc';
-import { PanthorService } from '../services/Panthor.service';
-import { View } from 'react-native';
-import { Company } from '../components/Company';
-import { NoResults } from '../components/NoResults';
+import {PanthorService} from '../services/Panthor.service';
+import {Company} from '../components/Company';
+import {NoResults} from '../components/NoResults';
+import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
 
 export type CompanyScreenProps = {};
 
 const CompanyScreen: React.FC<CompanyScreenProps> = () => {
-  const { apiKey, loading, setLoading, refreshing, setRefreshing, profile, setProfile } =
-    React.useContext(StoreContext);
-  const [currentCompany, setCurrentCompany] = React.useState<CompanyModel['id'] | null>(null);
+  const {apiKey, loading, setLoading, refreshing, setRefreshing, profile, setProfile} = React.useContext(StoreContext);
+  const [currentCompany, setCurrentCompany] = React.useState<CompanyModel['id']>(-1);
 
   const companies = React.useMemo(() => {
     if (!profile) return [];
@@ -38,7 +37,7 @@ const CompanyScreen: React.FC<CompanyScreenProps> = () => {
       handler.fetchData().finally(() => setRefreshing(false));
     },
     onAccordionPress: (expandedId: number | string) => {
-      setCurrentCompany((cur) => (cur == expandedId ? null : Number(expandedId)));
+      setCurrentCompany(cur => (cur === expandedId ? -1 : Number(expandedId)));
     },
   };
 
@@ -48,21 +47,16 @@ const CompanyScreen: React.FC<CompanyScreenProps> = () => {
   }, [apiKey]);
 
   if (loading) {
-    return (
-      <View style={{ padding: 16 }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <ScreenActivityIndicator />;
   }
 
   return (
     <ScreenWrapper
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{padding: 16}}
       refreshControl={{
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
-      }}
-    >
+      }}>
       <List.AccordionGroup expandedId={currentCompany} onAccordionPress={handler.onAccordionPress}>
         {companies.length > 0 ? (
           companies.map((company, index, arr) => (

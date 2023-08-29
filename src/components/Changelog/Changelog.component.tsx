@@ -1,9 +1,8 @@
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import React from 'react';
-import { View, ViewProps } from 'react-native';
-import { Text } from 'react-native-paper';
-import { Changelog as ChangelogModel } from '../../types';
-import { Accordion, AccordionProps } from '../Accordion/Accordion.component';
+import {Changelog as ChangelogModel} from '../../models';
+import {Accordion, type AccordionProps} from '../Accordion/Accordion.component';
+import {ChangeCategory} from './ChangeCategory.component';
 
 export type ChangelogProps = {
   changelog: ChangelogModel;
@@ -15,7 +14,7 @@ export const Changelog: React.FC<ChangelogProps> = ({
   isLast = false,
   isExpanded = false,
 }) => {
-  const { id, version, changeMission, changeMod, changeMap, releaseAt } = changelog;
+  const {id, version, changeMission, changeMod, changeMap, releaseAt} = changelog;
 
   return (
     <Accordion
@@ -24,49 +23,14 @@ export const Changelog: React.FC<ChangelogProps> = ({
       isFirst={isFirst}
       isLast={isLast}
       isExpanded={isExpanded}
-      divider
-    >
+      divider>
       <React.Fragment>
-        {changeMission.length > 0 && (
-          <ChangeCategory title="Mission" changes={changeMission} style={{ marginTop: 0 }} />
-        )}
+        {changeMission.length > 0 && <ChangeCategory title="Mission" changes={changeMission} style={{marginTop: 0}} />}
 
         {changeMod.length > 0 && <ChangeCategory title="Mod" changes={changeMod} />}
 
         {changeMap.length > 0 && <ChangeCategory title="Karte" changes={changeMap} />}
       </React.Fragment>
     </Accordion>
-  );
-};
-
-type ChangeCategoryProps = {
-  title: string;
-  changes: ChangelogModel['changeMap'] | ChangelogModel['changeMission'] | ChangelogModel['changeMod'];
-  style?: ViewProps['style'];
-};
-
-export const ChangeCategory: React.FC<ChangeCategoryProps> = ({ title, changes, style }) => {
-  const id = React.useId();
-  return (
-    <View>
-      <Text variant="titleSmall" style={[{ marginTop: 16 }, style]}>
-        {title}
-      </Text>
-      <View>
-        {changes.map((change, idx) => (
-          <Change key={`${id}-${title.toLowerCase()}-${idx}`}>{change}</Change>
-        ))}
-      </View>
-    </View>
-  );
-};
-
-type ChangeProps = React.PropsWithChildren;
-
-const Change: React.FC<ChangeProps> = ({ children }) => {
-  return (
-    <Text>
-      {'\u2022'} {children}
-    </Text>
   );
 };

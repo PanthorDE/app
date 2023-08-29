@@ -1,4 +1,4 @@
-import { type ServerResponse } from './Server.type';
+import {type ServerResponse} from './Server.type';
 
 export type RpgServerResponse = ServerResponse & {
   Civilians: number;

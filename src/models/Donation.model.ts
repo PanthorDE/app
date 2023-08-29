@@ -1,5 +1,5 @@
-import { type DonationResponse } from '../types';
-import { Timezone } from './Timezone.model';
+import {type DonationResponse} from '../types';
+import {Timezone} from './Timezone.model';
 
 export class Donation {
   amount: number;

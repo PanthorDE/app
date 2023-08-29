@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { IStoreContext } from '../context/Store.context';
-import { PanthorService } from './Panthor.service';
+import {IStoreContext} from '../context/Store.context';
+import {PanthorService} from './Panthor.service';
 
 export class ApiKeyService {
   private static storageKey = 'a3pli.api_key';
@@ -25,6 +25,7 @@ export class ApiKeyService {
   }
 
   static async validate(key: IStoreContext['apiKey']) {
+    if (!key) return false;
     return PanthorService.validateSecret(key);
   }
 }

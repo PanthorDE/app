@@ -1,4 +1,4 @@
-import { type TimezoneResponse } from '../types';
+import {type TimezoneResponse} from '../types';
 
 export class Timezone {
   date: Date;

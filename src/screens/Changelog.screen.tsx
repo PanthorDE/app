@@ -1,19 +1,19 @@
-import * as React from 'react';
-import { ActivityIndicator, List, Text } from 'react-native-paper';
+import React from 'react';
+import {List} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
-import { ScreenDetails } from '../types/ScreenDetails.type';
-import { View } from 'react-native';
-import { StoreContext } from '../context/Store.context';
-import { Changelog as ChangelogModel } from '../models';
-import { PanthorService } from '../services/Panthor.service';
-import { Changelog } from '../components/Changelog';
-import { NoResults } from '../components/NoResults';
+import type {ScreenDetails} from '../types/ScreenDetails.type';
+import {StoreContext} from '../context/Store.context';
+import {Changelog as ChangelogModel} from '../models';
+import {PanthorService} from '../services/Panthor.service';
+import {Changelog} from '../components/Changelog';
+import {NoResults} from '../components/NoResults';
+import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
 
 export type ChangelogScreenProps = {};
 
 const ChangelogScreen: React.FC<ChangelogScreenProps> = () => {
-  const { loading, setLoading, refreshing, setRefreshing, changelogs, setChangelogs } = React.useContext(StoreContext);
-  const [selectedChangelog, setSelectedChangelog] = React.useState<ChangelogModel['id'] | null>(null);
+  const {loading, setLoading, refreshing, setRefreshing, changelogs, setChangelogs} = React.useContext(StoreContext);
+  const [selectedChangelog, setSelectedChangelog] = React.useState<ChangelogModel['id']>(-1);
 
   const handler = {
     fetchData: async () => {
@@ -29,7 +29,7 @@ const ChangelogScreen: React.FC<ChangelogScreenProps> = () => {
       handler.fetchData().finally(() => setRefreshing(false));
     },
     onAccordionPress: (expandedId: number | string) => {
-      setSelectedChangelog((cur) => (cur == expandedId ? null : Number(expandedId)));
+      setSelectedChangelog(cur => (cur === expandedId ? -1 : Number(expandedId)));
     },
   };
 
@@ -39,21 +39,16 @@ const ChangelogScreen: React.FC<ChangelogScreenProps> = () => {
   }, []);
 
   if (loading) {
-    return (
-      <View style={{ padding: 16 }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <ScreenActivityIndicator />;
   }
 
   return (
     <ScreenWrapper
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{padding: 16}}
       refreshControl={{
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
-      }}
-    >
+      }}>
       {changelogs.length > 0 ? (
         <List.AccordionGroup expandedId={selectedChangelog} onAccordionPress={handler.onAccordionPress}>
           {changelogs.map((changelog, index, arr) => (

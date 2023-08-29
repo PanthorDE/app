@@ -1,15 +1,15 @@
 import React from 'react';
-import { Linking, StyleSheet, View } from 'react-native';
-import { Button, Chip, Text } from 'react-native-paper';
+import {Linking, StyleSheet, View} from 'react-native';
+import {Button, Chip, Text} from 'react-native-paper';
 
-import { Accordion, AccordionProps } from '../Accordion/Accordion.component';
-import { Building as BuildingModel, BuildingDTO } from '../../models';
+import {Accordion, AccordionProps} from '../Accordion/Accordion.component';
+import {Building as BuildingModel, BuildingDTO} from '../../models';
 
 export type BuildingProps = {
   building: BuildingModel | BuildingDTO;
 } & Pick<AccordionProps, 'isFirst' | 'isLast' | 'isExpanded'>;
 
-export const Building: React.FC<BuildingProps> = ({ building, isFirst, isLast, isExpanded }) => {
+export const Building: React.FC<BuildingProps> = ({building, isFirst, isLast, isExpanded}) => {
   return (
     <Accordion
       id={building.id}
@@ -18,8 +18,7 @@ export const Building: React.FC<BuildingProps> = ({ building, isFirst, isLast, i
       isFirst={isFirst}
       isLast={isLast}
       isExpanded={isExpanded}
-      divider
-    >
+      divider>
       <View style={style.col}>
         <Text variant="labelMedium">Position</Text>
         <Button icon="map" onPress={() => Linking.openURL(building.getPosition().getMapUrl())}>

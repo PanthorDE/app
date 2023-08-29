@@ -1,20 +1,20 @@
-import { type ProfileResponse } from '../types';
-import { BankAccount } from './BankAccount.model';
-import { BankAccountDTO } from './BankAccountDTO.model';
-import { Building } from './Building.model';
-import { BuildingDTO } from './BuildingDTO.model';
-import { Company } from './Company.model';
-import { Donation } from './Donation.model';
-import { House } from './House.model';
-import { HouseDTO } from './HouseDTO.model';
-import { License } from './License.model';
-import { Phone } from './Phone.model';
-import { Phonebook } from './Phonebook.model';
-import { Position } from './Position.model';
-import { Rental } from './Rental.model';
-import { RpgServer } from './RpgServer.model';
-import { Server } from './Server.model';
-import { Timezone } from './Timezone.model';
+import {type ProfileResponse} from '../types';
+import {BankAccount} from './BankAccount.model';
+import {BankAccountDTO} from './BankAccountDTO.model';
+import {Building} from './Building.model';
+import {BuildingDTO} from './BuildingDTO.model';
+import {Company} from './Company.model';
+import {Donation} from './Donation.model';
+import {House} from './House.model';
+import {HouseDTO} from './HouseDTO.model';
+import {License} from './License.model';
+import {Phone} from './Phone.model';
+import {Phonebook} from './Phonebook.model';
+import {Position} from './Position.model';
+import {Rental} from './Rental.model';
+import {RpgServer} from './RpgServer.model';
+import {Server} from './Server.model';
+import {Timezone} from './Timezone.model';
 
 export class Profile {
   id: number;
@@ -124,24 +124,24 @@ export class Profile {
     this.profileurl = data.profileurl;
     this.last_seen = new Timezone(data.last_seen);
     this.level_progress = data.level_progress;
-    this.donations = data.donations.map((props) => new Donation(props));
+    this.donations = data.donations.map(props => new Donation(props));
     this.play_time = data.play_time;
     this.garage = data.garage;
-    this.houses = data.houses.map((props) => new House(props));
-    this.houses_keyed = data.houses_keyed.map((props) => new HouseDTO(props));
-    this.rentals = data.rentals.map((props) => new Rental(props));
-    this.buildings = data.buildings.map((props) => new Building(props));
-    this.buildings_keyed = data.buildings_keyed.map((props) => new BuildingDTO(props));
-    this.phones = data.phones.map((props) => new Phone(props));
-    this.company_owned = data.company_owned.map((props) => new Company(props));
-    this.phonebooks = data.phonebooks.map((props) => new Phonebook(props));
-    this.licenses = data.licenses.map((props) => new License(props));
-    this.bank_main = data.bank_main.map((props) => new BankAccount(props, data.name));
-    this.banks = data.banks.map((props) => new BankAccountDTO(props));
+    this.houses = data.houses.map(props => new House(props));
+    this.houses_keyed = data.houses_keyed.map(props => new HouseDTO(props));
+    this.rentals = data.rentals.map(props => new Rental(props));
+    this.buildings = data.buildings.map(props => new Building(props));
+    this.buildings_keyed = data.buildings_keyed.map(props => new BuildingDTO(props));
+    this.phones = data.phones.map(props => new Phone(props));
+    this.company_owned = data.company_owned.map(props => new Company(props));
+    this.phonebooks = data.phonebooks.map(props => new Phonebook(props));
+    this.licenses = data.licenses.map(props => new License(props));
+    this.bank_main = data.bank_main.map(props => new BankAccount(props, data.name));
+    this.banks = data.banks.map(props => new BankAccountDTO(props));
   }
 
   public transformPlaytime() {
-    const { active, total } = this.play_time;
+    const {active, total} = this.play_time;
     return {
       active: active / 60,
       total: total / 60,
@@ -149,30 +149,30 @@ export class Profile {
   }
 
   public getActiveCompanies(): Company[] {
-    return this.company_owned.filter((company) => !company.disabled);
+    return this.company_owned.filter(company => !company.disabled);
   }
 
   /**
    * If the `name` of the player is in the player-list hes currently online
    */
   public isOnline(servers: RpgServer[] | Server[]): boolean {
-    return servers.some((server) => server.players.includes(this.name));
+    return servers.some(server => server.players.includes(this.name));
   }
 
   public getBankAccounts(): BankAccount[] | BankAccountDTO[] {
     const list: BankAccount[] | BankAccountDTO[] = [
       ...this.bank_main,
       ...this.getActiveCompanies()
-        .filter((c) => c.bank_details)
-        .flatMap(({ bank_details }) => {
+        .filter(c => c.bank_details)
+        .flatMap(({bank_details}) => {
           const details = bank_details as Exclude<Company['bank_details'], undefined>;
           return [details.bank_1, details.bank_2];
         }),
     ];
 
-    this.banks.forEach((acc) => {
+    this.banks.forEach(acc => {
       // @ts-expect-error
-      if (!list.some((le) => le.iban === acc.iban)) list.push(acc);
+      if (!list.some(le => le.iban === acc.iban)) list.push(acc);
     });
     return list;
   }
@@ -180,9 +180,9 @@ export class Profile {
   public getHouses(): House[] | HouseDTO[] {
     const list: House[] | HouseDTO[] = [...this.houses];
 
-    this.houses_keyed.forEach((house) => {
+    this.houses_keyed.forEach(house => {
       // @ts-expect-error
-      if (!list.some((li) => li.id === house.id)) list.push(house);
+      if (!list.some(li => li.id === house.id)) list.push(house);
     });
 
     return list;
@@ -191,9 +191,9 @@ export class Profile {
   public getBuildings(): Building[] | BuildingDTO[] {
     const list: Building[] | BuildingDTO[] = [...this.buildings];
 
-    this.buildings_keyed.forEach((building) => {
+    this.buildings_keyed.forEach(building => {
       // @ts-expect-error
-      if (!list.some((li) => li.id === building.id)) list.push(building);
+      if (!list.some(li => li.id === building.id)) list.push(building);
     });
 
     return list;

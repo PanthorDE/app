@@ -1,5 +1,5 @@
-import { Panthor } from '../constants/panthor.constant';
-import { type ItemBacklogResponse, type MarketItemResponse, type ApiResponse } from '../types';
+import {Panthor} from '../constants/panthor.constant';
+import {type ItemBacklogResponse, type MarketItemResponse, type ApiResponse} from '../types';
 
 const ILLEGAL_ITEMS = [
   'cocaine_r',
@@ -23,7 +23,7 @@ export class ItemBacklog {
   serverId: number;
   createdAt: Date;
 
-  constructor({ id, item, price, server_id, created_at }: ItemBacklogResponse) {
+  constructor({id, item, price, server_id, created_at}: ItemBacklogResponse) {
     this.id = id;
     this.item = item;
     this.price = price;
@@ -51,7 +51,7 @@ export class MarketItem {
     icon: string;
   };
 
-  constructor({ item, price, server, updated_at, created_at, localized, export_virt_item }: MarketItemResponse) {
+  constructor({item, price, server, updated_at, created_at, localized, export_virt_item}: MarketItemResponse) {
     this.item = item;
     this.price = price;
     this.server = server;
@@ -82,7 +82,7 @@ export class MarketItem {
     try {
       const response = await fetch(`${Panthor.apiBaseUrl}/v1/market_logs/${server}/${this.item}/${backlogCount}`);
       const backlog: ApiResponse<[ItemBacklogResponse]> = await response.json();
-      return backlog.data[0].map((item) => new ItemBacklog(item));
+      return backlog.data[0].map(item => new ItemBacklog(item));
     } catch (error) {
       console.error(error);
       return [];

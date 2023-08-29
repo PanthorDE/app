@@ -9,7 +9,7 @@ export class CopBonus {
 
   determineMultiplicator(): number {
     if (this.copsOnline <= 0) return AppConfig.copBonus[0].multiplier;
-    const match = AppConfig.copBonus.find((item) => item.amount === this.copsOnline);
+    const match = AppConfig.copBonus.find(item => item.amount === this.copsOnline);
     return match ? match.multiplier : AppConfig.copBonus.at(-1)?.multiplier || 0;
   }
 

@@ -1,4 +1,4 @@
-import { MD3DarkTheme, type ProviderProps } from 'react-native-paper';
+import {MD3DarkTheme, type ProviderProps} from 'react-native-paper';
 
 export const Theme: ProviderProps['theme'] = {
   ...MD3DarkTheme,

@@ -1,5 +1,5 @@
-import { addHours } from 'date-fns';
-import { type RentalResponse } from '../types';
+import {addHours} from 'date-fns';
+import {type RentalResponse} from '../types';
 
 export class Rental {
   id: number;

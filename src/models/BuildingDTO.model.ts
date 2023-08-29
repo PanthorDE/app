@@ -1,5 +1,5 @@
-import { type BuildingDTOResponse } from '../types';
-import { Position } from './Position.model';
+import {type BuildingDTOResponse} from '../types';
+import {Position} from './Position.model';
 
 export class BuildingDTO {
   id: number;

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Divider, List, Surface, SurfaceProps, useTheme } from 'react-native-paper';
-import type { ListAccordionProps } from 'react-native-paper';
+import {Divider, List, Surface, SurfaceProps, useTheme} from 'react-native-paper';
+import type {ListAccordionProps} from 'react-native-paper';
 
 export type AccordionProps = React.PropsWithChildren<
   {
@@ -68,8 +68,7 @@ export const Accordion: React.FC<AccordionProps> = ({
         descriptionStyle={descriptionStyle}
         titleNumberOfLines={titleNumberOfLines}
         titleStyle={titleStyle}
-        style={mergedAccordionStyle}
-      >
+        style={mergedAccordionStyle}>
         <Divider />
         <Surface style={mergedSurfaceStyle}>{children}</Surface>
         {!isLast && <Divider />}

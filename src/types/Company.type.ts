@@ -1,4 +1,4 @@
-import type { BankAccountResponse } from './BankAccount.type';
+import type {BankAccountResponse} from './BankAccount.type';
 
 export type CompanyResponse = {
   id: number;

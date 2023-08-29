@@ -1,5 +1,5 @@
-import { type LicenseResponse } from '../types';
-import { Side } from './Side.model';
+import {type LicenseResponse} from '../types';
+import {Side} from './Side.model';
 
 export class License {
   pid: string;

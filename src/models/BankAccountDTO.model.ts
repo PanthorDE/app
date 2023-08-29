@@ -1,4 +1,4 @@
-import { type BankAccountDTOResponse } from '../types';
+import {type BankAccountDTOResponse} from '../types';
 
 export class BankAccountDTO {
   pid: string;

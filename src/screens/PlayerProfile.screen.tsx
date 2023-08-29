@@ -1,22 +1,21 @@
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import React from 'react';
-import { ActivityIndicator, Avatar, Card, Text } from 'react-native-paper';
-import { StoreContext } from '../context/Store.context';
+import {Avatar, Card, Text} from 'react-native-paper';
+import {StoreContext} from '../context/Store.context';
 import withApiKey from '../hoc/withApiKey.hoc';
-import { type ScreenDetails } from '../types/ScreenDetails.type';
-import { View } from 'react-native';
+import {type ScreenDetails} from '../types/ScreenDetails.type';
 import ScreenWrapper from '../ScreenWrapper';
-import { LabelValue } from '../components/LabelValue';
-import { NoResults } from '../components/NoResults';
-import { Progress } from '../components/Progress';
-import { formatter } from '../services';
-import { PanthorService } from '../services/Panthor.service';
+import {LabelValue} from '../components/LabelValue';
+import {NoResults} from '../components/NoResults';
+import {Progress} from '../components/Progress';
+import {formatter} from '../services';
+import {PanthorService} from '../services/Panthor.service';
+import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
 
 export type PlayerProfileScreenProps = {};
 
 export const PlayerProfileScreen: React.FC<PlayerProfileScreenProps> = () => {
-  const { apiKey, loading, setLoading, refreshing, setRefreshing, profile, setProfile } =
-    React.useContext(StoreContext);
+  const {apiKey, loading, setLoading, refreshing, setRefreshing, profile, setProfile} = React.useContext(StoreContext);
 
   const handler = {
     fetchData: async () => {
@@ -36,39 +35,33 @@ export const PlayerProfileScreen: React.FC<PlayerProfileScreenProps> = () => {
   }, [apiKey]);
 
   if (loading) {
-    return (
-      <View style={{ padding: 16 }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <ScreenActivityIndicator />;
   }
-
   return (
     <ScreenWrapper
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{padding: 16}}
       refreshControl={{
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
-      }}
-    >
+      }}>
       {profile != null ? (
         <React.Fragment>
-          <Card style={{ marginBottom: 16, padding: 16 }}>
+          <Card style={{marginBottom: 16, padding: 16}}>
             <Avatar.Image
-              source={{ uri: profile.avatar_full }}
+              source={{uri: profile.avatar_full}}
               size={80}
-              style={{ marginLeft: 'auto', marginRight: 'auto' }}
+              style={{marginLeft: 'auto', marginRight: 'auto'}}
             />
-            <Text variant="titleMedium" style={{ textAlign: 'center' }}>
+            <Text variant="titleMedium" style={{textAlign: 'center'}}>
               {profile.name}
             </Text>
-            <Text variant="titleSmall" style={{ textAlign: 'center' }}>
+            <Text variant="titleSmall" style={{textAlign: 'center'}}>
               {profile.pid}
             </Text>
             <Progress currentLevel={profile.level} progress={profile.level_progress} withLabel />
           </Card>
 
-          <Card style={{ padding: 16 }}>
+          <Card style={{padding: 16}}>
             <LabelValue label="Name" value={profile.name} />
             <LabelValue label="PlayerId" value={profile.pid} withDivider />
             <LabelValue label="Bargeld" value={formatter.format(profile.cash)} withDivider />
@@ -101,6 +94,6 @@ export default withApiKey(PlayerProfileScreen);
 export const PlayerProfileScreenDetails: ScreenDetails<PlayerProfileScreenProps> = {
   name: 'Profile',
   label: 'Profil',
-  icon: 'account-circle-outline',
+  icon: 'account-circle',
   component: withApiKey(PlayerProfileScreen),
 };

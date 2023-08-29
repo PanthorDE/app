@@ -1,5 +1,5 @@
-import { type BankAccountResponse } from '../types';
-import { BankAccountDTO } from './BankAccountDTO.model';
+import {type BankAccountResponse} from '../types';
+import {BankAccountDTO} from './BankAccountDTO.model';
 
 export class BankAccount extends BankAccountDTO {
   id: number;

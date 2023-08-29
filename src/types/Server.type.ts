@@ -1,4 +1,4 @@
-import { type TimezoneResponse } from './ApiResponse.type';
+import {type TimezoneResponse} from './ApiResponse.type';
 
 export type ServerResponse = {
   Id: number;
