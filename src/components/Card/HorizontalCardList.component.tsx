@@ -1,21 +1,20 @@
-import React, {useState} from 'react';
+import React from 'react';
 import type {NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 import {Dimensions, ScrollView, StyleSheet, View} from 'react-native';
 import {Theme} from '../../theme/theme';
-import {LayoutProps} from '../Layout/Layout.component';
+import {ScreenWrapperProps} from '../../ScreenWrapper';
 import {RefreshControl} from '../RefreshControl/RefreshControl.component';
 
-export type HorizontalCardListProps = {
+export type HorizontalCardListProps = Pick<ScreenWrapperProps, 'refreshControl'> & {
   cards: JSX.Element[];
   onScroll?: (currentIndex: number) => void;
-  refreshControl?: LayoutProps['refreshControl'];
 };
 
 const CARD_WIDTH = Dimensions.get('window').width - 32;
 const CARD_SPACING = 8;
 
 export const HorizontalCardList: React.FC<HorizontalCardListProps> = ({cards, onScroll, refreshControl}) => {
-  const [currentCard, setCurrentCard] = useState<number>(0);
+  const [currentCard, setCurrentCard] = React.useState<number>(0);
 
   const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const {contentOffset} = event.nativeEvent;

@@ -4,7 +4,7 @@ import {useTheme} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {RefreshControl} from './components/RefreshControl';
 
-type Props = Omit<ScrollViewProps, 'refreshControl'> & {
+export type ScreenWrapperProps = Omit<ScrollViewProps, 'refreshControl'> & {
   children: React.ReactNode;
   withScrollView?: boolean;
   style?: StyleProp<ViewStyle>;
@@ -19,7 +19,7 @@ export default function ScreenWrapper({
   contentContainerStyle,
   refreshControl,
   ...rest
-}: Props) {
+}: ScreenWrapperProps) {
   const theme = useTheme();
   const insets = useSafeAreaInsets();
 
