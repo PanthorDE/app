@@ -1,12 +1,21 @@
 # Panthor App
 
+- Push-Benachrichtigungen
+- Dynamic colors
+
 ## Developer Setup
 
-```bash
-npm start
-# or start with cleared cache
-npm start -- --reset-cache
-```
+1. Setup `google-services.json`
+
+   In order for working push-notifications powered by Firebase Cloud Messaging you need to place your `googe-services.json` at `/android/app/google-services.json`.
+
+2. Start your application
+
+   ```bash
+   npm start
+   # or start with cleared cache
+   npm start -- --reset-cache
+   ```
 
 ## Build bauen
 
