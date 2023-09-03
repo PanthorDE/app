@@ -69,7 +69,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = () => {
         <NoResults />
       )}
 
-      {servers.length > 0 && selectedServer && <Playerlist players={playerList} />}
+      {servers.length > 0 && <Playerlist players={playerList} />}
     </ScreenWrapper>
   );
 };
