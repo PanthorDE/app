@@ -9,6 +9,7 @@ import {
   DarkTheme as NavigationDarkTheme,
   DefaultTheme as NavigationDefaultTheme,
 } from '@react-navigation/native';
+import {Theme} from './theme/theme';
 import {Provider as PaperProvider, MD3DarkTheme, MD3LightTheme, adaptNavigationTheme, Appbar} from 'react-native-paper';
 import {SafeAreaInsetsContext} from 'react-native-safe-area-context';
 import {CardStyleInterpolators} from '@react-navigation/stack';
@@ -27,10 +28,6 @@ export function PanthorApp() {
   const isDarkMode = React.useMemo(() => colorScheme === 'dark', [colorScheme]);
   const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState<InitialState | undefined>();
-
-  const theme = React.useMemo(() => {
-    return isDarkMode ? MD3DarkTheme : MD3LightTheme;
-  }, [isDarkMode]);
 
   React.useEffect(() => {
     const restoreState = async () => {
@@ -105,17 +102,14 @@ export function PanthorApp() {
   const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
 
   return (
-    <PaperProvider theme={theme}>
+    <PaperProvider theme={Theme}>
       <StoreProvider>
         <SnackbarProvider>
           <NavigationContainer
             theme={combinedTheme}
             initialState={initialState}
             onStateChange={state => AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))}>
-            <StatusBar
-              barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-              backgroundColor={theme.colors.elevation.level2}
-            />
+            <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
             <SafeAreaInsetsContext.Consumer>
               {() => {
                 return (

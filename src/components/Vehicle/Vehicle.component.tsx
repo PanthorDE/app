@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Chip, Text} from 'react-native-paper';
-import {Vehicle as CVehicle} from '../../types';
+import {Vehicle as CVehicle} from '../../models';
 import {Accordion, AccordionProps} from '../Accordion';
 import {Progress} from '../Progress/Progress.component';
 
@@ -9,7 +9,6 @@ export type VehicleProps = {
   vehicle: CVehicle;
 } & Pick<AccordionProps, 'isFirst' | 'isLast' | 'isExpanded'>;
 
-// FIXME: Update chpis and progress-var
 export const Vehicle: React.FC<VehicleProps> = ({vehicle, isFirst, isLast, isExpanded}) => {
   return (
     <Accordion
@@ -54,5 +53,6 @@ const style = StyleSheet.create({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
+    width: 0,
   },
 });

@@ -2,17 +2,17 @@ import React from 'react';
 import {View} from 'react-native';
 import {Surface, Text, useTheme} from 'react-native-paper';
 
-export interface ProgressProps {
+export type ProgressProps = {
   currentLevel?: number;
   progress: number;
   withLabel?: boolean;
-}
+};
 
 export const Progress: React.FC<ProgressProps> = ({currentLevel, progress, withLabel = false}) => {
   const theme = useTheme();
   return (
     <React.Fragment>
-      {withLabel && (
+      {withLabel && currentLevel && (
         <View
           style={{
             display: 'flex',

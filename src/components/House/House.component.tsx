@@ -23,7 +23,6 @@ export const House: React.FC<HouseProps> = ({house, isFirst, isLast, isExpanded}
       divider>
       <View style={style.row}>
         <View style={style.col}>
-          <Text variant="labelMedium">Position</Text>
           <Button icon="map" onPress={() => Linking.openURL(house.getPosition().getMapUrl())}>
             Karte aufrufen
           </Button>

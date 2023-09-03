@@ -59,7 +59,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
   return (
     <ScreenWrapper contentContainerStyle={{padding: 16}}>
       <Card style={{marginBottom: 16}}>
-        <Card.Title title="Einstellungen" />
+        <Card.Title title="Einstellungen" titleStyle={{fontWeight: 'bold'}} />
         <Card.Content>
           <Text variant="bodyMedium">
             Um die App im vollem Umfang nutzen zu können, wird empfohlen dein Panthor API-Key anzugeben.
@@ -86,24 +86,11 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
         </Card.Actions>
       </Card>
 
-      <Card style={{marginBottom: 16}}>
-        <Card.Cover
-          source={{
-            uri: 'https://opengraph.githubassets.com/27243bf731ee5a6df2277b9717adfb57fe3e680d279a028ff9e6455f47a8516d/tklein1801/A3PLI',
-          }}
-        />
-        <Card.Content>
-          <LabelValue label="Name" value={appDisplayName} />
-          <LabelValue label="Version" value={appVersion} />
-        </Card.Content>
-      </Card>
-
       <Card>
         <Card.Cover source={{uri: Panthor.modPreview}} />
         <Card.Content>
-          <Text style={{textAlign: 'center', marginTop: 16}}>
-            Es handelt sich um keine offizielle App von Panthor.de
-          </Text>
+          <LabelValue label="Name" value={appDisplayName} />
+          <LabelValue label="Version" value={appVersion} />
         </Card.Content>
       </Card>
     </ScreenWrapper>

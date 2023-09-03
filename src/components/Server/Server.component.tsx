@@ -12,7 +12,11 @@ export type ServerProps = {
 export const Server: React.FC<ServerProps> = ({server, onPress, cardStyle}) => {
   return (
     <Card style={cardStyle} onPress={onPress ? () => onPress(server) : undefined}>
-      <Card.Title title={server.servername} subtitle={`Online: ${server.players.length}/${server.slots}`} />
+      <Card.Title
+        title={server.servername}
+        titleStyle={{fontWeight: 'bold'}}
+        subtitle={`Online: ${server.players.length}/${server.slots}`}
+      />
       <Card.Content style={{flexDirection: 'row', flexWrap: 'wrap'}}>
         {server instanceof RpgServer ? (
           <React.Fragment>

@@ -12,9 +12,9 @@ export const LabelValue: React.FC<LabelValueProps> = ({label, value, withDivider
   return (
     <React.Fragment>
       {withDivider && <Divider />}
-      <View style={{marginVertical: 8}}>
-        <Text variant="labelMedium">{label}</Text>
-        <Text>{value}</Text>
+      <View style={{marginTop: 8}}>
+        <Text variant="labelSmall">{label}</Text>
+        <Text variant="bodyMedium">{value}</Text>
       </View>
     </React.Fragment>
   );

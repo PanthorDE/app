@@ -4,6 +4,7 @@ import {StyleSheet, View, Image} from 'react-native';
 import {Drawer, Text, useTheme} from 'react-native-paper';
 import {Screens} from './screens';
 import {useStoreContext} from './context/Store.context';
+import {rgbStringToHex, rgbToHex} from './theme/rgbToHex';
 
 export default function DrawerItems(props: DrawerContentComponentProps) {
   const theme = useTheme();
@@ -41,7 +42,7 @@ export default function DrawerItems(props: DrawerContentComponentProps) {
             marginBottom: 18,
             paddingVertical: 8 * 2,
             paddingHorizontal: 16,
-            backgroundColor: theme.colors.surfaceDisabled,
+            backgroundColor: '#3d4659',
             borderRadius: theme.roundness * 2,
           }}>
           <Image
@@ -54,7 +55,7 @@ export default function DrawerItems(props: DrawerContentComponentProps) {
             }}
           />
           <View>
-            <Text>{profile.name}</Text>
+            <Text variant="titleMedium">{profile.name}</Text>
             <Text>{profile.pid}</Text>
           </View>
         </View>

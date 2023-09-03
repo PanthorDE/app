@@ -20,7 +20,6 @@ export const Building: React.FC<BuildingProps> = ({building, isFirst, isLast, is
       isExpanded={isExpanded}
       divider>
       <View style={style.col}>
-        <Text variant="labelMedium">Position</Text>
         <Button icon="map" onPress={() => Linking.openURL(building.getPosition().getMapUrl())}>
           Karte aufrufen
         </Button>

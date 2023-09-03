@@ -1,13 +1,13 @@
 import React from 'react';
 import {Card, Chip, Text} from 'react-native-paper';
-import {Server} from '../../types';
+import {Server} from '../../models';
 
 export const Playerlist: React.FC<{players: Server['players']}> = ({players}) => {
   const id = React.useId();
 
   return (
     <Card>
-      <Card.Title title="Spielerliste" />
+      <Card.Title title="Spielerliste" titleStyle={{fontWeight: 'bold'}} />
       <Card.Content style={{flexDirection: 'row', flexWrap: 'wrap'}}>
         {players.length > 0 ? (
           players.map((player, index) => (
@@ -16,7 +16,7 @@ export const Playerlist: React.FC<{players: Server['players']}> = ({players}) =>
             </Chip>
           ))
         ) : (
-          <Text>Keine Spieler online</Text>
+          <Text style={{textAlign: 'center'}}>Keine Spieler online</Text>
         )}
       </Card.Content>
     </Card>

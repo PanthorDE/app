@@ -10,7 +10,7 @@ import {TraderNavigationDetails} from './TraderNavigation.screen';
 /**
  * Order of item is relevant for order of DrawerItems
  */
-export const Screens: ScreenDetails<unknown>[] = [
+export const Screens: ScreenDetails<any>[] = [
   HomeScreenDetails,
   PlayerProfileNavigationDetails,
   MarketScreenDetails,
