@@ -76,7 +76,7 @@ const GarageScreen: React.FC<GarageScreenProps> = () => {
               ))}
             </List.AccordionGroup>
           ) : (
-            <NoResults message="Keine intakten Fahrzeuge gefunden" />
+            <NoResults />
           )}
         </React.Fragment>
       )}

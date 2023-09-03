@@ -51,11 +51,7 @@ const PhonebookScreen: React.FC<PhonebookScreenProps> = () => {
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
       }}>
-      {phonebooks.length > 0 ? (
-        <PhonebookWrapper phonebooks={phonebooks} />
-      ) : (
-        <NoResults message="Keine Telefonbücher gefunden" reason="NO_RESULTS" />
-      )}
+      {phonebooks.length > 0 ? <PhonebookWrapper phonebooks={phonebooks} /> : <NoResults />}
     </ScreenWrapper>
   );
 };

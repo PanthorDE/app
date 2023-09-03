@@ -66,7 +66,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = () => {
           ))}
         />
       ) : (
-        <NoResults message="Keine Server online" reason="NO_RESULTS" />
+        <NoResults />
       )}
 
       {servers.length > 0 && selectedServer && <Playerlist players={playerList} />}

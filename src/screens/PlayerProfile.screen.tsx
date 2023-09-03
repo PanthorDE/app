@@ -83,7 +83,7 @@ export const PlayerProfileScreen: React.FC<PlayerProfileScreenProps> = () => {
           </Card>
         </React.Fragment>
       ) : (
-        <NoResults message="Dein Profil konnte nicht geladen werden" reason="NO_RESULTS" />
+        <NoResults />
       )}
     </ScreenWrapper>
   );

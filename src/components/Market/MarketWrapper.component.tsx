@@ -15,7 +15,7 @@ export const MarketWrapper: React.FC<MarketWrapperProps> = ({items, policeOnline
     return new CopBonus(policeOnlineCount).determineMultiplicator();
   }, [policeOnlineCount]);
 
-  if (items.length === 0) return <NoResults message="Marktpreise konnten nicht abgerufen werden" reason="NO_RESULTS" />;
+  if (items.length === 0) return <NoResults />;
   return (
     <List.Section>
       {items.map((item, index) => (

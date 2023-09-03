@@ -62,7 +62,7 @@ const TraderScreen: React.FC<TraderScreenProps> = ({category}) => {
           ))}
         </List.AccordionGroup>
       ) : (
-        <NoResults message="Keine Händler gefunden" reason="NO_RESULTS" />
+        <NoResults />
       )}
     </ScreenWrapper>
   );

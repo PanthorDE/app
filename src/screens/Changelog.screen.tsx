@@ -62,7 +62,7 @@ const ChangelogScreen: React.FC<ChangelogScreenProps> = () => {
           ))}
         </List.AccordionGroup>
       ) : (
-        <NoResults message="Keine Changelogs gefunden" reason="NO_RESULTS" />
+        <NoResults />
       )}
     </ScreenWrapper>
   );

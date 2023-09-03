@@ -69,7 +69,7 @@ const CompanyScreen: React.FC<CompanyScreenProps> = () => {
             />
           ))
         ) : (
-          <NoResults message="Keine Firmen gefunden" reason="NO_RESULTS" />
+          <NoResults />
         )}
       </List.AccordionGroup>
     </ScreenWrapper>

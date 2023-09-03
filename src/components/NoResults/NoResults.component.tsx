@@ -1,77 +1,86 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Card, Text} from 'react-native-paper';
-import type {CardProps} from 'react-native-paper';
-import {Icon, IconSize} from '../Icon';
-import type {IconProps} from '../Icon';
+import {Card, type CardProps, Text} from 'react-native-paper';
+import {Icon, IconSize, type IconProps} from '../Icon';
 
-export type Reason = 'NO_RESULTS' | 'NETWORK_ERR' | 'MISSING_API_KEY' | 'UNKNOWN_ERROR';
+export type NoResultsReason = 'NO_RESULTS' | 'NETWORK_ERR' | 'MISSING_API_KEY' | 'UNKNOWN';
 
-export function isReason(reason: string) {
-  return (
-    reason === 'NO_RESULTS' || reason === 'NETWORK_ERR' || reason === 'MISSING_API_KEY' || reason === 'UNKNOWN_ERROR'
-  );
-}
-
-export type NoResultsProps = {
+export type NoResultsProps = Pick<CardProps, 'style'> & {
+  reason?: NoResultsReason;
+  title?: string;
+  text?: string;
   icon?: IconProps['icon'];
-  iconProps?: Omit<IconProps, 'icon'>;
-  message?: string;
-  reason?: Reason;
-} & Pick<CardProps, 'style'>;
+};
 
-export enum ResultMessage {
-  NoResults = 'Keine Ergebnisse',
-  NetworkError = 'Netzwerfehler',
-  MissingApiKey = 'API-Key nicht gesetzt',
-  UnknownError = 'Unbekannter Fehler',
-}
-
-export const NoResults: React.FC<NoResultsProps> = ({message, reason, icon, iconProps, ...rest}) => {
-  const displayedMessage = React.useMemo(() => {
-    if (message) return message;
-    switch (reason) {
-      case 'NETWORK_ERR':
-        return ResultMessage.NetworkError;
-
-      case 'NO_RESULTS':
-        return ResultMessage.NoResults;
-
-      case 'MISSING_API_KEY':
-        return ResultMessage.MissingApiKey;
-
-      case 'UNKNOWN_ERROR':
-      default:
-        return ResultMessage.UnknownError;
-    }
-  }, [reason, message]);
-
-  const displayedIcon = React.useMemo(() => {
-    if (icon) return icon;
-    switch (reason) {
-      case 'NETWORK_ERR':
-        return 'access-point-network-off';
-
-      case 'NO_RESULTS':
-        return 'text-search';
-
-      case 'MISSING_API_KEY':
-        return 'account-key';
-
-      case 'UNKNOWN_ERROR':
-      default:
-        return 'help-circle-outline';
-    }
-  }, [reason]);
-
+export const NoResults: React.FC<NoResultsProps> = ({
+  reason = 'NO_RESULTS',
+  icon = getIcon(reason),
+  title = getHeading(reason),
+  text = getText(reason),
+  style,
+}) => {
   return (
-    <Card style={[rest.style, {padding: 16}]}>
+    <Card style={[style, {padding: 16, marginBottom: 16}]}>
       <View style={{display: 'flex', alignItems: 'center'}}>
-        <Icon icon={displayedIcon} size={IconSize.large} {...iconProps} />
+        <Icon icon={icon} size={IconSize.medium} style={{borderRadius: 50}} />
       </View>
-      <Text variant="titleMedium" style={{textAlign: 'center', marginTop: 8}}>
-        {displayedMessage}
+      <Text variant="titleMedium" style={{textAlign: 'center'}}>
+        {title}
+      </Text>
+      <Text variant="bodyMedium" style={{textAlign: 'center'}}>
+        {text}
       </Text>
     </Card>
   );
 };
+
+function getIcon(reason: NoResultsReason): string {
+  switch (reason) {
+    case 'MISSING_API_KEY':
+      return 'account-key';
+
+    case 'NETWORK_ERR':
+      return 'access-point-network-off';
+
+    case 'NO_RESULTS':
+      return 'text-search';
+
+    case 'UNKNOWN':
+    default:
+      return 'help-circle-outline';
+  }
+}
+
+function getHeading(reason: NoResultsReason): string {
+  switch (reason) {
+    case 'MISSING_API_KEY':
+      return 'Fehlender API-Key';
+
+    case 'NETWORK_ERR':
+      return 'Netzwerkfehler';
+
+    case 'NO_RESULTS':
+      return 'Keine Ergebnisse';
+
+    case 'UNKNOWN':
+    default:
+      return 'Unbekannter Fehler';
+  }
+}
+
+function getText(reason: NoResultsReason): string {
+  switch (reason) {
+    case 'MISSING_API_KEY':
+      return 'Es wurde kein gültiger API-Key gefunden. Gehe in die Einstellungen und überprüfe diese.';
+
+    case 'NETWORK_ERR':
+      return 'Es ist ein Netzwerkfehler aufgetreten. Prüfe deine Verbindung.';
+
+    case 'NO_RESULTS':
+      return 'Es wurden keine Ergebnisse gefunden';
+
+    case 'UNKNOWN':
+    default:
+      return 'Es ist ein unbekannter Fehler aufgetreten.';
+  }
+}

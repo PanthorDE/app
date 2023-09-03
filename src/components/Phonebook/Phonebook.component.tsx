@@ -1,14 +1,14 @@
 import React from 'react';
 import {View} from 'react-native';
 import {Avatar, Chip, Divider, List, Searchbar} from 'react-native-paper';
-import {Phonebook as PhonebookModel, Profile} from '../../types';
+import {Phonebook as PhonebookModel, Profile} from '../../models';
 import {Accordion} from '../Accordion';
 import {LabelValue} from '../LabelValue';
 import {NoResults} from '../NoResults';
 
-export interface PhonebookProps {
+export type PhonebookProps = {
   phonebook: PhonebookModel;
-}
+};
 
 export const Phonebook: React.FC<PhonebookProps> = ({phonebook}) => {
   const [keyword, setKeyword] = React.useState('');
@@ -73,9 +73,9 @@ export const Phonebook: React.FC<PhonebookProps> = ({phonebook}) => {
   );
 };
 
-export interface PhonebookWrapperProps {
+export type PhonebookWrapperProps = {
   phonebooks: Profile['phonebooks'];
-}
+};
 
 export const PhonebookWrapper: React.FC<PhonebookWrapperProps> = ({phonebooks}) => {
   const [currentPhonebook, setCurrentPhonebook] = React.useState<PhonebookModel['idNR'] | null>(null);
@@ -84,7 +84,7 @@ export const PhonebookWrapper: React.FC<PhonebookWrapperProps> = ({phonebooks}) 
     <React.Fragment>
       {phonebooks.length > 0 ? (
         <List.AccordionGroup
-          expandedId={currentPhonebook}
+          expandedId={currentPhonebook ?? undefined}
           onAccordionPress={expandedId =>
             setCurrentPhonebook(expandedId === currentPhonebook ? null : Number(expandedId))
           }>
@@ -103,7 +103,7 @@ export const PhonebookWrapper: React.FC<PhonebookWrapperProps> = ({phonebooks}) 
           ))}
         </List.AccordionGroup>
       ) : (
-        <NoResults message="Keine Telefonbücher gefunden" icon="contacts" />
+        <NoResults icon="contacts" text="Keine Telefonbücher gefunden" />
       )}
     </React.Fragment>
   );

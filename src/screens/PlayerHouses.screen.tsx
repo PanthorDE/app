@@ -1,7 +1,7 @@
 import React from 'react';
 import {List} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
-import {ScreenDetails} from '../types/ScreenDetails.type';
+import {type ScreenDetails} from '../types/ScreenDetails.type';
 import {StoreContext} from '../context/Store.context';
 import withApiKey from '../hoc/withApiKey.hoc';
 import {NoResults} from '../components/NoResults';
@@ -79,7 +79,7 @@ const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
               />
             ))
           ) : (
-            <NoResults message="Es konnten keine Häuser gefunden werden" icon="home-search-outline" />
+            <NoResults icon="home-search-outline" text="Es wurden keine Häuser gefunden." />
           )}
         </List.Section>
 
@@ -95,7 +95,7 @@ const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
               />
             ))
           ) : (
-            <NoResults message="Es wurde kein Appartment gefunden" icon="home-search-outline" />
+            <NoResults icon="home-search-outline" text="Es wurden keine Appartments gefunden." />
           )}
         </List.Section>
 
@@ -111,7 +111,7 @@ const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
               />
             ))
           ) : (
-            <NoResults message="Es wurde keine Baustelle gefunden" icon="home-search-outline" />
+            <NoResults icon="home-search-outline" text="Es wurden keine Baustellen gefunden." />
           )}
         </List.Section>
       </List.AccordionGroup>
