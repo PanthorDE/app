@@ -146,6 +146,14 @@ public class FractionMappingHelper {
                 return context.getResources().getString(R.string.str_med11);
             case 12:
                 return context.getResources().getString(R.string.str_med12);
+            case 13:
+                return context.getResources().getString(R.string.str_med13);
+            case 14:
+                return context.getResources().getString(R.string.str_med14);
+            case 15:
+                return context.getResources().getString(R.string.str_med15);
+            case 16:
+                return context.getResources().getString(R.string.str_med16);
             default:
                 return context.getResources().getString(R.string.str_noRank);
         }
@@ -224,7 +232,6 @@ public class FractionMappingHelper {
     }
 
     public static String getJustizRankSymbolAsString(int justizlevel) {
-
         return "Kein Rang";
     }
 
@@ -257,6 +264,14 @@ public class FractionMappingHelper {
                 return "medic_11";
             case 12:
                 return "medic_12";
+            case 13:
+                return "medic_13";
+            case 14:
+                return "medic_14";
+            case 15:
+                return "medic_15";
+            case 16:
+                return "medic_16";
             default:
                 return "Kein Rang";
         }

@@ -112,14 +112,18 @@
     <string name="str_med02">Sanitäter</string> <!-- medic-level 2 -->
     <string name="str_med03">Rettungshelfer</string> <!-- medic-level 3 -->
     <string name="str_med04">Rettungssanitäter</string> <!-- medic-level 4 -->
-    <string name="str_med05">Notfallhelfer</string> <!-- medic-level 5 -->
-    <string name="str_med06">Notfallsanitäter</string> <!-- medic-level 6 -->
-    <string name="str_med07">Medizinstudent</string> <!-- medic-level 7 -->
-    <string name="str_med08">Assistenzarzt</string> <!-- medic-level 8 -->
-    <string name="str_med09">Facharzt</string> <!-- medic-level 9 -->
-    <string name="str_med10">Oberarzt</string> <!-- medic-level 10 -->
-    <string name="str_med11">Stellv. Ärztlicher Leiter</string> <!-- medic-level 11 -->
-    <string name="str_med12">Ärztlicher Leiter</string> <!-- medic-level 12 -->
+    <string name="str_med05">Rettungsassistent</string> <!-- medic-level 5 -->
+    <string name="str_med06">Notfallhelfer</string> <!-- medic-level 6 -->
+    <string name="str_med07">Notfallsanitäter i.A.</string> <!-- medic-level 7 -->
+    <string name="str_med08">Notfallsanitäter</string> <!-- medic-level 8 -->
+    <string name="str_med09">Medizinstudent</string> <!-- medic-level 9 -->
+    <string name="str_med10">Medizindoktorand</string> <!-- medic-level 10 -->
+    <string name="str_med11">Assistenzarzt</string> <!-- medic-level 11 -->
+    <string name="str_med12">Facharzt</string> <!-- medic-level 12 -->
+    <string name="str_med13">Oberarzt</string> <!-- medic-level 13 -->
+    <string name="str_med14">Leitender Oberarzt</string> <!-- medic-level 14 -->
+    <string name="str_med15">Chefarzt</string> <!-- medic-level 15 -->
+    <string name="str_med16">Ärztlicher Direktor</string> <!-- medic-level 16 -->
 
     <!-- Raenge des RAC -->
     <string name="str_rac01">Auszubildender</string> <!-- R1, adac-level 1 -->
