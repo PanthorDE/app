@@ -1,32 +1,26 @@
 import React from 'react';
-import {List} from 'react-native-paper';
-import ScreenWrapper from '../ScreenWrapper';
-import {ScreenDetails} from '../types/ScreenDetails.type';
-import {StoreContext} from '../context/Store.context';
+import type {ScreenDetails} from '../types/ScreenDetails.type';
 import {Company as CompanyModel} from '../models';
-import withApiKey from '../hoc/withApiKey.hoc';
-import {PanthorService} from '../services/Panthor.service';
-import {Company} from '../components/Company';
-import {NoResults} from '../components/NoResults';
+import {StoreContext} from '../context/Store.context';
 import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
+import {PanthorService} from '../services';
+import ScreenWrapper from '../ScreenWrapper';
+import {List, Text} from 'react-native-paper';
+import {NoResults} from '../components/NoResults';
+import {CompanyShop} from '../components/Company';
 
-export type CompanyScreenProps = {};
+export type CompanyShopsScreenProps = {};
 
-export const CompanyScreen: React.FC<CompanyScreenProps> = () => {
-  const {apiKey, loading, setLoading, refreshing, setRefreshing, profile, setProfile} = React.useContext(StoreContext);
+export const CompanyShopsScreen: React.FC<CompanyShopsScreenProps> = () => {
+  const {apiKey, loading, setLoading, refreshing, setRefreshing, companyShops, setCompanyShops} =
+    React.useContext(StoreContext);
   const [currentCompany, setCurrentCompany] = React.useState<CompanyModel['id']>(-1);
-
-  const companies = React.useMemo(() => {
-    if (!profile) return [];
-    return profile.company_owned;
-  }, [profile]);
 
   const handler = {
     fetchData: async function () {
       try {
-        if (!apiKey) return;
-        const newProfile = await PanthorService.getProfile(apiKey);
-        setProfile(newProfile);
+        const shops = await PanthorService.getCompanyShops();
+        setCompanyShops(shops);
       } catch (error) {
         console.error(error);
         // FIXME: Add error-handling
@@ -49,7 +43,6 @@ export const CompanyScreen: React.FC<CompanyScreenProps> = () => {
   if (loading) {
     return <ScreenActivityIndicator />;
   }
-
   return (
     <ScreenWrapper
       contentContainerStyle={{padding: 16}}
@@ -58,14 +51,14 @@ export const CompanyScreen: React.FC<CompanyScreenProps> = () => {
         onRefresh: handler.onRefresh,
       }}>
       <List.AccordionGroup expandedId={currentCompany} onAccordionPress={handler.onAccordionPress}>
-        {companies.length > 0 ? (
-          companies.map((company, index, arr) => (
-            <Company
-              key={company.id}
+        {companyShops.length > 0 ? (
+          companyShops.map((company, index, arr) => (
+            <CompanyShop
+              key={company.industrialAreaId}
               company={company}
               isFirst={index === 0}
               isLast={index === arr.length - 1}
-              isExpanded={currentCompany === company.id}
+              isExpanded={currentCompany === company.industrialAreaId}
             />
           ))
         ) : (
@@ -76,11 +69,9 @@ export const CompanyScreen: React.FC<CompanyScreenProps> = () => {
   );
 };
 
-export default withApiKey(CompanyScreen);
-
-export const CompanyScreenDetails: ScreenDetails<CompanyScreenProps> = {
-  name: 'Company',
+export const CompanyShopScreenDetails: ScreenDetails<CompanyShopsScreenProps> = {
+  name: 'CompanyShops',
   label: 'Unternehmen',
   icon: 'domain',
-  component: withApiKey(CompanyScreen),
+  component: CompanyShopsScreen,
 };

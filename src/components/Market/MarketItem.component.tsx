@@ -1,8 +1,9 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Avatar, Divider, List, Text} from 'react-native-paper';
+import {Divider, List, Text} from 'react-native-paper';
 import {formatter} from '../../services';
 import {MarketItem as MarketItemModel, CopBonus} from '../../models';
+import {ItemIcon} from '../Icon';
 
 export type MarketItemProps = {
   item: MarketItemModel;
@@ -16,13 +17,7 @@ export const MarketItem: React.FC<MarketItemProps> = ({item, priceMultiplicator,
       {withDivider ? <Divider /> : null}
       <List.Item
         title={item.localized}
-        left={() => (
-          <Avatar.Image
-            size={40}
-            source={{uri: item.getImageUrl()}}
-            style={{marginLeft: 16, backgroundColor: 'transparent'}}
-          />
-        )}
+        left={() => <ItemIcon item={item.item} />}
         right={() => (
           <View style={{display: 'flex', justifyContent: 'center'}}>
             <Text>{formatter.format(item.price)}</Text>

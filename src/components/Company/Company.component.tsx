@@ -22,7 +22,7 @@ export const Company: React.FC<CompanyProps> = ({company, isFirst, isLast, isExp
       isExpanded={isExpanded}
       surfaceStyle={{paddingHorizontal: 0, paddingVertical: 0}}
       divider>
-      <View style={{paddingHorizontal: 16}}>
+      <View style={{paddingHorizontal: 16, paddingBottom: 8}}>
         <LabelValue label="Telefonnummer" value={company.phone} />
       </View>
       {bankAccounts.length > 0 && (
@@ -32,7 +32,7 @@ export const Company: React.FC<CompanyProps> = ({company, isFirst, isLast, isExp
             <React.Fragment key={account.iban}>
               {index !== 0 && <Divider />}
               <List.Item
-                title={`(${index + 1}) ${account.iban}`}
+                title={account.iban}
                 description={account.owner}
                 left={props => <List.Icon {...props} icon="credit-card" />}
                 right={() => (

@@ -70,12 +70,12 @@ export class MarketItem {
     return this.exportVirtItem ? this.exportVirtItem.illegal : ILLEGAL_ITEMS.includes(this.item);
   }
 
-  static getImageUrl(itemClassname: string): string {
-    return `https://files.dulliag.de/app/market_${itemClassname}.png`;
+  static getImageName(itemClassname: string) {
+    return `${itemClassname}.png`;
   }
 
-  getImageUrl() {
-    return MarketItem.getImageUrl(this.item);
+  getImageName() {
+    return MarketItem.getImageName(this.item);
   }
 
   async getPriceBacklog(server: number, backlogCount: number) {

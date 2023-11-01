@@ -1,41 +1,33 @@
 import React from 'react';
-import {Card} from 'react-native-paper';
+import {Card, Searchbar, useTheme} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 import {ScreenDetails} from '../types/ScreenDetails.type';
 import {StoreContext} from '../context/Store.context';
-import {MarketItem as MarketItemModel, RpgServer} from '../models';
-import {ItemBonus, Market, PriceCalculation, type PriceCalculationProps} from '../components/Market';
-import {View} from 'react-native';
+import {MarketItem as MarketItemModel} from '../models';
+import {Market} from '../components/Market';
 import {PanthorService} from '../services/Panthor.service';
-import {differenceInSeconds} from 'date-fns';
 import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
 
 export type MarketScreenProps = {};
 
 export const MarketScreen: React.FC<MarketScreenProps> = () => {
+  const theme = useTheme();
   const {loading, setLoading, refreshing, setRefreshing, servers, setServers} = React.useContext(StoreContext);
   const [items, setItems] = React.useState<MarketItemModel[]>([]);
-  const [refreshInterval, setRefreshInterval] = React.useState<PriceCalculationProps>({
-    date: new Date(),
-    interval: 0,
-  });
+  const [searchBy, setSearchBy] = React.useState('');
 
-  const policeOnlineCount = React.useMemo(() => {
-    return servers[0] instanceof RpgServer ? servers[0].cops : 0;
-  }, [servers]);
+  const displayedItems: MarketItemModel[] = React.useMemo(() => {
+    if (searchBy.length === 0) return items;
+    return items.filter(item => item.localized.toLowerCase().includes(searchBy.toLowerCase()));
+  }, [searchBy, items]);
 
   const handler = {
+    onItemSearch: (keyword: string) => {
+      setSearchBy(keyword);
+    },
     fetchData: async () => {
       try {
         const [market, fetchedServers] = await Promise.all([PanthorService.getMarket(1), PanthorService.getServers()]);
-        if (market.length >= 1) {
-          const [newer, older] = await market[0].getPriceBacklog(1, 2);
-          setRefreshInterval({
-            date: newer.createdAt,
-            interval: differenceInSeconds(newer.createdAt, older.createdAt),
-          });
-        }
-
         setItems(market);
         setServers(fetchedServers);
       } catch (error) {
@@ -70,24 +62,16 @@ export const MarketScreen: React.FC<MarketScreenProps> = () => {
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
       }}>
-      <View
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          flex: 1,
-          columnGap: 8,
-          marginBottom: 8,
-        }}>
-        {!loading && <ItemBonus copAmount={policeOnlineCount} />}
-        {!loading && refreshInterval.interval > 0 && <PriceCalculation {...refreshInterval} />}
-      </View>
+      <Searchbar
+        placeholder="Suchen"
+        onChangeText={handler.onItemSearch}
+        value={searchBy}
+        style={{backgroundColor: theme.colors.elevation.level1, marginBottom: 16}}
+        elevation={2}
+        loading={loading || refreshing}
+      />
 
-      {!loading && (
-        <Card>
-          <Market.Wrapper items={items} policeOnlineCount={policeOnlineCount} />
-        </Card>
-      )}
+      {!loading && <Market.Wrapper items={displayedItems} policeOnlineCount={undefined} />}
     </ScreenWrapper>
   );
 };
