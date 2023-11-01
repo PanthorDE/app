@@ -1,47 +1,55 @@
-import {MD3DarkTheme, type ProviderProps} from 'react-native-paper';
+import {MD3DarkTheme} from 'react-native-paper';
+import {type ThemeProp} from 'react-native-paper/lib/typescript/src/types';
 
-export const Theme: ProviderProps['theme'] = {
+export const Theme: ThemeProp = {
   ...MD3DarkTheme,
+  dark: true,
+  roundness: 4,
   colors: {
-    primary: 'rgb(170, 199, 255)',
-    onPrimary: 'rgb(0, 47, 100)',
-    primaryContainer: 'rgb(0, 69, 141)',
-    onPrimaryContainer: 'rgb(214, 227, 255)',
-    secondary: 'rgb(190, 198, 220)',
-    onSecondary: 'rgb(40, 49, 65)',
-    secondaryContainer: 'rgb(62, 71, 89)',
-    onSecondaryContainer: 'rgb(218, 226, 249)',
-    tertiary: 'rgb(220, 188, 224)',
-    onTertiary: 'rgb(63, 40, 68)',
-    tertiaryContainer: 'rgb(87, 62, 92)',
-    onTertiaryContainer: 'rgb(250, 216, 253)',
-    error: 'rgb(255, 180, 171)',
-    onError: 'rgb(105, 0, 5)',
-    errorContainer: 'rgb(147, 0, 10)',
-    onErrorContainer: 'rgb(255, 180, 171)',
-    background: 'rgb(26, 27, 30)',
-    onBackground: 'rgb(227, 226, 230)',
-    surface: 'rgb(26, 27, 30)',
-    onSurface: 'rgb(227, 226, 230)',
-    surfaceVariant: 'rgb(68, 71, 78)',
-    onSurfaceVariant: 'rgb(196, 198, 208)',
-    outline: 'rgb(142, 144, 153)',
-    outlineVariant: 'rgb(68, 71, 78)',
-    shadow: 'rgb(0, 0, 0)',
-    scrim: 'rgb(0, 0, 0)',
-    inverseSurface: 'rgb(227, 226, 230)',
-    inverseOnSurface: 'rgb(47, 48, 51)',
-    inversePrimary: 'rgb(12, 93, 182)',
-    elevation: {
-      level0: 'transparent',
-      level1: 'rgb(33, 36, 41)',
-      level2: 'rgb(38, 41, 48)',
-      level3: 'rgb(42, 46, 55)',
-      level4: 'rgb(43, 48, 57)',
-      level5: 'rgb(46, 51, 62)',
-    },
-    surfaceDisabled: 'rgba(227, 226, 230, 0.12)',
-    onSurfaceDisabled: 'rgba(227, 226, 230, 0.38)',
-    backdrop: 'rgba(45, 48, 56, 0.4)',
+    ...MD3DarkTheme.colors,
+    // primary: '#e52222',
+    // onPrimary: '#000000',
+    // primaryContainer: '#b91d1d',
+    // onPrimaryContainer: '#fff',
+    // secondary: '#e52222',
+    // onSecondary: '#000000',
+    // secondaryContainer: '#b91d1d',
+    // onSecondaryContainer: '#fff',
+    // // secondary: '#f2a104', // Sekundärfarbe als Komplementärfarbe zur Primärfarbe
+    // // onSecondary: '#000000',
+    // // secondaryContainer: '#b57c04', // Dunklere Schattierung der Sekundärfarbe
+    // // onSecondaryContainer: '#fff',
+    // tertiary: '#f2e104', // Tertiärfarbe als weitere Komplementärfarbe
+    // onTertiary: '#000000',
+    // tertiaryContainer: '#b5a904', // Dunklere Schattierung der Tertiärfarbe
+    // onTertiaryContainer: '#fff',
+    // error: '#ff0000', // Fehlerfarbe als hellerer Rotton
+    // onError: '#000000',
+    // errorContainer: '#b50000', // Dunklere Schattierung der Fehlerfarbe
+    // onErrorContainer: '#fff',
+    // background: '#262729', // Dunkler Grauton für den Hintergrund
+    // onBackground: '#fff', // Primärfarbe auf dem Hintergrund
+    // surface: '#262729', // Gleiche Farbe wie der Hintergrund für die Oberfläche
+    // onSurface: '#fff', // Primärfarbe auf der Oberfläche
+    // surfaceVariant: '#1a1b1c', // Dunklere Schattierung des Hintergrunds für die Oberflächenvariante
+    // onSurfaceVariant: '#fff', // Primärfarbe auf der Oberflächenvariante
+    // outline: '#e52222', // Primärfarbe für die Umrisse
+    // outlineVariant: '##fff', // Dunklere Schattierung der Primärfarbe für die Umrissvariante
+    // shadow: 'rgb(0, 0, 0)',
+    // scrim: 'rgb(0, 0, 0)',
+    // inverseSurface: 'rgb(227, 226, 230)',
+    // inverseOnSurface: 'rgb(47, 48, 51)',
+    // inversePrimary: '#1addf2', // Inverse Primärfarbe als Komplementärfarbe zur Primärfarbe
+    // elevation: {
+    //   level0: 'transparent',
+    //   level1: 'rgb(33, 36, 41)',
+    //   level2: 'rgb(38, 41, 48)',
+    //   level3: 'rgb(42, 46, 55)',
+    //   level4: 'rgb(43, 48, 57)',
+    //   level5: 'rgb(46, 51, 62)',
+    // },
+    // surfaceDisabled: 'rgba(227, 226, 230, 0.12)',
+    // onSurfaceDisabled: 'rgba(227, 226, 230, 0.38)',
+    // backdrop: 'rgba(45, 48, 56, 0.4)',
   },
 };

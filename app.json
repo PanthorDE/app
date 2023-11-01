@@ -1,5 +1,14 @@
 {
   "name": "Panthor",
   "displayName": "Panthor",
-  "version": "0.1.0"
+  "version": "0.1.0",
+  "android": {
+    "permissions": ["NOTIFICATIONS"],
+    "googleServicesFile": "./google-services.json",
+    "adaptiveIcon": {
+      "foregroundImage": "./assets/dag-logo-panda-smoking.png",
+      "backgroundColor": "#1a1b1e"
+    },
+    "package": "de.realliferpg.app"
+  }
 }

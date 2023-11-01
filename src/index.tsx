@@ -1,7 +1,8 @@
 import React from 'react';
-import {Platform, useColorScheme, StatusBar} from 'react-native';
+import {Platform, useColorScheme, StatusBar, PermissionsAndroid} from 'react-native';
 import {getHeaderTitle} from '@react-navigation/elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import analytics from '@react-native-firebase/analytics';
 import {DrawerNavigationProp, createDrawerNavigator} from '@react-navigation/drawer';
 import {
   InitialState,
@@ -17,6 +18,11 @@ import {Screens} from './screens';
 import DrawerItems from './DrawerItems';
 import {StoreProvider} from './context/Store.context';
 import {SnackbarProvider} from './context/Snackbar.context';
+import {PushNotificationService} from './services';
+<<<<<<< Updated upstream
+=======
+import {useTranslation} from 'react-i18next';
+>>>>>>> Stashed changes
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCE_KEY = 'APP_PREFERENCES';
@@ -34,8 +40,6 @@ export function PanthorApp() {
       try {
         const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
         const state = JSON.parse(savedStateString || '');
-
-        // console.log(state);
 
         setInitialState(state);
       } catch (e) {
@@ -58,6 +62,7 @@ export function PanthorApp() {
 
         if (preferences) {
           // TODO: Load pres
+          console.log(preferences);
         }
       } catch (e) {
         // ignore error
@@ -65,6 +70,22 @@ export function PanthorApp() {
     };
 
     restorePrefs();
+  }, []);
+
+  React.useEffect(() => {
+    analytics().setAnalyticsCollectionEnabled(true);
+
+    // PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
+    PushNotificationService.requestUserPermission()
+      .then(async enabled => {
+        if (enabled) {
+          const token = await PushNotificationService.getToken();
+          console.log(token);
+
+          PushNotificationService.applyListener();
+        }
+      })
+      .catch(console.error);
   }, []);
 
   if (!isReady) {

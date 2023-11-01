@@ -1,7 +1,13 @@
 # Panthor App
 
 - Push-Benachrichtigungen
-- Dynamic colors
+  - Können ein-/abgeschaltet werden
+  - Service bauen um "Device Tokens" zu speichern
+- Analytics
+  - Analytics sind standardmäßig deaktiviert
+  - Können über die Einstellungen ak-/deaktiviert werden
+- Übersetzungen für den Markt (nicht manuell)
+- Übersetzungen für Händler
 
 ## Developer Setup
 
