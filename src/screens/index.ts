@@ -1,6 +1,6 @@
 import type {ScreenDetails} from '../types/ScreenDetails.type';
 import {ChangelogScreenDetails} from './Changelog.screen';
-import {CompanyScreenDetails} from './Company.screen';
+import {CompanyNavigationDetails} from './CompanyNavigation.screen';
 import {HomeScreenDetails} from './Home.screen';
 import {MarketScreenDetails} from './Market.screen';
 import {PlayerProfileNavigationDetails} from './PlayerProfileNavigation.screen';
@@ -14,7 +14,7 @@ export const Screens: ScreenDetails<any>[] = [
   HomeScreenDetails,
   PlayerProfileNavigationDetails,
   MarketScreenDetails,
-  CompanyScreenDetails,
+  CompanyNavigationDetails,
   TraderNavigationDetails,
   ChangelogScreenDetails,
   SettingsScreenDetails,

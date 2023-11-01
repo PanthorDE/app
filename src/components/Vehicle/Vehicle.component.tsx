@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Chip, Text} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 import {Vehicle as CVehicle} from '../../models';
 import {Accordion, AccordionProps} from '../Accordion';
 import {Progress} from '../Progress/Progress.component';
@@ -14,7 +14,7 @@ export const Vehicle: React.FC<VehicleProps> = ({vehicle, isFirst, isLast, isExp
     <Accordion
       id={vehicle.id}
       title={vehicle.vehicle_data.name}
-      description={vehicle.getVehicleTypeLabel()}
+      description={vehicle.side.getLabel()}
       isFirst={isFirst}
       isLast={isLast}
       isExpanded={isExpanded}
@@ -22,15 +22,15 @@ export const Vehicle: React.FC<VehicleProps> = ({vehicle, isFirst, isLast, isExp
       <View style={style.row}>
         <View style={style.col}>
           <Text variant="labelMedium">Fraktion</Text>
-          <Chip compact>{vehicle.side.getLabel()}</Chip>
+          <Text>{vehicle.side.getLabel()}</Text>
         </View>
         <View style={style.col}>
           <Text variant="labelMedium">Kennzeichen</Text>
-          <Chip compact>{vehicle.plate}</Chip>
+          <Text>{vehicle.plate}</Text>
         </View>
         <View style={style.col}>
           <Text variant="labelMedium">Kilometerstand</Text>
-          <Chip compact>{vehicle.kilometer_total} Km.</Chip>
+          <Text>{vehicle.kilometer_total} km</Text>
         </View>
         <View style={[style.col, {minWidth: '100%'}]}>
           <Text variant="labelMedium">Tank</Text>
@@ -50,9 +50,7 @@ const style = StyleSheet.create({
     columnGap: 16,
   },
   col: {
-    flex: 1,
     display: 'flex',
-    flexDirection: 'column',
-    width: 0,
+    flexGrow: 1,
   },
 });

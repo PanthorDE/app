@@ -11,7 +11,7 @@ export class Side {
     switch (this.side.toUpperCase()) {
       case 'MEDIC':
       case 'GUER':
-        return 'Mediziner';
+        return 'Rettungsdienst';
       case 'WEST':
         return 'Polizei';
       case 'ADAC':

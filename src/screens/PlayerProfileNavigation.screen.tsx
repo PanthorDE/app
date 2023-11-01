@@ -24,7 +24,7 @@ export type PlayerProfileNavigationProps = {
   navigation: StackNavigationProp<{}>;
 };
 
-const PlayerProfileNavigation: React.FC<PlayerProfileNavigationProps> = ({navigation}) => {
+export const PlayerProfileNavigationScreen: React.FC<PlayerProfileNavigationProps> = ({navigation}) => {
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState<RoutesState>([
@@ -85,10 +85,10 @@ export const PlayerProfileNavigationDetails: ScreenDetails<PlayerProfileNavigati
   name: 'PlayerProfileNavigation',
   label: 'Profil',
   icon: 'account-circle',
-  component: PlayerProfileNavigation,
+  component: PlayerProfileNavigationScreen,
 };
 
-export default PlayerProfileNavigation;
+export default PlayerProfileNavigationScreen;
 
 const styles = StyleSheet.create({
   screen: {

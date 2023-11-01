@@ -11,7 +11,7 @@ import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.com
 
 export type ChangelogScreenProps = {};
 
-const ChangelogScreen: React.FC<ChangelogScreenProps> = () => {
+export const ChangelogScreen: React.FC<ChangelogScreenProps> = () => {
   const {loading, setLoading, refreshing, setRefreshing, changelogs, setChangelogs} = React.useContext(StoreContext);
   const [selectedChangelog, setSelectedChangelog] = React.useState<ChangelogModel['id']>(-1);
 

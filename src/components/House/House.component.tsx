@@ -15,7 +15,13 @@ export const House: React.FC<HouseProps> = ({house, isFirst, isLast, isExpanded}
       id={house.id}
       title={'Haus ' + house.id}
       description={
-        <View>{house.disabled ? <Chip compact>Inaktiv</Chip> : <Chip compact>{house.payed_for / 24} Tage</Chip>}</View>
+        <View>
+          {house.disabled ? (
+            <Text variant="labelMedium">Inaktiv</Text>
+          ) : (
+            <Text variant="labelMedium">{house.payed_for / 24} Tage verbleibend</Text>
+          )}
+        </View>
       }
       isFirst={isFirst}
       isLast={isLast}

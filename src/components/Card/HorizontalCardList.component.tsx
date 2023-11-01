@@ -1,6 +1,6 @@
 import React from 'react';
 import type {NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
-import {Dimensions, ScrollView, StyleSheet, View} from 'react-native';
+import {Dimensions, ScrollView, StyleSheet, TouchableHighlight, View} from 'react-native';
 import {Theme} from '../../theme/theme';
 import {ScreenWrapperProps} from '../../ScreenWrapper';
 import {RefreshControl} from '../RefreshControl/RefreshControl.component';
@@ -23,6 +23,10 @@ export const HorizontalCardList: React.FC<HorizontalCardListProps> = ({cards, on
     if (onScroll) onScroll(currentIndex);
   };
 
+  const handleDotIndicatorPress = (nextCard: typeof currentCard) => {
+    setCurrentCard(nextCard);
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -31,13 +35,10 @@ export const HorizontalCardList: React.FC<HorizontalCardListProps> = ({cards, on
         showsHorizontalScrollIndicator={false}
         onScroll={handleScroll}
         scrollEventThrottle={16}
-        // contentContainerStyle={{
-        //   backgroundColor: 'red',
-        // }}
         refreshControl={
-          refreshControl ? (
+          refreshControl && (
             <RefreshControl refreshing={refreshControl.refreshing} onRefresh={refreshControl.onRefresh} />
-          ) : undefined
+          )
         }>
         {cards.map((card, index) => (
           <View
@@ -76,11 +77,10 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    // @ts-ignore
-    backgroundColor: Theme.colors.surfaceDisabled,
+    backgroundColor: Theme!.colors!.onSurface,
     margin: 4,
   },
   currentIndicator: {
-    backgroundColor: Theme.colors.primary,
+    backgroundColor: Theme!.colors!.primary,
   },
 });

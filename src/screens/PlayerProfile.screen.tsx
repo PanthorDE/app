@@ -7,7 +7,7 @@ import {type ScreenDetails} from '../types/ScreenDetails.type';
 import ScreenWrapper from '../ScreenWrapper';
 import {LabelValue} from '../components/LabelValue';
 import {NoResults} from '../components/NoResults';
-import {Progress} from '../components/Progress';
+import {LevelProgress} from '../components/Progress';
 import {formatter} from '../services';
 import {PanthorService} from '../services/Panthor.service';
 import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
@@ -58,7 +58,7 @@ export const PlayerProfileScreen: React.FC<PlayerProfileScreenProps> = () => {
             <Text variant="titleSmall" style={{textAlign: 'center'}}>
               {profile.pid}
             </Text>
-            <Progress currentLevel={profile.level} progress={profile.level_progress} withLabel />
+            <LevelProgress currentLevel={profile.level} progress={profile.level_progress} />
           </Card>
 
           <Card style={{padding: 16}}>

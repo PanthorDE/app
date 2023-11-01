@@ -1,6 +1,7 @@
 import React from 'react';
 import {StoreContext} from '../context/Store.context';
 import {NoApiKey} from '../components/Alert/NoApiKey.component';
+import ScreenWrapper from '../ScreenWrapper';
 
 const withApiKey = <P extends object>(WrappedComponent: React.ComponentType<P>) => {
   const EnhancedComponent: React.FC<P> = props => {
@@ -12,7 +13,11 @@ const withApiKey = <P extends object>(WrappedComponent: React.ComponentType<P>) 
       return <WrappedComponent {...props} />;
     }
 
-    return <NoApiKey />;
+    return (
+      <ScreenWrapper>
+        <NoApiKey />
+      </ScreenWrapper>
+    );
   };
 
   EnhancedComponent.displayName = `withApiKey(${WrappedComponent.displayName || WrappedComponent.name})`;

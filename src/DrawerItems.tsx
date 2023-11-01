@@ -4,7 +4,6 @@ import {StyleSheet, View, Image} from 'react-native';
 import {Drawer, Text, useTheme} from 'react-native-paper';
 import {Screens} from './screens';
 import {useStoreContext} from './context/Store.context';
-import {rgbStringToHex, rgbToHex} from './theme/rgbToHex';
 
 export default function DrawerItems(props: DrawerContentComponentProps) {
   const theme = useTheme();
@@ -29,7 +28,8 @@ export default function DrawerItems(props: DrawerContentComponentProps) {
       style={[
         styles.drawerContent,
         {
-          backgroundColor: theme.colors.surface,
+          // backgroundColor: theme.colors.surface,
+          backgroundColor: theme.colors.background,
         },
       ]}>
       {profile != null && (
@@ -42,7 +42,7 @@ export default function DrawerItems(props: DrawerContentComponentProps) {
             marginBottom: 18,
             paddingVertical: 8 * 2,
             paddingHorizontal: 16,
-            backgroundColor: '#3d4659',
+            backgroundColor: theme.colors.secondaryContainer,
             borderRadius: theme.roundness * 2,
           }}>
           <Image
@@ -61,7 +61,7 @@ export default function DrawerItems(props: DrawerContentComponentProps) {
         </View>
       )}
       <React.Fragment>
-        {Screens.map((screen, idx) => (
+        {Screens.map(screen => (
           <Drawer.Item
             {...screen.drawerItemProps}
             key={screen.name}

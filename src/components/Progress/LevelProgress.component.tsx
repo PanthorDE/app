@@ -1,28 +1,23 @@
 import React from 'react';
+import {type ProgressProps} from './Progress.component';
 import {View} from 'react-native';
 import {Surface, Text, useTheme} from 'react-native-paper';
 
-export type ProgressProps = {
-  currentLevel?: number;
-  progress: number;
-  withLabel?: boolean;
-};
+export type LevelProgressProps = Omit<ProgressProps, 'withLabel' | 'currentLevel'> & {currentLevel: number};
 
-export const Progress: React.FC<ProgressProps> = ({currentLevel, progress, withLabel = false}) => {
+export const LevelProgress: React.FC<LevelProgressProps> = ({currentLevel, progress}) => {
   const theme = useTheme();
   return (
     <React.Fragment>
-      {withLabel && currentLevel && (
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <Text variant="labelMedium">{currentLevel}</Text>
-          <Text variant="labelMedium">{currentLevel + 1}</Text>
-        </View>
-      )}
+      <View
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <Text variant="labelMedium">Level {currentLevel}</Text>
+        <Text variant="labelMedium">Level {currentLevel + 1}</Text>
+      </View>
       <Surface
         style={{
           width: '100%',

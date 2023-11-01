@@ -44,9 +44,9 @@ export default function ScreenWrapper({
           showsVerticalScrollIndicator={false}
           style={[containerStyle, style]}
           refreshControl={
-            refreshControl ? (
+            refreshControl && (
               <RefreshControl refreshing={refreshControl.refreshing} onRefresh={refreshControl.onRefresh} />
-            ) : undefined
+            )
           }>
           {children}
         </ScrollView>
