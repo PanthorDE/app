@@ -1,5 +1,5 @@
 import React from 'react';
-import {List} from 'react-native-paper';
+import {List, Searchbar, useTheme} from 'react-native-paper';
 import {NoResults} from '../components/NoResults';
 import {TraderOffers} from '../components/TraderOffers';
 import type {ShopCategory} from '../types';
@@ -15,8 +15,10 @@ export type TraderScreenProps = {
 };
 
 const TraderScreen: React.FC<TraderScreenProps> = ({category}) => {
+  const theme = useTheme();
   const {loading, setLoading, refreshing, setRefreshing, traders, setTraders} = React.useContext(StoreContext);
   const [currentTrader, setCurrentTrader] = React.useState<ShopType['type']>('');
+  const [keyword, setKeyword] = React.useState('');
 
   const handler = {
     fetchData: async function () {
@@ -32,9 +34,18 @@ const TraderScreen: React.FC<TraderScreenProps> = ({category}) => {
     },
   };
 
+  const displayedTraders = React.useMemo(() => {
+    const lowerKeyword = keyword.toLowerCase();
+    return traders[category].filter(trader => trader.name.toLowerCase().includes(lowerKeyword));
+  }, [traders, keyword]);
+
   React.useEffect(() => {
     setLoading(true);
     handler.fetchData().finally(() => setLoading(false));
+
+    return () => {
+      setKeyword('');
+    };
   }, [category]);
 
   if (loading) {
@@ -48,9 +59,18 @@ const TraderScreen: React.FC<TraderScreenProps> = ({category}) => {
         refreshing: refreshing,
         onRefresh: handler.onRefresh,
       }}>
-      {traders[category].length > 0 ? (
+      <Searchbar
+        mode="bar"
+        placeholder="Suchen"
+        value={keyword}
+        onChangeText={setKeyword}
+        elevation={2}
+        style={{backgroundColor: theme.colors.elevation.level1, marginBottom: 16}}
+      />
+
+      {displayedTraders.length > 0 ? (
         <List.AccordionGroup expandedId={currentTrader} onAccordionPress={handler.onAccordionPress}>
-          {traders[category].map((shop, index, arr) => (
+          {displayedTraders.map((shop, index, arr) => (
             <React.Fragment key={shop.type}>
               <TraderOffers
                 shop={shop}

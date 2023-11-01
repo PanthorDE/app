@@ -12,7 +12,7 @@ export default ItemTraderScreen;
 
 export const ItemTraderScreenDetails: ScreenDetails<ItemTraderProps> = {
   name: 'ItemTrader',
-  label: 'Item-Händler',
-  icon: 'information',
+  label: 'Händler',
+  icon: 'cart-variant',
   component: ItemTraderScreen,
 };

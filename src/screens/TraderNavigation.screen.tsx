@@ -22,7 +22,7 @@ export type TraderNavigationProps = {
   navigation: StackNavigationProp<{}>;
 };
 
-const TraderNavigation: React.FC<TraderNavigationProps> = ({navigation}) => {
+export const TraderNavigationScreen: React.FC<TraderNavigationProps> = ({navigation}) => {
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState<RoutesState>([
@@ -69,10 +69,10 @@ export const TraderNavigationDetails: ScreenDetails<TraderNavigationProps> = {
   name: 'TraderNavigation',
   label: 'Händler',
   icon: 'store',
-  component: TraderNavigation,
+  component: TraderNavigationScreen,
 };
 
-export default TraderNavigation;
+export default TraderNavigationScreen;
 
 const styles = StyleSheet.create({
   screen: {
