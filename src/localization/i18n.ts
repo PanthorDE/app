@@ -13,7 +13,7 @@ i18n
       en: {translation: en},
     },
     // FIXME: Get locale based on phone preference
-    lng: 'en', //getDeviceLocale(),
+    lng: getDeviceLocale(),
     interpolation: {
       escapeValue: false,
     },

@@ -9,12 +9,14 @@ import {StoreContext} from '../context/Store.context';
 import {ScreenDetails} from '../types/ScreenDetails.type';
 import ScreenWrapper from '../ScreenWrapper';
 import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
+import {useTranslation} from 'react-i18next';
 
 export type TraderScreenProps = {
   category: ShopCategory;
 };
 
 const TraderScreen: React.FC<TraderScreenProps> = ({category}) => {
+  const {t} = useTranslation();
   const theme = useTheme();
   const {loading, setLoading, refreshing, setRefreshing, traders, setTraders} = React.useContext(StoreContext);
   const [currentTrader, setCurrentTrader] = React.useState<ShopType['type']>('');
@@ -61,7 +63,7 @@ const TraderScreen: React.FC<TraderScreenProps> = ({category}) => {
       }}>
       <Searchbar
         mode="bar"
-        placeholder="Suchen"
+        placeholder={t('trader.base_screen.search_placeholder')}
         value={keyword}
         onChangeText={setKeyword}
         elevation={2}
@@ -89,10 +91,3 @@ const TraderScreen: React.FC<TraderScreenProps> = ({category}) => {
 };
 
 export default TraderScreen;
-
-export const GarageScreenDetails: ScreenDetails<TraderScreenProps> = {
-  name: 'Trader',
-  label: 'Händler',
-  icon: 'garage',
-  component: TraderScreen,
-};

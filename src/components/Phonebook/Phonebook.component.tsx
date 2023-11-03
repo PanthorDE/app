@@ -5,12 +5,14 @@ import {Phonebook as PhonebookModel, Profile} from '../../models';
 import {Accordion} from '../Accordion';
 import {LabelValue} from '../LabelValue';
 import {NoResults} from '../NoResults';
+import {useTranslation} from 'react-i18next';
 
 export type PhonebookProps = {
   phonebook: PhonebookModel;
 };
 
 export const Phonebook: React.FC<PhonebookProps> = ({phonebook}) => {
+  const {t} = useTranslation();
   const [keyword, setKeyword] = React.useState('');
   const shownContacts = React.useMemo(() => {
     if (keyword.length < 1) return phonebook.phonebook;
@@ -32,30 +34,45 @@ export const Phonebook: React.FC<PhonebookProps> = ({phonebook}) => {
           </View>
 
           <View>
-            <LabelValue label="Name" value={phonebook.identity.name} />
-            <LabelValue label="Nationalität" value={phonebook.identity.id_nationality} />
+            <LabelValue label={t('profile.phonebook_screen.id_name')} value={phonebook.identity.name} />
+            <LabelValue
+              label={t('profile.phonebook_screen.id_nationality')}
+              value={phonebook.identity.id_nationality}
+            />
           </View>
 
           <View>
-            <LabelValue label="Geburts" value={phonebook.identity.id_birthday.toString()} />
+            <LabelValue
+              label={t('profile.phonebook_screen.id_dob')}
+              value={phonebook.identity.id_birthday.toString()}
+            />
             <Chip compact style={{marginTop: 12}}>
-              {phonebook.identity.side.getLabel()}
+              {t(phonebook.identity.side.getLabel())}
             </Chip>
           </View>
         </View>
       </View>
 
       <View style={{paddingHorizontal: 16, paddingVertical: 8}}>
-        <Searchbar mode="bar" placeholder="Suchen" value={keyword} onChangeText={setKeyword} />
+        <Searchbar
+          mode="bar"
+          placeholder={t('profile.phonebook_screen.search_contacts_placeholder')}
+          value={keyword}
+          onChangeText={setKeyword}
+        />
       </View>
 
       <List.Section>
-        <List.Subheader>Kontakte ({shownContacts.length})</List.Subheader>
+        <List.Subheader>
+          {t('profile.phonebook_screen.contacts_heading', {amount: shownContacts.length})}
+        </List.Subheader>
         {shownContacts.length < 1 ? (
           <List.Item
-            title="Keine Kontakte"
+            title={t('profile.phonebook_screen.no_contacts')}
             titleStyle={{textAlign: 'center'}}
-            description={keyword.length > 0 ? `Keine Treffer für '${keyword}'!` : undefined}
+            description={
+              keyword.length > 0 ? t('profile.phonebook_screen.no_contacts_for_keyword', {keyword: keyword}) : undefined
+            }
             descriptionStyle={{textAlign: 'center'}}
           />
         ) : (
@@ -65,7 +82,9 @@ export const Phonebook: React.FC<PhonebookProps> = ({phonebook}) => {
               <List.Item
                 left={props => <List.Icon icon="account-circle" {...props} />}
                 title={contact.name}
-                description={`${contact.number || 'Keine Nummer'}\n${contact.iban || 'Keine IBAN'}`}
+                description={`${contact.number || t('profile.phonebook_screen.no_phone')}\n${
+                  contact.iban || t('profile.phonebook_screen.no_iban')
+                }`}
               />
             </React.Fragment>
           ))

@@ -6,6 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {type ScreenDetails} from '../types/ScreenDetails.type';
 import ItemTraderScreen, {ItemTraderScreenDetails} from './ItemTrader.screen';
 import VehicleTraderScreen, {VehicleTraderScreenDetails} from './VehicleTrader.screen';
+import {useTranslation} from 'react-i18next';
 
 type RoutesState = {
   key: string;
@@ -23,18 +24,22 @@ export type TraderNavigationProps = {
 };
 
 export const TraderNavigationScreen: React.FC<TraderNavigationProps> = ({navigation}) => {
+  const {t} = useTranslation();
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
+  const getScreenTitle = ({label, label_key}: ScreenDetails<any>): string => {
+    return label_key ? t(label_key) : label;
+  };
   const [routes] = React.useState<RoutesState>([
     {
       key: ItemTraderScreenDetails.name,
-      title: ItemTraderScreenDetails.label,
+      title: getScreenTitle(ItemTraderScreenDetails),
       unfocusedIcon: ItemTraderScreenDetails.icon,
       focusedIcon: ItemTraderScreenDetails.icon,
     },
     {
       key: VehicleTraderScreenDetails.name,
-      title: VehicleTraderScreenDetails.label,
+      title: getScreenTitle(VehicleTraderScreenDetails),
       unfocusedIcon: VehicleTraderScreenDetails.icon,
       focusedIcon: VehicleTraderScreenDetails.icon,
     },
@@ -68,6 +73,7 @@ export const TraderNavigationScreen: React.FC<TraderNavigationProps> = ({navigat
 export const TraderNavigationDetails: ScreenDetails<TraderNavigationProps> = {
   name: 'TraderNavigation',
   label: 'Händler',
+  label_key: 'trader.navigation_screen.title',
   icon: 'store',
   component: TraderNavigationScreen,
 };

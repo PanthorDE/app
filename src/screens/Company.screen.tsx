@@ -81,6 +81,7 @@ export default withApiKey(CompanyScreen);
 export const CompanyScreenDetails: ScreenDetails<CompanyScreenProps> = {
   name: 'Company',
   label: 'Unternehmen',
+  label_key: 'company.list.title',
   icon: 'domain',
   component: withApiKey(CompanyScreen),
 };

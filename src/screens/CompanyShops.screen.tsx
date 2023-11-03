@@ -72,6 +72,7 @@ export const CompanyShopsScreen: React.FC<CompanyShopsScreenProps> = () => {
 export const CompanyShopScreenDetails: ScreenDetails<CompanyShopsScreenProps> = {
   name: 'CompanyShops',
   label: 'Unternehmen',
+  label_key: 'company.shops.title',
   icon: 'domain',
   component: CompanyShopsScreen,
 };

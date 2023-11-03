@@ -4,8 +4,10 @@ import {StyleSheet, View, Image} from 'react-native';
 import {Drawer, Text, useTheme} from 'react-native-paper';
 import {Screens} from './screens';
 import {useStoreContext} from './context/Store.context';
+import {useTranslation} from 'react-i18next';
 
 export default function DrawerItems(props: DrawerContentComponentProps) {
+  const {t} = useTranslation();
   const theme = useTheme();
   const {profile} = useStoreContext();
 
@@ -66,7 +68,7 @@ export default function DrawerItems(props: DrawerContentComponentProps) {
             {...screen.drawerItemProps}
             key={screen.name}
             active={isActive(screen.name)}
-            label={screen.label}
+            label={screen.label_key ? t(screen.label_key) : screen.label}
             icon={screen.icon}
             onPress={() => {
               if (props.navigation) props.navigation.navigate(screen.name);

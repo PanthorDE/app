@@ -6,6 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {type ScreenDetails} from '../types/ScreenDetails.type';
 import CompanyScreen, {CompanyScreenDetails} from './Company.screen';
 import {CompanyShopScreenDetails, CompanyShopsScreen} from './CompanyShops.screen';
+import {useTranslation} from 'react-i18next';
 
 type RoutesState = {
   key: string;
@@ -23,18 +24,19 @@ export type CompanyNavigationProps = {
 };
 
 export const CompanyNavigationScreen: React.FC<CompanyNavigationProps> = ({navigation}) => {
+  const {t} = useTranslation();
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState<RoutesState>([
     {
       key: CompanyScreenDetails.name,
-      title: 'Eigene Unternehmen',
+      title: t('company.list.title'),
       unfocusedIcon: CompanyScreenDetails.icon,
       focusedIcon: CompanyScreenDetails.icon,
     },
     {
       key: CompanyShopScreenDetails.name,
-      title: 'Firmenshops',
+      title: t('company.shops.title'),
       unfocusedIcon: CompanyShopScreenDetails.icon,
       focusedIcon: CompanyShopScreenDetails.icon,
     },
@@ -68,6 +70,7 @@ export const CompanyNavigationScreen: React.FC<CompanyNavigationProps> = ({navig
 export const CompanyNavigationDetails: ScreenDetails<CompanyNavigationProps> = {
   name: 'CompanyNavigation',
   label: 'Firmen',
+  label_key: 'company.navigation_screen.title',
   icon: 'domain',
   component: CompanyNavigationScreen,
 };

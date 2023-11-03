@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Searchbar, useTheme} from 'react-native-paper';
+import {Searchbar, useTheme} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 import {ScreenDetails} from '../types/ScreenDetails.type';
 import {StoreContext} from '../context/Store.context';
@@ -7,10 +7,12 @@ import {MarketItem as MarketItemModel} from '../models';
 import {Market} from '../components/Market';
 import {PanthorService} from '../services/Panthor.service';
 import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
+import {useTranslation} from 'react-i18next';
 
 export type MarketScreenProps = {};
 
 export const MarketScreen: React.FC<MarketScreenProps> = () => {
+  const {t} = useTranslation();
   const theme = useTheme();
   const {loading, setLoading, refreshing, setRefreshing, servers, setServers} = React.useContext(StoreContext);
   const [items, setItems] = React.useState<MarketItemModel[]>([]);
@@ -63,7 +65,7 @@ export const MarketScreen: React.FC<MarketScreenProps> = () => {
         onRefresh: handler.onRefresh,
       }}>
       <Searchbar
-        placeholder="Suchen"
+        placeholder={t('market.screen.search_placeholder')}
         onChangeText={handler.onItemSearch}
         value={searchBy}
         style={{backgroundColor: theme.colors.elevation.level1, marginBottom: 16}}
@@ -79,6 +81,7 @@ export const MarketScreen: React.FC<MarketScreenProps> = () => {
 export const MarketScreenDetails: ScreenDetails<MarketScreenProps> = {
   name: 'Market',
   label: 'Markt',
+  label_key: 'market.screen.title',
   icon: 'finance',
   component: MarketScreen,
 };

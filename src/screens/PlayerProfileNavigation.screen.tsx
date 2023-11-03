@@ -8,6 +8,7 @@ import PlayerProfileScreen, {PlayerProfileScreenDetails} from './PlayerProfile.s
 import GarageScreen, {GarageScreenDetails} from './Garage.screen';
 import PhonebooksScreen, {PhonebookScreenDetails} from './Phonebooks.screen';
 import PlayerHousesScreen, {PlayerHousesScreenDetails} from './PlayerHouses.screen';
+import {useTranslation} from 'react-i18next';
 
 type RoutesState = {
   key: string;
@@ -25,30 +26,34 @@ export type PlayerProfileNavigationProps = {
 };
 
 export const PlayerProfileNavigationScreen: React.FC<PlayerProfileNavigationProps> = ({navigation}) => {
+  const {t} = useTranslation();
   const insets = useSafeAreaInsets();
   const [index, setIndex] = React.useState(0);
+  const getScreenTitle = ({label, label_key}: ScreenDetails<any>): string => {
+    return label_key ? t(label_key) : label;
+  };
   const [routes] = React.useState<RoutesState>([
     {
       key: PlayerProfileScreenDetails.name,
-      title: PlayerProfileScreenDetails.label,
+      title: getScreenTitle(PlayerProfileNavigationDetails),
       unfocusedIcon: PlayerProfileScreenDetails.icon,
       focusedIcon: PlayerProfileScreenDetails.icon,
     },
     {
       key: GarageScreenDetails.name,
-      title: GarageScreenDetails.label,
+      title: getScreenTitle(GarageScreenDetails),
       unfocusedIcon: GarageScreenDetails.icon,
       focusedIcon: GarageScreenDetails.icon,
     },
     {
       key: PlayerHousesScreenDetails.name,
-      title: PlayerHousesScreenDetails.label,
+      title: getScreenTitle(PlayerHousesScreenDetails),
       unfocusedIcon: PlayerHousesScreenDetails.icon,
       focusedIcon: PlayerHousesScreenDetails.icon,
     },
     {
       key: PhonebookScreenDetails.name,
-      title: PhonebookScreenDetails.label,
+      title: getScreenTitle(PhonebookScreenDetails),
       unfocusedIcon: PhonebookScreenDetails.icon,
       focusedIcon: PhonebookScreenDetails.icon,
     },
@@ -84,6 +89,7 @@ export const PlayerProfileNavigationScreen: React.FC<PlayerProfileNavigationProp
 export const PlayerProfileNavigationDetails: ScreenDetails<PlayerProfileNavigationProps> = {
   name: 'PlayerProfileNavigation',
   label: 'Profil',
+  label_key: 'profile.navigation_screen.title',
   icon: 'account-circle',
   component: PlayerProfileNavigationScreen,
 };

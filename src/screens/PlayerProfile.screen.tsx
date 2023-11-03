@@ -11,10 +11,12 @@ import {LevelProgress} from '../components/Progress';
 import {formatter} from '../services';
 import {PanthorService} from '../services/Panthor.service';
 import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
+import {useTranslation} from 'react-i18next';
 
 export type PlayerProfileScreenProps = {};
 
 export const PlayerProfileScreen: React.FC<PlayerProfileScreenProps> = () => {
+  const {t} = useTranslation();
   const {apiKey, loading, setLoading, refreshing, setRefreshing, profile, setProfile} = React.useContext(StoreContext);
 
   const handler = {
@@ -62,24 +64,50 @@ export const PlayerProfileScreen: React.FC<PlayerProfileScreenProps> = () => {
           </Card>
 
           <Card style={{padding: 16}}>
-            <LabelValue label="Name" value={profile.name} />
-            <LabelValue label="PlayerId" value={profile.pid} withDivider />
-            <LabelValue label="Bargeld" value={formatter.format(profile.cash)} withDivider />
-            <LabelValue label="Kontostand (Hauptkonto)" value={formatter.format(profile.bankacc)} withDivider />
-            <LabelValue label="XP" value={profile.exp.toLocaleString() + ' XP.'} withDivider />
-            <LabelValue label="Skillpunkte" value={profile.skillpoint + ' Punkte'} withDivider />
-            <LabelValue label="Spielzeit" value={(profile.play_time.active / 60).toFixed(0) + ' Stunden'} withDivider />
+            <LabelValue label={t('profile.player_screen.name')} value={profile.name} />
+            <LabelValue label={t('profile.player_screen.player_id')} value={profile.pid} withDivider />
+            <LabelValue label={t('profile.player_screen.cash')} value={formatter.format(profile.cash)} withDivider />
             <LabelValue
-              label="Volle Spielzeit"
-              value={(profile.play_time.total / 60).toFixed(0) + ' Stunden'}
+              label={t('profile.player_screen.bank_account_balance')}
+              value={formatter.format(profile.bankacc)}
               withDivider
             />
             <LabelValue
-              label="Zuletzt gesehen"
-              value={format(profile.last_seen.date, 'dd.MM.yy, HH:mm') + ' Uhr'}
+              label={t('profile.player_screen.experience')}
+              value={t('profile.player_screen.experience_gained', {experience: profile.exp.toLocaleString()})}
               withDivider
             />
-            <LabelValue label="Beigetreten" value={format(profile.joined_at, 'dd.MM.yy, HH:mm') + ' Uhr'} withDivider />
+            <LabelValue
+              label={t('profile.player_screen.skillpoints')}
+              value={t('profile.player_screen.skillpoints_left', {skillpoints: profile.skillpoint})}
+              withDivider
+            />
+            <LabelValue
+              label={t('profile.player_screen.playtime.active')}
+              value={t('profile.player_screen.playtime.active_value', {
+                hours: (profile.play_time.active / 60).toFixed(0),
+              })}
+              withDivider
+            />
+            <LabelValue
+              label={t('profile.player_screen.playtime.total')}
+              value={t('profile.player_screen.playtime.total_value', {
+                hours: (profile.play_time.total / 60).toFixed(0),
+              })}
+              withDivider
+            />
+            <LabelValue
+              label={t('profile.player_screen.last_seen')}
+              value={t('profile.player_screen.last_seen_value', {
+                time: format(profile.last_seen.date, 'dd.MM.yy, HH:mm'),
+              })}
+              withDivider
+            />
+            <LabelValue
+              label={t('profile.player_screen.joined_at')}
+              value={t('profile.player_screen.joined_at_value', {time: format(profile.joined_at, 'dd.MM.yy, HH:mm')})}
+              withDivider
+            />
           </Card>
         </React.Fragment>
       ) : (
@@ -94,6 +122,7 @@ export default withApiKey(PlayerProfileScreen);
 export const PlayerProfileScreenDetails: ScreenDetails<PlayerProfileScreenProps> = {
   name: 'Profile',
   label: 'Profil',
+  label_key: 'profile.player_screen.title',
   icon: 'account-circle',
   component: withApiKey(PlayerProfileScreen),
 };

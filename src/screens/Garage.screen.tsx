@@ -89,6 +89,7 @@ export default withApiKey(GarageScreen);
 export const GarageScreenDetails: ScreenDetails<GarageScreenProps> = {
   name: 'Garage',
   label: 'Garage',
+  label_key: 'profile.garage_screen.title',
   icon: 'garage',
   component: withApiKey(GarageScreen),
 };

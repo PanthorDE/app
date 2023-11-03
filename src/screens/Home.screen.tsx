@@ -77,6 +77,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = () => {
 export const HomeScreenDetails: ScreenDetails<HomeScreenProps> = {
   name: 'ServerList',
   label: 'Serverliste',
+  label_key: 'home.screen.title',
   icon: 'home',
   component: HomeScreen,
 };

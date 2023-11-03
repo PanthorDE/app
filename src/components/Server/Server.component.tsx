@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Card, CardProps, Text} from 'react-native-paper';
 import {RpgServer, Server as ServerModel} from '../../models';
+import {useTranslation} from 'react-i18next';
 
 export type ServerProps = {
   cardStyle?: CardProps['style'];
@@ -10,35 +11,48 @@ export type ServerProps = {
 };
 
 export const Server: React.FC<ServerProps> = ({server, onPress, cardStyle}) => {
+  const {t} = useTranslation();
   return (
     <Card style={cardStyle} onPress={onPress ? () => onPress(server) : undefined}>
       <Card.Title
         title={server.servername}
         titleStyle={{fontWeight: 'bold'}}
-        subtitle={`Online: ${server.players.length}/${server.slots}`}
+        subtitle={t('server.server.currently_online', {curr: server.players.length, max: server.slots})}
       />
       <Card.Content style={{flexDirection: 'row', flexWrap: 'wrap'}}>
         {server instanceof RpgServer ? (
           <React.Fragment>
             <View style={styles.column}>
-              <Text>Zivilisten: {server.civilians}</Text>
+              <Text>
+                {t('sides.civilians')}: {server.civilians}
+              </Text>
             </View>
             <View style={styles.column}>
-              <Text>Abramier: {server.medics}</Text>
+              <Text>
+                {t('sides.medics')}: {server.medics}
+              </Text>
             </View>
             <View style={styles.column}>
-              <Text>RAC'ler: {server.rac}</Text>
+              <Text>
+                {t('sides.rac')}: {server.rac}
+              </Text>
             </View>
             <View style={styles.column}>
-              <Text>Polizisten: {server.cops}</Text>
+              <Text>
+                {t('sides.cops')}: {server.cops}
+              </Text>
             </View>
             <View style={styles.column}>
-              <Text>Justiz'ler: {server.justice}</Text>
+              <Text>
+                {t('sides.attorneys')}: {server.justice}
+              </Text>
             </View>
           </React.Fragment>
         ) : (
           <View>
-            <Text>Spieler: {server.players.length}</Text>
+            <Text>
+              {t('sides.players')}: {server.players.length}
+            </Text>
           </View>
         )}
       </Card.Content>

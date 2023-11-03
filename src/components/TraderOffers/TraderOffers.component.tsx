@@ -4,12 +4,14 @@ import {ActivityIndicator, Divider, List, Text} from 'react-native-paper';
 import {formatter} from '../../services/CurrencyFormat.service';
 import {Accordion, AccordionProps} from '../Accordion/Accordion.component';
 import {ShopCar, ShopItem, ShopType} from '../../models';
+import {useTranslation} from 'react-i18next';
 
 export type TraderOffersProps = {
   shop: ShopType;
 } & Pick<AccordionProps, 'isExpanded' | 'isLast' | 'isFirst'>;
 
 export const TraderOffers: React.FC<TraderOffersProps> = ({shop, isFirst, isExpanded, isLast}) => {
+  const {t} = useTranslation();
   const id = React.useId();
   const [offers, setOffers] = React.useState<ShopCar[] | ShopItem[]>([]);
   const [loading, setLoading] = React.useState<boolean>(true);
@@ -45,8 +47,11 @@ export const TraderOffers: React.FC<TraderOffersProps> = ({shop, isFirst, isExpa
                 title={offer.name}
                 description={
                   offer instanceof ShopCar
-                    ? `Kofferraum: ${offer.vSpace} Kg.\nLevel: ${offer.level}`
-                    : `Level: ${offer.level}`
+                    ? `${t('trader.offer_compnent.capacity', {value: offer.vSpace})}\n${t(
+                        'trader.offer_component.level',
+                        {level: offer.level},
+                      )}`
+                    : t('trader.offer_component.level', {level: offer.level})
                 }
                 right={() => (
                   <View style={{display: 'flex', justifyContent: 'center'}}>

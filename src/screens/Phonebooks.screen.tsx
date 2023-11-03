@@ -61,6 +61,7 @@ export default withApiKey(PhonebookScreen);
 export const PhonebookScreenDetails: ScreenDetails<PhonebookScreenProps> = {
   name: 'Phonebook',
   label: 'Telefonbücher',
+  label_key: 'profile.phonebook_screen.title',
   icon: 'contacts',
   component: withApiKey(PhonebookScreen),
 };

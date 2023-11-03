@@ -2,9 +2,10 @@ import React from 'react';
 import {CompanyShop as CompanyShopModel} from '../../models';
 import {Accordion, type AccordionProps} from '../Accordion';
 import {Linking, View} from 'react-native';
-import {Avatar, Button, List, Text} from 'react-native-paper';
+import {Button, List, Text} from 'react-native-paper';
 import {formatter} from '../../services';
 import {ItemIcon} from '../Icon';
+import {useTranslation} from 'react-i18next';
 
 export type CompanyShopProps = {
   company: CompanyShopModel;
@@ -16,6 +17,7 @@ export const CompanyShop: React.FC<CompanyShopProps> = ({
   isLast,
   isExpanded,
 }) => {
+  const {t} = useTranslation();
   return (
     <Accordion
       id={industrialAreaId}
@@ -28,7 +30,7 @@ export const CompanyShop: React.FC<CompanyShopProps> = ({
       divider>
       <View style={{padding: 16}}>
         <Button icon="map" onPress={() => Linking.openURL(location.getMapUrl())}>
-          Karte aufrufen
+          {t('company.shop.open_map')}
         </Button>
       </View>
 
@@ -38,7 +40,7 @@ export const CompanyShop: React.FC<CompanyShopProps> = ({
             <List.Item
               key={offer.className}
               title={offer.name}
-              description={offer.amount + ' Stück'}
+              description={t('company.shop.item_amount', {amount: offer.amount})}
               left={() => <ItemIcon item={offer.className} />}
               right={() => <Text>{formatter.format(offer.price)}</Text>}
             />

@@ -73,6 +73,7 @@ export default ChangelogScreen;
 export const ChangelogScreenDetails: ScreenDetails<ChangelogScreenProps> = {
   name: 'Changelog',
   label: 'Changelogs',
+  label_key: 'changelogs.screen.title',
   icon: 'text-box-multiple',
   component: ChangelogScreen,
 };

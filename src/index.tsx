@@ -19,10 +19,7 @@ import DrawerItems from './DrawerItems';
 import {StoreProvider} from './context/Store.context';
 import {SnackbarProvider} from './context/Snackbar.context';
 import {PushNotificationService} from './services';
-<<<<<<< Updated upstream
-=======
 import {useTranslation} from 'react-i18next';
->>>>>>> Stashed changes
 
 const PERSISTENCE_KEY = 'NAVIGATION_STATE';
 const PREFERENCE_KEY = 'APP_PREFERENCES';
@@ -30,6 +27,7 @@ const PREFERENCE_KEY = 'APP_PREFERENCES';
 const Drawer = createDrawerNavigator();
 
 export function PanthorApp() {
+  const {t} = useTranslation();
   const colorScheme = useColorScheme();
   const isDarkMode = React.useMemo(() => colorScheme === 'dark', [colorScheme]);
   const [isReady, setIsReady] = React.useState(false);
@@ -162,7 +160,7 @@ export function PanthorApp() {
                         key={screen.name}
                         name={screen.name}
                         component={screen.component}
-                        options={{title: screen.label}}
+                        options={{title: screen.label_key ? t(screen.label_key) : screen.label}}
                       />
                     ))}
                   </Drawer.Navigator>

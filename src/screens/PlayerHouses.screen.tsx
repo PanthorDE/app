@@ -9,10 +9,12 @@ import {Building, House, Rental} from '../components/House';
 import {Profile} from '../models';
 import {PanthorService} from '../services/Panthor.service';
 import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
+import {useTranslation} from 'react-i18next';
 
 export type PlayerHousesScreenProps = {};
 
 const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
+  const {t} = useTranslation();
   const {apiKey, loading, setLoading, refreshing, setRefreshing, setProfile} = React.useContext(StoreContext);
   const [houses, setHouses] = React.useState<{
     houses: ReturnType<Profile['getHouses']>;
@@ -79,7 +81,7 @@ const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
               />
             ))
           ) : (
-            <NoResults icon="home-search-outline" text="Es wurden keine Häuser gefunden." />
+            <NoResults icon="home-search-outline" text={t('profile.house_screen.no_houses_text')} />
           )}
         </List.Section>
 
@@ -95,7 +97,7 @@ const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
               />
             ))
           ) : (
-            <NoResults icon="home-search-outline" text="Es wurden keine Appartments gefunden." />
+            <NoResults icon="home-search-outline" text={t('profile.house_screen.no_appartments_text')} />
           )}
         </List.Section>
 
@@ -111,7 +113,7 @@ const PlayerHousesScreen: React.FC<PlayerHousesScreenProps> = () => {
               />
             ))
           ) : (
-            <NoResults icon="home-search-outline" text="Es wurden keine Baustellen gefunden." />
+            <NoResults icon="home-search-outline" text={t('profile.house_screen.no_constructions_text')} />
           )}
         </List.Section>
       </List.AccordionGroup>
@@ -124,6 +126,7 @@ export default withApiKey(PlayerHousesScreen);
 export const PlayerHousesScreenDetails: ScreenDetails<PlayerHousesScreenProps> = {
   name: 'PlayerHouses',
   label: 'Häuser',
+  label_key: 'profile.house_screen.title',
   icon: 'domain',
   component: withApiKey(PlayerHousesScreen),
 };

@@ -2,11 +2,13 @@ import React from 'react';
 import {type ProgressProps} from './Progress.component';
 import {View} from 'react-native';
 import {Surface, Text, useTheme} from 'react-native-paper';
+import {useTranslation} from 'react-i18next';
 
 export type LevelProgressProps = Omit<ProgressProps, 'withLabel' | 'currentLevel'> & {currentLevel: number};
 
 export const LevelProgress: React.FC<LevelProgressProps> = ({currentLevel, progress}) => {
   const theme = useTheme();
+  const {t} = useTranslation();
   return (
     <React.Fragment>
       <View
@@ -15,8 +17,8 @@ export const LevelProgress: React.FC<LevelProgressProps> = ({currentLevel, progr
           flexDirection: 'row',
           justifyContent: 'space-between',
         }}>
-        <Text variant="labelMedium">Level {currentLevel}</Text>
-        <Text variant="labelMedium">Level {currentLevel + 1}</Text>
+        <Text variant="labelMedium">{t('profile.player_screen.level', {level: currentLevel})}</Text>
+        <Text variant="labelMedium">{t('profile.player_screen.level', {level: currentLevel + 1})}</Text>
       </View>
       <Surface
         style={{
