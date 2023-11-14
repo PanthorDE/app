@@ -24,6 +24,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = () => {
     fetchData: async () => {
       const serverList = await PanthorService.getServers();
       setServers(serverList);
+      setSelectedServer(serverList[0]);
     },
     onRefresh: () => {
       setRefreshing(true);
@@ -36,10 +37,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = () => {
   };
 
   React.useEffect(() => {
-    handler
-      .fetchData()
-      .then(() => setSelectedServer(servers[0] || null))
-      .finally(() => setLoading(false));
+    handler.fetchData().finally(() => setLoading(false));
   }, []);
 
   return (
