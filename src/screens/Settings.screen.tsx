@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, Card, Text, TextInput, useTheme} from 'react-native-paper';
+import {type SwitchChangeEvent, View} from 'react-native';
+import {Button, Card, Divider, Switch, Text, TextInput, useTheme} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 import {ScreenDetails} from '../types/ScreenDetails.type';
 import {useSnackbarContext} from '../context/Snackbar.context';
@@ -9,6 +10,8 @@ import {Panthor} from '../constants/panthor.constant';
 import {displayName as appDisplayName, version as appVersion} from '../../app.json';
 import {ApiKeyService} from '../services/ApiKey.service';
 import {useTranslation} from 'react-i18next';
+import {SwitchLabel} from '../components/SwitchLabel';
+import {PreferenceService, type Preferences} from '../services';
 
 // export type SettingsScreenProps = WithTranslation & {};
 export type SettingsScreenProps = {};
@@ -19,12 +22,13 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
   const {showSnackbar} = useSnackbarContext();
   const {apiKey, setApiKey} = useStoreContext();
   const [newApiKey, setNewApiKey] = React.useState(apiKey);
+  const [preferences, setPreferences] = React.useState<Preferences | null>(null);
 
   const handler = {
-    onApiKeyInputChange: function (value: string) {
+    onApiKeyInputChange(value: string) {
       setNewApiKey(value);
     },
-    deleteApiKey: async function () {
+    async deleteApiKey() {
       try {
         await ApiKeyService.save(null);
         setApiKey(null);
@@ -38,7 +42,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
         });
       }
     },
-    saveNewApiKey: async function () {
+    async saveNewApiKey() {
       try {
         if (!newApiKey || newApiKey === apiKey) return;
         if (newApiKey.length === 0) {
@@ -57,7 +61,31 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
         });
       }
     },
+    onToggleAnalytics() {
+      PreferenceService.save(
+        {
+          enablePushNotification: preferences?.enablePushNotification || false,
+          enableAnalytics: !preferences?.enableAnalytics || false,
+        },
+        prefs => setPreferences(prefs),
+      );
+    },
+    onToggleNotifications() {
+      PreferenceService.save(
+        {
+          enablePushNotification: !preferences?.enablePushNotification || false,
+          enableAnalytics: preferences?.enableAnalytics || false,
+        },
+        prefs => setPreferences(prefs),
+      );
+    },
   };
+
+  React.useEffect(() => {
+    PreferenceService.restore(pref => setPreferences(pref));
+  }, []);
+
+  React.useEffect(() => console.log(preferences), [preferences]);
 
   return (
     <ScreenWrapper contentContainerStyle={{padding: 16}}>
@@ -85,6 +113,22 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
             {t('settings.api_key.save_btn')}
           </Button>
         </Card.Actions>
+
+        <Card.Content>
+          <Divider style={{marginVertical: 16}} />
+
+          <SwitchLabel
+            label={t('settings.enable_analytics')}
+            value={preferences ? preferences.enableAnalytics : false}
+            onChange={handler.onToggleAnalytics}
+          />
+
+          {/* <SwitchLabel
+            label={t('settings.enable_notifications')}
+            value={preferences ? preferences.enablePushNotification : false}
+            onChange={handler.onToggleNotifications}
+          /> */}
+        </Card.Content>
       </Card>
 
       <Card>

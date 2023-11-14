@@ -1,5 +1,5 @@
 import React from 'react';
-import {Platform, useColorScheme, StatusBar, PermissionsAndroid} from 'react-native';
+import {Platform, useColorScheme, StatusBar} from 'react-native';
 import {getHeaderTitle} from '@react-navigation/elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import analytics from '@react-native-firebase/analytics';
@@ -18,11 +18,9 @@ import {Screens} from './screens';
 import DrawerItems from './DrawerItems';
 import {StoreProvider} from './context/Store.context';
 import {SnackbarProvider} from './context/Snackbar.context';
-import {PushNotificationService} from './services';
+import {PreferenceService, PushNotificationService} from './services';
 import {useTranslation} from 'react-i18next';
-
-const PERSISTENCE_KEY = 'NAVIGATION_STATE';
-const PREFERENCE_KEY = 'APP_PREFERENCES';
+import AppConfig from './App.config';
 
 const Drawer = createDrawerNavigator();
 
@@ -36,7 +34,7 @@ export function PanthorApp() {
   React.useEffect(() => {
     const restoreState = async () => {
       try {
-        const savedStateString = await AsyncStorage.getItem(PERSISTENCE_KEY);
+        const savedStateString = await AsyncStorage.getItem(AppConfig.storage.PERSISTENCE_KEY);
         const state = JSON.parse(savedStateString || '');
 
         setInitialState(state);
@@ -53,33 +51,22 @@ export function PanthorApp() {
   }, [isReady]);
 
   React.useEffect(() => {
-    const restorePrefs = async () => {
-      try {
-        const prefString = await AsyncStorage.getItem(PREFERENCE_KEY);
-        const preferences = JSON.parse(prefString || '');
-
-        if (preferences) {
-          // TODO: Load pres
-          console.log(preferences);
-        }
-      } catch (e) {
-        // ignore error
+    PreferenceService.restore(preferences => {
+      if (!preferences) {
+        return PreferenceService.save({enableAnalytics: false, enablePushNotification: false});
       }
-    };
 
-    restorePrefs();
+      analytics().setAnalyticsCollectionEnabled(preferences.enableAnalytics ?? false);
+    });
   }, []);
 
   React.useEffect(() => {
-    analytics().setAnalyticsCollectionEnabled(true);
-
     // PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.POST_NOTIFICATIONS);
     PushNotificationService.requestUserPermission()
       .then(async enabled => {
         if (enabled) {
           const token = await PushNotificationService.getToken();
           console.log(token);
-
           PushNotificationService.applyListener();
         }
       })
@@ -127,7 +114,7 @@ export function PanthorApp() {
           <NavigationContainer
             theme={combinedTheme}
             initialState={initialState}
-            onStateChange={state => AsyncStorage.setItem(PERSISTENCE_KEY, JSON.stringify(state))}>
+            onStateChange={state => AsyncStorage.setItem(AppConfig.storage.PERSISTENCE_KEY, JSON.stringify(state))}>
             <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
             <SafeAreaInsetsContext.Consumer>
               {() => {

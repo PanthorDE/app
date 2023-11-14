@@ -6,7 +6,6 @@ import type {ShopCategory} from '../types';
 import {ShopType} from '../models';
 import {PanthorService} from '../services/Panthor.service';
 import {StoreContext} from '../context/Store.context';
-import {ScreenDetails} from '../types/ScreenDetails.type';
 import ScreenWrapper from '../ScreenWrapper';
 import {ScreenActivityIndicator} from '../components/ScreenActivityIndicator.component';
 import {useTranslation} from 'react-i18next';

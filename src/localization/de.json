@@ -159,6 +159,8 @@
     "screen": {
       "title": "Einstellungen"
     },
+    "enable_analytics": "Analytics aktivieren",
+    "enable_notifications": "Benachrichtiungen aktivieren",
     "api_key": {
       "card_title": "Einstellungen",
       "card_text": "Um die App im vollem Umfang nutzen zu können, wird empfohlen dein Panthor API-Key anzugeben.",
