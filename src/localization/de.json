@@ -1,0 +1,184 @@
+{
+  "no_results": {
+    "missing_api_key": "Fehlender API-Key",
+    "missing_api_key_text": "Es wurde kein gültiger API-Key gefunden. Gehe in die Einstellungen und überprüfe diese.",
+    "network_err": "Netzwerkfehler",
+    "network_err_text": "Es ist ein Netzwerkfehler aufgetreten. Prüfe deine Verbindung.",
+    "no_results": "Keine Ergebnisse",
+    "no_results_text": "Es wurden keine Ergebnisse gefunden",
+    "unknown": "Unbekannter Fehler",
+    "unknown_text": "Es ist ein unbekannter Fehler aufgetreten."
+  },
+  "sides": {
+    "civilian": "Zivilist",
+    "civilians": "Zivilisten",
+    "cop": "Polizist",
+    "cops": "Polizisten",
+    "attorney": "Justliz'ler",
+    "attorneys": "Justliz'ler",
+    "rac": "RAC'ler",
+    "racs": "RAC'ler",
+    "medic": "Abramier",
+    "medics": "Abramier",
+    "player": "Spieler",
+    "players": "Spieler"
+  },
+  "home": {"screen": {"title": "Serverliste"}},
+  "server": {
+    "server": {
+      "currently_online": "Online: {{curr}}/{{max}}"
+    },
+    "player_list": {
+      "title": "Spieler",
+      "no_players": "Gerade ist keiner online"
+    }
+  },
+  "profile": {
+    "navigation_screen": {
+      "title": "Profil"
+    },
+    "player_screen": {
+      "title": "Profil",
+      "level": "Level {{level}}",
+      "name": "Name",
+      "player_id": "Player ID",
+      "cash": "Bargeld",
+      "bank_account_balance": "Kontostand (Hauptkonto)",
+      "experience": "XP",
+      "experience_gained": "{{experience}} XP.",
+      "skillpoints": "Skillpunkte",
+      "skillpoints_left": "{{skillpoints}} Punkte",
+      "playtime": {
+        "active": "Aktive Spielzeit",
+        "active_value": "{{hours}} Stunden",
+        "total": "Gesamte Spielzeit",
+        "total_value": "{{hours}} Spielzeit"
+      },
+      "last_seen": "Zuletzt gesetzt",
+      "last_seen_value": "{{time}} Uhr",
+      "joined_at": "Beigetreten am",
+      "joined_at_value": "{{time}} Uhr"
+    },
+    "garage_screen": {
+      "title": "Garage",
+      "side": "Fraktion",
+      "plate": "Kennzeichen",
+      "mileage": "Kilometerstand",
+      "mileage_value": "{{value}} km.",
+      "fuel_left": "Tank"
+    },
+    "house_screen": {
+      "title": "Häuser",
+      "house": "Haus {{house}}",
+      "inactive": "Inaktiv",
+      "time_remaining": "{{time}} Tage verbleibend",
+      "open_map": "Karte öffnen",
+      "maintenance_label": "Gewartet bis zum",
+      "maintenance_value": "{{time}} Uhr",
+      "players_label": "Mitbewohner",
+      "no_houses_text": "Es wurden keine Häuser gefunden.",
+      "no_appartments_text": "Es wurden keine Appartments gefunden.",
+      "no_constructions_text": "Es wurden keine Baustellen gefunden.",
+      "rental": "Appartment {{appartment}}",
+      "rented_until": "Gemietet bis zum",
+      "rented_until_value": "{{time}} Uhr",
+      "construction": "Baustelle {{construction}}",
+      "construction_type": "Typ",
+      "construction_stage": "Stufe"
+    },
+    "phonebook_screen": {
+      "title": "Telefonbücker",
+      "id_name": "Name",
+      "id_nationality": "Nationalität",
+      "id_dob": "Geburtstag",
+      "contacts_heading": "Kontakte ({{amount}})",
+      "search_contacts_placeholder": "Kontakte durchsuchen",
+      "no_contacts": "Keine Kontakte",
+      "no_contacts_for_keyword": "Keine Treffer für '{{keyword}}'!",
+      "no_phone": "Keine Telefonnummer",
+      "no_iban": "Keine IBAN"
+    }
+  },
+  "market": {
+    "screen": {
+      "title": "Markt",
+      "search_placeholder": "Suchen"
+    }
+  },
+  "company": {
+    "navigation_screen": {
+      "title": "Unternehmen"
+    },
+    "list": {
+      "title": "Eigene Unternehmen"
+    },
+    "company": {
+      "active": "Aktiv",
+      "inactive": "Inaktiv",
+      "phone": "Telefonnummer",
+      "bank_accounts": "Bankverbindungen"
+    },
+    "shops": {
+      "title": "Firmenshops"
+    },
+    "shop": {
+      "open_map": "Karte öffnen",
+      "item_amount": "{{amount}} Stück"
+    }
+  },
+  "trader": {
+    "navigation_screen": {
+      "title": "Händler"
+    },
+    "vehicle_trader_screen": {
+      "title": "Fahrzeughändler"
+    },
+    "item_trader_screen": {
+      "title": "Händler"
+    },
+    "base_screen": {
+      "search_placeholder": "Suchen"
+    },
+    "offer_component": {
+      "capacity": "Kofferraum: {{value}} Kg.",
+      "level": "Level: {{level}}"
+    }
+  },
+  "changelogs": {
+    "screen": {
+      "title": "Changelogs"
+    },
+    "accordion_title": "Changelog {{version}} - {{date}}",
+    "category": {
+      "mission_title": "Mission",
+      "mod_title": "Mod",
+      "map_title": "Map"
+    }
+  },
+  "settings": {
+    "screen": {
+      "title": "Einstellungen"
+    },
+    "enable_analytics": "Analytics aktivieren",
+    "enable_notifications": "Benachrichtiungen aktivieren",
+    "api_key": {
+      "card_title": "Einstellungen",
+      "card_text": "Um die App im vollem Umfang nutzen zu können, wird empfohlen dein Panthor API-Key anzugeben.",
+      "input_label": "API-Key",
+      "save_btn": "Speichern",
+      "save_invalid_value_text": "Der Wert ist ungültig",
+      "save_invalid_key_text": "Der API-Key ist ungültig",
+      "save_key_saved_text": "Der API-Key wurde gespeichert",
+      "save_key_failed_text": "Der API-Key konnte nicht gespeichert werden",
+      "save_retry_text": "Erneut",
+      "delete_btn": "Löschen",
+      "delete_alert": "Der API-Key wurde gelöscht",
+      "delete_failed_alert": "Löschen fehlgeschlagen",
+      "delete_retry_text": "Erneut"
+    },
+    "info_box": {
+      "name_label": "Name",
+      "version_label": "Version"
+    }
+  }
+}

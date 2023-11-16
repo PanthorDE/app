@@ -1,0 +1,184 @@
+{
+  "no_results": {
+    "missing_api_key": "Missing API-Key",
+    "missing_api_key_text": "No valid API-Key was found. Go to the settings and check it.",
+    "network_err": "Network Error",
+    "network_err_text": "A network error occurred. Check your connection.",
+    "no_results": "No Results",
+    "no_results_text": "No results were found",
+    "unknown": "Unknown Error",
+    "unknown_text": "An unknown error occurred."
+  },
+  "sides": {
+    "civilian": "Civilian",
+    "civilians": "Civilians",
+    "cop": "Cop",
+    "cops": "Cops",
+    "attorney": "Attorney",
+    "attorneys": "Attorneys",
+    "rac": "RAC",
+    "racs": "RACs",
+    "medic": "Medic",
+    "medics": "Medics",
+    "player": "Player",
+    "players": "Players"
+  },
+  "home": {"screen": {"title": "Servers"}},
+  "server": {
+    "server": {
+      "currently_online": "Online: {{curr}}/{{max}}"
+    },
+    "player_list": {
+      "title": "Players",
+      "no_players": "Currently no one is online"
+    }
+  },
+  "profile": {
+    "navigation_screen": {
+      "title": "Profile"
+    },
+    "player_screen": {
+      "title": "Profile",
+      "level": "Level {{level}}",
+      "name": "Name",
+      "player_id": "Player ID",
+      "cash": "Cash",
+      "bank_account_balance": "Bank-account (Main account)",
+      "experience": "XP",
+      "experience_gained": "{{experience}} XP.",
+      "skillpoints": "Skillpoints",
+      "skillpoints_left": "{{skillpoints}} points",
+      "playtime": {
+        "active": "Active playtime",
+        "active_value": "{{hours}} hours",
+        "total": "Total playtime",
+        "total_value": "{{hours}} hours"
+      },
+      "last_seen": "Last seen",
+      "last_seen_value": "{{time}} o'clock",
+      "joined_at": "Joined at",
+      "joined_at_value": "{{time}} o'clock"
+    },
+    "garage_screen": {
+      "title": "Garage",
+      "side": "Side",
+      "plate": "Plate",
+      "mileage": "Mileage",
+      "mileage_value": "{{value}} km.",
+      "fuel_left": "Fuel left"
+    },
+    "house_screen": {
+      "title": "Houses",
+      "house": "House {{house}}",
+      "inactive": "Inactive",
+      "time_remaining": "{{time}} days left",
+      "open_map": "Open map",
+      "maintenance_label": "Maintained until",
+      "maintenance_value": "{{time}} o'clock",
+      "players_label": "Roommates",
+      "no_houses_text": "No houses were found.",
+      "no_appartments_text": "No apartments were found.",
+      "no_constructions_text": "No construction sites were found.",
+      "rental": "Appartment {{appartment}}",
+      "rented_until": "Rented until",
+      "rented_until_value": "{{time}} o'clock",
+      "construction": "Construction {{construction}}",
+      "construction_type": "Type",
+      "construction_stage": "Stage"
+    },
+    "phonebook_screen": {
+      "title": "Phonebooks",
+      "id_name": "Name",
+      "id_nationality": "Nationality",
+      "id_dob": "Date of birth",
+      "search_contacts_placeholder": "Search contacts",
+      "contacts_heading": "Contacts ({{amount}})",
+      "no_contacts": "No contacts",
+      "no_contacts_for_keyword": "No matches for '{{keyword}}'!",
+      "no_phone": "No phone",
+      "no_iban": "No IBAN"
+    }
+  },
+  "market": {
+    "screen": {
+      "title": "Market",
+      "search_placeholder": "Search"
+    }
+  },
+  "company": {
+    "navigation_screen": {
+      "title": "Companies"
+    },
+    "list": {
+      "title": "Owned companies"
+    },
+    "company": {
+      "active": "Active",
+      "inactive": "In-Active",
+      "phone": "Phone number",
+      "bank_accounts": "Bank accounts"
+    },
+    "shops": {
+      "title": "Shops"
+    },
+    "shop": {
+      "open_map": "Open map",
+      "item_amount": "{{amount}} pcs."
+    }
+  },
+  "trader": {
+    "navigation_screen": {
+      "title": "Traders"
+    },
+    "vehicle_trader_screen": {
+      "title": "Vehicle traders"
+    },
+    "item_trader_screen": {
+      "title": "Traders"
+    },
+    "base_screen": {
+      "search_placeholder": "Search"
+    },
+    "offer_component": {
+      "capacity": "Capacity: {{value}} Kg.",
+      "level": "Level: {{level}}"
+    }
+  },
+  "changelogs": {
+    "screen": {
+      "title": "Changelogs"
+    },
+    "accordion_title": "Changelog {{version}} - {{date}}",
+    "category": {
+      "mission_title": "Mission",
+      "mod_title": "Mod",
+      "map_title": "Map"
+    }
+  },
+  "settings": {
+    "screen": {
+      "title": "Settings"
+    },
+    "enable_analytics": "Enable Analytics",
+    "enable_notifications": "Enable Push-Notifications",
+    "api_key": {
+      "card_title": "Settings",
+      "card_text": "To fully utilize the app, it is recommended to provide your Panthor API-Key.",
+      "input_label": "API-Key",
+      "save_btn": "Save",
+      "save_invalid_value_text": "The value is invalid",
+      "save_invalid_key_text": "The API-Key is invalid",
+      "save_key_saved_text": "The API-Key has been saved",
+      "save_key_failed_text": "The API-Key could not be saved",
+      "save_retry_text": "Retry",
+      "delete_btn": "Delete",
+      "delete_alert": "The API-Key has been deleted",
+      "delete_failed_alert": "Deletion failed",
+      "delete_retry_text": "Retry"
+    },
+    "info_box": {
+      "name_label": "Name",
+      "version_label": "Version"
+    }
+  }
+}
