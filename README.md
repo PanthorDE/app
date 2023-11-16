@@ -1,14 +1,5 @@
 # Panthor App
 
-- Push-Benachrichtigungen
-  - Können ein-/abgeschaltet werden
-  - Service bauen um "Device Tokens" zu speichern
-- Analytics
-  - Analytics sind standardmäßig deaktiviert
-  - Können über die Einstellungen ak-/deaktiviert werden
-- Übersetzungen für den Markt (nicht manuell)
-- Übersetzungen für Händler
-
 ## Developer Setup
 
 1. Setup `google-services.json`

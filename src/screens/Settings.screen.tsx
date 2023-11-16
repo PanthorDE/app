@@ -1,6 +1,6 @@
 import React from 'react';
-import {type SwitchChangeEvent, View} from 'react-native';
-import {Button, Card, Divider, Switch, Text, TextInput, useTheme} from 'react-native-paper';
+import analytics from '@react-native-firebase/analytics';
+import {Button, Card, Divider, Text, TextInput, useTheme} from 'react-native-paper';
 import ScreenWrapper from '../ScreenWrapper';
 import {ScreenDetails} from '../types/ScreenDetails.type';
 import {useSnackbarContext} from '../context/Snackbar.context';
@@ -85,7 +85,9 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
     PreferenceService.restore(pref => setPreferences(pref));
   }, []);
 
-  React.useEffect(() => console.log(preferences), [preferences]);
+  React.useEffect(() => {
+    analytics().setAnalyticsCollectionEnabled(preferences ? preferences.enableAnalytics : false);
+  }, [preferences]);
 
   return (
     <ScreenWrapper contentContainerStyle={{padding: 16}}>

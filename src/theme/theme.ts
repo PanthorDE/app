@@ -7,49 +7,46 @@ export const Theme: ThemeProp = {
   roundness: 4,
   colors: {
     ...MD3DarkTheme.colors,
-    // primary: '#e52222',
-    // onPrimary: '#000000',
-    // primaryContainer: '#b91d1d',
-    // onPrimaryContainer: '#fff',
-    // secondary: '#e52222',
-    // onSecondary: '#000000',
-    // secondaryContainer: '#b91d1d',
-    // onSecondaryContainer: '#fff',
-    // // secondary: '#f2a104', // Sekundärfarbe als Komplementärfarbe zur Primärfarbe
-    // // onSecondary: '#000000',
-    // // secondaryContainer: '#b57c04', // Dunklere Schattierung der Sekundärfarbe
-    // // onSecondaryContainer: '#fff',
-    // tertiary: '#f2e104', // Tertiärfarbe als weitere Komplementärfarbe
-    // onTertiary: '#000000',
-    // tertiaryContainer: '#b5a904', // Dunklere Schattierung der Tertiärfarbe
-    // onTertiaryContainer: '#fff',
-    // error: '#ff0000', // Fehlerfarbe als hellerer Rotton
-    // onError: '#000000',
-    // errorContainer: '#b50000', // Dunklere Schattierung der Fehlerfarbe
-    // onErrorContainer: '#fff',
-    // background: '#262729', // Dunkler Grauton für den Hintergrund
-    // onBackground: '#fff', // Primärfarbe auf dem Hintergrund
-    // surface: '#262729', // Gleiche Farbe wie der Hintergrund für die Oberfläche
-    // onSurface: '#fff', // Primärfarbe auf der Oberfläche
-    // surfaceVariant: '#1a1b1c', // Dunklere Schattierung des Hintergrunds für die Oberflächenvariante
-    // onSurfaceVariant: '#fff', // Primärfarbe auf der Oberflächenvariante
-    // outline: '#e52222', // Primärfarbe für die Umrisse
-    // outlineVariant: '##fff', // Dunklere Schattierung der Primärfarbe für die Umrissvariante
-    // shadow: 'rgb(0, 0, 0)',
-    // scrim: 'rgb(0, 0, 0)',
-    // inverseSurface: 'rgb(227, 226, 230)',
-    // inverseOnSurface: 'rgb(47, 48, 51)',
-    // inversePrimary: '#1addf2', // Inverse Primärfarbe als Komplementärfarbe zur Primärfarbe
-    // elevation: {
-    //   level0: 'transparent',
-    //   level1: 'rgb(33, 36, 41)',
-    //   level2: 'rgb(38, 41, 48)',
-    //   level3: 'rgb(42, 46, 55)',
-    //   level4: 'rgb(43, 48, 57)',
-    //   level5: 'rgb(46, 51, 62)',
-    // },
-    // surfaceDisabled: 'rgba(227, 226, 230, 0.12)',
-    // onSurfaceDisabled: 'rgba(227, 226, 230, 0.38)',
-    // backdrop: 'rgba(45, 48, 56, 0.4)',
+    primary: '#ffb4ab',
+    onPrimary: '#690005',
+    primaryContainer: '#93000a',
+    onPrimaryContainer: '#ffb4ab',
+    secondary: '#ffb4ab',
+    onSecondary: '#690005',
+    secondaryContainer: '#93000a',
+    onSecondaryContainer: '#ffb4ab',
+    tertiary: '#dcbce0',
+    onTertiary: '#3f2844',
+    tertiaryContainer: '#573e5c',
+    onTertiaryContainer: '#fad8fd',
+    error: '#ffb4ab',
+    onError: '#690005',
+    errorContainer: '#93000a',
+    onErrorContainer: '#ffb4ab',
+    background: '#111518', // 111518
+    onBackground: '#e3e2e6',
+    surface: '#111518', // 111518
+    onSurface: '#e3e2e6',
+    surfaceVariant: '#44474e',
+    onSurfaceVariant: '#c4c6d0',
+    outline: '#8e9099',
+    outlineVariant: '#44474e',
+    shadow: '#000000',
+    scrim: '#000000',
+    inverseSurface: '#e3e2e6',
+    inverseOnSurface: '#2f3033',
+    inversePrimary: '#0c5db6',
+    elevation: {
+      level0: 'transparent',
+      // TODO: Increase color opacity for each level
+      level1: '#181A1C',
+      level2: '#181A1C',
+      level3: '#181A1C',
+      level4: '#181A1C',
+      level5: '#181A1C',
+    },
+    surfaceDisabled: 'rgba(227, 226, 230, 0.12)',
+    onSurfaceDisabled: 'rgba(227, 226, 230, 0.38)',
+    backdrop: 'rgba(45, 48, 56, 0.4)',
   },
 };
