@@ -180,5 +180,10 @@
       "name_label": "Name",
       "version_label": "Version"
     }
+  },
+  "no_api_key_dialog": {
+    "title": "Es wurde kein API-Key gefunden",
+    "text": "Dieser wird benötigt um Spielerspezifische Informationen abzurufen.",
+    "button": "Einstellungen"
   }
 }

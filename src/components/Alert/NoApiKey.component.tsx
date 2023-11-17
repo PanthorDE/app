@@ -4,11 +4,13 @@ import {Icon} from '../Icon';
 import {View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {SettingsScreenDetails} from '../../screens/Settings.screen';
+import {useTranslation} from 'react-i18next';
 
 export type NoApiKeyProps = {};
 
 export const NoApiKey: React.FC<NoApiKeyProps> = props => {
   const navigate = useNavigation();
+  const {t} = useTranslation();
   return (
     <Card style={[{margin: 18, padding: 16}]}>
       <Card.Content>
@@ -16,11 +18,9 @@ export const NoApiKey: React.FC<NoApiKeyProps> = props => {
           <Icon icon="key-alert" />
         </View>
         <Text variant="titleMedium" style={[style.textCenter, {marginTop: 8}]}>
-          Es wurde kein API-Key gefunden.
+          {t('no_api_key_dialog.title')}
         </Text>
-        <Text style={[style.textCenter, {marginTop: 4}]}>
-          Dieser wir benötigt um Spielerspezifische Informationen abzurufen.
-        </Text>
+        <Text style={[style.textCenter, {marginTop: 4}]}>{t('no_api_key_dialog.text')}</Text>
       </Card.Content>
 
       <Card.Actions style={{display: 'flex'}}>
@@ -30,7 +30,7 @@ export const NoApiKey: React.FC<NoApiKeyProps> = props => {
           style={{marginRight: 'auto', marginLeft: 'auto'}}
           //   @ts-ignore // FIXME: Dont suppress with @ts-ignore
           onPress={() => navigate.navigate(SettingsScreenDetails.name)}>
-          {SettingsScreenDetails.label}
+          {t('no_api_key_dialog.button')}
         </Button>
       </Card.Actions>
     </Card>

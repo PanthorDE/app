@@ -146,8 +146,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = () => {
 
 export const SettingsScreenDetails: ScreenDetails<SettingsScreenProps> = {
   name: 'Settings',
-  // FIXME: "";
-  label: 'Einstellungen test',
+  label: 'Einstellungen',
   label_key: 'settings.screen.title',
   icon: 'cog',
   component: SettingsScreen,
