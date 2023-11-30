@@ -47,7 +47,7 @@ export const TraderOffers: React.FC<TraderOffersProps> = ({shop, isFirst, isExpa
                 title={offer.name}
                 description={
                   offer instanceof ShopCar
-                    ? `${t('trader.offer_compnent.capacity', {value: offer.vSpace})}\n${t(
+                    ? `${t('trader.offer_component.capacity', {value: offer.vSpace})}\n${t(
                         'trader.offer_component.level',
                         {level: offer.level},
                       )}`
