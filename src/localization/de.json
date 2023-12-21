@@ -45,7 +45,7 @@
       "cash": "Bargeld",
       "bank_account_balance": "Kontostand (Hauptkonto)",
       "experience": "XP",
-      "experience_gained": "{{experience}} XP.",
+      "experience_gained": "{{experience}} XP",
       "skillpoints": "Skillpunkte",
       "skillpoints_left": "{{skillpoints}} Punkte",
       "playtime": {

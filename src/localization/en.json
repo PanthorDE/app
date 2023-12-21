@@ -45,7 +45,7 @@
       "cash": "Cash",
       "bank_account_balance": "Bank-account (Main account)",
       "experience": "XP",
-      "experience_gained": "{{experience}} XP.",
+      "experience_gained": "{{experience}} XP",
       "skillpoints": "Skillpoints",
       "skillpoints_left": "{{skillpoints}} points",
       "playtime": {
@@ -74,14 +74,14 @@
       "time_remaining": "{{time}} days left",
       "open_map": "Open map",
       "maintenance_label": "Maintained until",
-      "maintenance_value": "{{time}} o'clock",
+      "maintenance_value": "{{time}}",
       "players_label": "Roommates",
       "no_houses_text": "No houses were found.",
       "no_appartments_text": "No apartments were found.",
       "no_constructions_text": "No construction sites were found.",
       "rental": "Appartment {{appartment}}",
       "rented_until": "Rented until",
-      "rented_until_value": "{{time}} o'clock",
+      "rented_until_value": "{{time}}",
       "construction": "Construction {{construction}}",
       "construction_type": "Type",
       "construction_stage": "Stage"
@@ -119,7 +119,7 @@
       "bank_accounts": "Bank accounts"
     },
     "shops": {
-      "title": "Shops"
+      "title": "Company Shops"
     },
     "shop": {
       "open_map": "Open map",
